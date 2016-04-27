@@ -14,7 +14,7 @@ Readme for the Support Deck Builder
 		V.iii Character Profile Output
 	VI. Editing Files
 
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	
 	I. Introduction & Description
 	
@@ -25,6 +25,7 @@ user that no combinations could be located. In addition, this program contains a
 characters and unique profiles.
 
 Included are four controllable optimizations for searching:
+		
 	1) thresholding cards to search based on N affiliation matches
 		-Before the search, the user specifies N affiliations a card must match of the total needed affiliations for a support deck
 		-e.g., if Queen Apaliana was your only card, and you entered "2" as your type match criteria, the program would only search cards who match
@@ -45,13 +46,13 @@ Once these options have been set, the program will commence its solving. Solving
 on the skills and options chosen. This is a brute force solver, so the program will search through every viable combination specified by the chosen
 options until all possible combinations have been examined.
 
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	II. Installation
 	
 Please see the file "Getting Started.txt" for installation instructions.
 	
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	III. Files Used
 
@@ -77,7 +78,7 @@ have a matching line in supportCards.txt (not 1:1 map). More information is avai
 The only file not referenced by the program is "char_aff_table.xlsx". That file is just a simple spreadsheet to make editing information about a card
 easier.
 
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	IV. Understanding the Files
 	
@@ -155,7 +156,11 @@ support skills, respectively. In contrast, the other files are very simple to re
 			Note that not every two integer line is a start of a new skill card - with skills that have only 1 max level, their entries are all two
 			integer lines.
 			
-	-------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	
+	----------------------------------------------------------------------------------------------------------------------
+	
+	
 			
 		cardTypes.txt
 			This file contains the name of each affiliation in the current game. Only one affiliation per line.
@@ -200,7 +205,7 @@ support skills, respectively. In contrast, the other files are very simple to re
 			Looking at Jango's types in-game, we see that they are: Male, Bounty Hunter, Separatist, and Mandalorian; and so the affiliation sum is
 			generated from: 2^0 + 2^7 + 2^16 + 2^20 = 1114241.
 			
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	V. Output
 	
@@ -265,7 +270,7 @@ This program will produce output files to three locations: 1) directory "Output"
 			created from the statistics component and are named based on the affiliations queried - so if you were searching for cards possessing
 			"Podracer" and "Tatooinian" and "Resistance", the output file would be named "Podracer_Tatooinian_Resistance.txt".
 
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	VI. Editing Files
 
