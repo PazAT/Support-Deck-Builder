@@ -64,19 +64,19 @@ items they do not considered.
 
 Inside of "Data", there are six .txt files and one excel .xlsx file. These files are:
 
-		1) cardTypes.txt
-		2) characterNames.txt
-		3) numericTypes.txt
-		4) supportCards.txt
-		5) supportSkillLevels.txt
-		6) supportSkills.txt
-		7) char_aff_table.xlsx
+	1) cardTypes.txt
+	2) characterNames.txt
+	3) numericTypes.txt
+	4) supportCards.txt
+	5) supportSkillLevels.txt
+	6) supportSkills.txt
+	7) Support Deck Tables.xlsx
 
-Each line in numericTypes.txt has a matching character in the characterNames.txt file (1:1 map). However, each line in supportSkillLevels.txt does not
-have a matching line in supportCards.txt (not 1:1 map). More information is available in the next section.
+Each line in numericTypes.txt has a matching character in the characterNames.txt file (1:1 map). However, each line in
+supportSkillLevels.txt does not have a matching line in supportCards.txt (not 1:1 map). More information is available in
+the next section.
 			
-The only file not referenced by the program is "char_aff_table.xlsx". That file is just a simple spreadsheet to make editing information about a card
-easier.
+The only file not referenced by the program is "Support Deck Tables.xlsx". That file is just a simple spreadsheet to make editing information about cards and skills easier.
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -86,189 +86,194 @@ The "Data" files are the program's database, so to speak. In particular, the fil
 important and coincidentally, the most cryptic upon first glance. Each of these files contains numerical information pertaining to characters and
 support skills, respectively. In contrast, the other files are very simple to read.
 
-		supportSkills.txt
-			the name of each support skill and its nickname on the line directly below
-				<support skill full name>
-				<support skill nickname>
-				
-			For example, HP UP is represented as:
-				Character Card HP UP
-				HP
+	supportSkills.txt
+		the name of each support skill and its nickname on the line directly below
+			<support skill full name>
+			<support skill nickname>
+			
+		For example, HP UP is represented as:
+			Character Card HP UP
+			HP
+	
+	supportCards.txt
+		The name of each support card and the types it requires for its skill. The order of names here must correspond to the order of support
+		skills in "supportSkills.txt", otherwise cards will be assigned to the incorrect skill. Each entry uses commas to separate items on the
+		same line - the very last entry on a line should have no comma after it. For cards with fewer than three requirements, they are marked
+		with "None" for the excess requirements.
 		
-		supportCards.txt
-			The name of each support card and the types it requires for its skill. The order of names here must correspond to the order of support
-			skills in "supportSkills.txt", otherwise cards will be assigned to the incorrect skill. Each entry uses commas to separate items on the
-			same line - the very last entry on a line should have no comma after it. For cards with fewer than three requirements, they are marked
-			with "None" for the excess requirements.
-			
-			Some examples:
-					First Ambush entry:
-						Agen Kolar,Jedi,Clone Trooper,None
-						
-					Battle Penalty Reduction:
-						Jabba the Hutt,Jabbas Crime Syndicate,None,None
-						Sebulba,Podracer,None,None
-						
-					Jamillia from Prep Skill Trigger UP
-						Queen Jamillia,Female,Jedi,Nabooan
-			
-		*** supportSkillLevels.txt ***
-			This file contains numerical information about the skills and skill cards. The order of information must correspond first to the order of
-			support skills in "supportSkills.txt" and then second to the ordering of support cards in "supportCards.txt" or else information about a
-			skill and its cards will be horribly wrong.
-			
-			The start of each new skill is marked by a line that contains only two integers, which represent the following:
-			
-						<skill max level>	<number of cards with this support skill>
-
-			Following this line is a variable number of lines with a variable number of integers on each line. The number of lines which follow is
-			equal to the second number on the first line - each of those lines represent an individual skill card. On each of those lines, the number
-			of integers is equal to the [skill max level] + 1. The first N integers represent the type value requirements for each level of a skill
-			with max level N and the very last entry is the skill card's rarity.
-			
-			The template for a skill card line is as follows
-			
-						<skill level 1 type requirement> ... <skill level MAX type requirement>	<skill card rarity>
-
-			So Character Card HP UP would look like the following:
-			
-				5 4 //skill max level and number of cards with skill
-				3 5 7 9 12 2 //type value requirements for levels of skill and the skill card's rarity at the very end
-				3 5 7 9 12 2
-				3 5 7 9 12 3
-				3 5 7 9 12 2			
-
-			The first line tells us that Character Card HP UP has "5" max levels and "4" Character Cards possess it. The next 5 lines then tell us
-			the individual value requirements for each skill card that has HP UP and the rarity of that skill card. So we see that the first card has
-			value requirements of "3", "5", "7", "9", and "12" for levels 1 to 5, and it is rarity "2". The first line corresponds to Rabe in the
-			file "supportCards.txt"/
-			
-			Looking at Call to the Light Side,
-			
-				1 3 //skill max level and number of cards with skill
-				4 4 //type value requirements for level of skill and the skill card's rarity at the very end
-				4 4
-				4 3
+		Some examples:
+			First Ambush entry:
+				Agen Kolar,Jedi,Clone Trooper,None
 				
-			We can see that the skill has "1" level and "3" Character Cards possess it. The first of these cards requires "4" type values and it is
-			of rarity "4". The first line correpsonds to Adi Gallia in the file "supportCards.txt".
+			Battle Penalty Reduction entries:
+				Jabba the Hutt,Jabbas Crime Syndicate,None,None
+				Sebulba,Podracer,None,None
+				
+			Jamillia from Prep Skill Trigger UP
+				Queen Jamillia,Female,Jedi,Nabooan
+		
+	*** supportSkillLevels.txt ***
+		This file contains numerical information about the skills and skill cards. The order of information must correspond first to the order of
+		support skills in "supportSkills.txt" and then second to the ordering of support cards in "supportCards.txt" or else information about a
+		skill and its cards will be horribly wrong.
+		
+		The start of each new skill is marked by a line that contains only two integers, which represent the following:
+		
+					<skill max level>	<number of cards with this support skill>
+
+		Following this line is a variable number of lines with a variable number of integers on each line. The number of lines which follow is
+		equal to the second number on the first line - each of those lines represent an individual skill card. On each of those lines, the number
+		of integers is equal to the [skill max level] + 1. The first N integers represent the type value requirements for each level of a skill
+		with max level N and the very last entry is the skill card's rarity.
+		
+		The template for a skill card line is as follows
+		
+					<skill level 1 type requirement> ... <skill level MAX type requirement>	<skill card rarity>
+
+		So Character Card HP UP would look like the following:
+		
+			5 4 //skill max level and number of cards with skill
+			3 5 7 9 12 2 //type value requirements for levels of skill and the skill card's rarity at the very end
+			3 5 7 9 12 2
+			3 5 7 9 12 3
+			3 5 7 9 12 2			
+
+		The first line tells us that Character Card HP UP has "5" max levels and "4" Character Cards possess it. The next 5 lines then tell us
+		the individual value requirements for each skill card that has HP UP and the rarity of that skill card. So we see that the first card has
+		value requirements of "3", "5", "7", "9", and "12" for levels 1 to 5, and it is rarity "2". The first line corresponds to Rabe in the
+		file "supportCards.txt"/
+		
+		Looking at Call to the Light Side,
+		
+			1 3 //skill max level and number of cards with skill
+			4 4 //type value requirements for level of skill and the skill card's rarity at the very end
+			4 4
+			4 3
 			
-			Note that not every two integer line is a start of a new skill card - with skills that have only 1 max level, their entries are all two
-			integer lines.
-			
-	
-	
+		We can see that the skill has "1" level and "3" Character Cards possess it. The first of these cards requires "4" type values and it is
+		of rarity "4". The first line correpsonds to Adi Gallia in the file "supportCards.txt".
+		
+		Note that not every two integer line is a start of a new skill card - with skills that have only 1 max level, their entries are all two
+		integer lines.
+		
+
+
 	----------------------------------------------------------------------------------------------------------------------
 	
 	
 			
-		cardTypes.txt
-			This file contains the name of each affiliation in the current game. Only one affiliation per line.
+	cardTypes.txt
+		This file contains the name of each affiliation in the current game. Only one affiliation per line.
 
-		characterNames.txt
-			In here are the full names of the Character Cards. One character per line.
+	characterNames.txt
+		In here are the full names of the Character Cards. One character per line.
 
-		*** numericalTypes.txt ***
-			Inside here, you'll find many lines, each of 5 sets of numbers. These numbers are tab spaced and each relates to a line in the file
-			"characterNames.txt". The entry method for "numericalTypes.txt" is as follows:
+	*** numericalTypes.txt ***
+		Inside here, you'll find many lines, each of 5 sets of numbers. These numbers are tab spaced and each relates to a line in the file
+		"characterNames.txt". The entry method for "numericalTypes.txt" is as follows:
 
-							<rarity>	<cap cost>	<number of affilaitions>	<affiliation sum>	<awakened (binary representation)>
+						<rarity>	<cap cost>	<number of affilaitions>	<affiliation sum>	<awakened (binary representation)>
 
-			So, the first value of a line is a card's rarity, the second is its cost, and the third is how many affiliations that card possesses. The
-			fourth value is generated by assigning a unique integer to each affiliation and then summing the unique integers of the affiliations
-			belonging to a card. The last value represents if a card is awakened ("1" if it is and "0" if it is not).
+		So, the first value of a line is a card's rarity, the second is its cost, and the third is how many affiliations that card possesses. The
+		fourth value is generated by assigning a unique integer to each affiliation and then summing the unique integers of the affiliations
+		belonging to a card. The last value represents if a card is awakened ("1" if it is and "0" if it is not).
+		
+		The affiliation sum is generated by using powers of 2. The power given to an affiliation is equal to how many affiliations are before it
+		in the file "cardTypes.txt". So for "Male", the first affiliation, it would have a power equal to "0" (zero) because it is the first
+		affiliation. "Female" would have a power of "1" (since only one affiliation comes before it); "Droid" would have "2"; and so on, down to
+		"Fringer", which has a power of "23" because there are 23 affiliations before it.
+		
+		Taking a look at the very first entry, we see
+		
+			5	32	3	32786	0
 			
-			The affiliation sum is generated by using powers of 2. The power given to an affiliation is equal to how many affiliations are before it
-			in the file "cardTypes.txt". So for "Male", the first affiliation, it would have a power equal to "0" (zero) because it is the first
-			affiliation. "Female" would have a power of "1" (since only one affiliation comes before it); "Droid" would have "2"; and so on, down to
-			"Fringer", which has a power of "23" because there are 23 affiliations before it.
+		And since "numericTypes.txt" has a line for every line in "characterNames.txt", looking at the first line in the latter file tells us that
+		we are examining the information for "Aayla Secura".
+		
+		We see that she is rarity "5", has a cap cost of "32", and has "3" different affiliations. These affiliations sum to "32786" and at the
+		current moment, Aayla is not awakened (last value is "0"). Looking at Aayla's affiliations (Female, Jedi, Galactic Republic), we can see
+		that the affiliation sum was generated by: 2^1 + 2^4 + 2^15 = 32786. When the program reads this value, it will deconstruct it by using
+		the number of affiliation values to pull out Aayla's affiliations in written form.
+		
+		Choosing another entry (from line 199):
+		
+			4	15	4	1114241	1
 			
-			Taking a look at the very first entry, we see
-			
-				5	32	3	32786	0
-				
-			And since "numericTypes.txt" has a line for every line in "characterNames.txt", looking at the first line in the latter file tells us that
-			we are examining the information for "Aayla Secura".
-			
-			We see that she is rarity "5", has a cap cost of "32", and has "3" different affiliations. These affiliations sum to "32786" and at the
-			current moment, Aayla is not awakened (last value is "0"). Looking at Aayla's affiliations (Female, Jedi, Galactic Republic), we can see
-			that the affiliation sum was generated by: 2^1 + 2^4 + 2^15 = 32786. When the program reads this value, it will deconstruct it by using
-			the number of affiliation values to pull out Aayla's affiliations in written form.
-			
-			Choosing another entry (from line 199):
-			
-				4	15	4	1114241	1
-				
-			Looking at line 199 in "characterNames.txt", we see that these values belong to "Jango Fett".
-			
-			This Jango is rarity "4", costs "15", has "4" different types, has an affiliation sum of "1114241", and is awakened (last value is "1").
-			Looking at Jango's types in-game, we see that they are: Male, Bounty Hunter, Separatist, and Mandalorian; and so the affiliation sum is
-			generated from: 2^0 + 2^7 + 2^16 + 2^20 = 1114241.
+		Looking at line 199 in "characterNames.txt", we see that these values belong to "Jango Fett".
+		
+		This Jango is rarity "4", costs "15", has "4" different types, has an affiliation sum of "1114241", and is awakened (last value is "1").
+		Looking at Jango's types in-game, we see that they are: Male, Bounty Hunter, Separatist, and Mandalorian; and so the affiliation sum is
+		generated from: 2^0 + 2^7 + 2^16 + 2^20 = 1114241.
 			
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	V. Output
 	
-This program will produce output files to three locations: 1) directory "Output"; 2) directory "Unique Profiles", and 3) directory "Character Profiles".
+This program will produce output files to four locations: 1) directory "Output"; 2) directory "Unique Profiles"; 3) directory "Character Profiles"; and 4) "Exact Profiles", a subdirectory of "Character Profiles".
 
 "Output" contains the solutions found by the program during its combination searches
 "Unique Profiles" contains information about affiliation distributions of the current set of character cards
 "Character Profiles" contains the names of Character Cards that possess at least a user specified given set of affiliations
+"Character Profiles\Exact Profiles" contains the names, rarity, and cost of Character Cards which possess the exact specified
+set of affiliations
 
-		V.i Support Output
-			
-			Files in the output folder are named based on the nicknames of the skills being searched (e.g., searching for Prep Skill Trigger UP,
-			Proximity Alarm, and Character Card HP UP will result in a file by the name of "Prep_Prox_HP.txt"). However, note that each ordering of a
-			set of skills, such as (Prep, Prox, HP) and (HP, Prox, Prep), will produce a distinct output file even if the contents of the files would
-			be identical.
-			
-			Also generated is a file with the suffix "_bases" - when searching for specific skill levels, the program will check if each
-			successful combination can be made by using just bases of those cards. If you are searching for a minimum skill level, the program will
-			name files with the minimum level included - so if you were searching for Null, HP 5, and Prep 5, your output would be written to the
-			files called "Null_Hp_5_Prep_5.txt" and "Null_Hp_5_Prep_5_BASE.txt".
-
-			An output entry will look like:
-
-							----------------------------------------------------------------------
-								Ambush, level 1
-								Battle Penalty Reduction, level 1
-								Battle Reward Credit UP, level 2
-
-							4*  Shadow Stormtrooper   5*  Jabba the Hutt   4*  Lando Calrissian
-
-							6 (Droid,  Galactic Empire)  6 (Jabbas Crime Syndicate)  7 (Rebel Alliance,  Galactic Empire)
-
-								5*  Droid,  Rebel Alliance
-								5*  Droid,  Rebel Alliance
-								4*  Droid,  Galactic Empire
-								3*  Droid,  Tatooinian,  Jabbas Crime Syndicate
-
-
-							14 (Male)  8.6 (Galactic Empire)  8.7 (Tatooinian)  8.7 (Jabbas Crime Syndicate)  14.9 (Rebel Alliance)  18.2 (Droid)
-
-							----------------------------------------------------------------------
-							
-			At the top of the entry is a block with the skill names and their discovered levels
-			Next are the skill cards used (rarity and name)
-			In the middle are the type and value requirements for the skill levels listed at the top
-			The lower block contains the rarity and affiliations of the cards used in the solution
-			And lastly at the bottom is the total affiliation values using the above cards
-
-
-		V.ii Unique Profile Output
+	V.i Support Output
 		
-			Output written to the "Unique Profile" directory are .txt files which contain information about the current unique affiliation profiles in
-			the game. There are three possible files that can be written into that folder from the statistics component:
-			
-			"All_Cards__All_Types.txt" - tabbed spaced text file of the affiliations of each card in the program's database. (Not actually unique)
-			"Unique_Card_Affiliations.txt" - list of each unique affiliation profile per rarity
-			"unique_profile_dist.txt" - number of character cards that possess each unique profile (e.g., how many exactly Jedi, Male, Republic cards)
-			
-		V.iii Character Profile Output
+		Files in the output folder are named based on the nicknames of the skills being searched (e.g., searching for Prep Skill Trigger UP,
+		Proximity Alarm, and Character Card HP UP will result in a file by the name of "Prep_Prox_HP.txt"). However, note that each ordering of a
+		set of skills, such as (Prep, Prox, HP) and (HP, Prox, Prep), will produce a distinct output file even if the contents of the files would
+		be identical.
 		
-			These .txt files contain the names of Character Cards which have at least a certain combination of affiliations. These output files are
-			created from the statistics component and are named based on the affiliations queried - so if you were searching for cards possessing
-			"Podracer" and "Tatooinian" and "Resistance", the output file would be named "Podracer_Tatooinian_Resistance.txt".
+		Also generated is a file with the suffix "_bases" - when searching for specific skill levels, the program will check if each
+		successful combination can be made by using just bases of those cards. If you are searching for a minimum skill level, the program will
+		name files with the minimum level included - so if you were searching for Null, HP 5, and Prep 5, your output would be written to the
+		files called "Null_Hp_5_Prep_5.txt" and "Null_Hp_5_Prep_5_BASE.txt".
+
+		An output entry will look like:
+
+			----------------------------------------------------------------------
+				Ambush, level 1
+				Battle Penalty Reduction, level 1
+				Battle Reward Credit UP, level 2
+
+			4*  Shadow Stormtrooper   5*  Jabba the Hutt   4*  Lando Calrissian
+
+			6 (Droid,  Galactic Empire)  6 (Jabbas Crime Syndicate)  7 (Rebel Alliance,  Galactic Empire)
+
+				5*  Droid,  Rebel Alliance
+				5*  Droid,  Rebel Alliance
+				4*  Droid,  Galactic Empire
+				3*  Droid,  Tatooinian,  Jabbas Crime Syndicate
+
+
+			14 (Male)  8.6 (Galactic Empire)  8.7 (Tatooinian)  8.7 (Jabbas Crime Syndicate)  14.9 (Rebel Alliance)  18.2 (Droid)
+
+			----------------------------------------------------------------------
+						
+		At the top of the entry is a block with the skill names and their discovered levels
+		Next are the skill cards used (rarity and name)
+		In the middle are the type and value requirements for the skill levels listed at the top
+		The lower block contains the rarity and affiliations of the cards used in the solution
+		And lastly at the bottom is the total affiliation values using the above cards
+
+
+	V.ii Unique Profile Output
+	
+		Output written to the "Unique Profile" directory are .txt files which contain information about the current unique affiliation profiles in
+		the game. There are three possible files that can be written into that folder from the statistics component:
+		
+		"All_Cards__All_Types.txt" - tabbed spaced text file of the affiliations of each card in the program's database. (Not actually unique)
+		"Unique_Card_Affiliations.txt" - list of each unique affiliation profile per rarity
+		"unique_profile_dist.txt" - number of character cards that possess each unique profile (e.g., how many exactly Jedi, Male, Republic cards)
+		
+	V.iii Character Profile Output
+	
+		These .txt files contain the names of Character Cards which have at least a certain combination of affiliations. These output files are
+		created from the statistics component and are named based on the affiliations queried - so if you were searching for cards possessing
+		"Podracer" and "Tatooinian" and "Resistance", the output file would be named "Podracer_Tatooinian_Resistance.txt".
+		
+		In the subdirectory "Exact Profiles", the same naming scheme is present, but the only members in each file are
+		cards who possess exactly the specified affiliations.
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -280,7 +285,7 @@ to add new support skills at the bottom of the file - this makes editing the fil
 easier. If you decide to insert a new support skill somewhere above the last support skill in "supportSkills.txt", you need to be certain that you
 have correctly moved the entries of the other skills in the other two text files when you insert the information about the new support skill.
 
-To help with the editing, an excel spreadsheet (char_aff_table.xlsx) with all the pertinent information has been provided. When adding new cards, make
+To help with the editing, an excel spreadsheet (Support Deck Tables.xlsx) with all the pertinent information has been provided. When adding new cards, make
 a new entry at the bottom of the character table and add all the necessary information in the same row. Do not enter anything into the columns labeled
 "NumTypes" or "AffiliationSum" - the spreasheet will automatically update those columns when you enter the cards's affiliation data. Then once you've
 finished updating, use Excel's sort function to sort the character table so that the entries are sorted by rarity (Column 2: high to low) then by
@@ -293,4 +298,4 @@ following page (page name: "SS Output"). You'll see columns of information with 
 columns should be copied. As you update the information on page "Support Skills", "SS Output" is updated as well. Next to "SS Output" is a page called
 "SS Translator" - don't mess with that page; it is an intermediate step for the information on "SS Output".
 
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
