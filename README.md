@@ -4,6 +4,7 @@ A brute force solver for Support Decks in SWFC
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Readme for the Support Deck Builder
+
 	I. Introduction & Description
 	II. Installation
 	III. Files Used
@@ -33,13 +34,13 @@ Included are four controllable optimizations for searching:
 	
 	2) limiting searches to N* affiliation sets or better
 		-This option allows the user to control through how many levels of rarity are searched. By default, the program searches through only rarity
-		-5 and 4; this can be changed to include rarity 3 cards though doing so may lengthen solving by a considerable amount of time.
+		-5 and 4; this can be changed to include through rarity 1 cards though doing so may lengthen solving by a considerable amount of time.
 	
 	3) Stop searching after the first N solutions have been found
 		-User sets a number N of solutions they want found and the program will stop searching after N solutions have been found
 		
 	4) Ignoring skill cards during search
-		-User can select certain skill cards to be not included during solving
+		-User can select certain skill cards to exclude during solving
 
 
 Once these options have been set, the program will commence its solving. Solving can take at few as 3 seconds, or as long as 10 minutes, depending
@@ -57,10 +58,10 @@ Please see the file "Getting Started.txt" for installation instructions.
 	III. Files Used
 
 All files accessed by this program are in a local directory called "Data". The program uses these files to build its database of support skills, cards,
-and affiliations. Editing these files changes what data the program sees, and so it is advised that you do not edit them. The reason this information
-exists in .txt form and not in the source code is that it is designed to be more fluid with the release of new support abilities and cards. Instead of
-needing to edit the source code with each release one simply edits the correpsonding .txt file(s). This also allows the user an easy way to exclude
-items they do not considered.
+and affiliations. Editing these files changes what data the program sees, and so it is advised that you do not edit them without reading section VI.
+The reason this information exists in .txt form and not in the source code is that it is designed to be more fluid with the release of new support
+abilities and cards. Instead of needing to edit the source code with each release one simply edits the correpsonding .txt file(s). This also allows
+the user an easy way to exclude items they do not want considered.
 
 Inside of "Data", there are six .txt files and one excel .xlsx file. These files are:
 
@@ -98,7 +99,7 @@ support skills, respectively. In contrast, the other files are very simple to re
 	supportCards.txt
 		The name of each support card and the types it requires for its skill. The order of names here must correspond to the order of support
 		skills in "supportSkills.txt", otherwise cards will be assigned to the incorrect skill. Each entry uses commas to separate items on the
-		same line - the very last entry on a line should have no comma after it. For cards with fewer than three requirements, they are marked
+		same line - the very last item on a line should have no comma after it. For cards with fewer than three requirements, they are marked
 		with "None" for the excess requirements.
 		
 		Some examples:
@@ -130,13 +131,13 @@ support skills, respectively. In contrast, the other files are very simple to re
 		
 					<skill level 1 type requirement> ... <skill level MAX type requirement>	<skill card rarity>
 
-		So Character Card HP UP would look like the following:
+		So Character Card HP UP would look like the following (excluding the slashes and text at the end):
 		
 			5 4 //skill max level and number of cards with skill
 			3 5 7 9 12 2 //type value requirements for levels of skill and the skill card's rarity at the very end
 			3 5 7 9 12 2
 			3 5 7 9 12 3
-			3 5 7 9 12 2			
+			3 5 7 9 12 2
 
 		The first line tells us that Character Card HP UP has "5" max levels and "4" Character Cards possess it. The next 5 lines then tell us
 		the individual value requirements for each skill card that has HP UP and the rarity of that skill card. So we see that the first card has
