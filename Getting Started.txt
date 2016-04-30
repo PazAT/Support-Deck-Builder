@@ -1,0 +1,139 @@
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+														Support Deck Builder Set-Up Reference
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+Thanks for downloading the Support Deck Builder!
+
+Before proceeding, I must point out that this program has only been compiled for a Windows based system, and so I cannot assist non-Windows users at
+this time.
+
+The "Support Deck Builder.zip" file should include everything you need to successfully run this program. Inside the .zip should be five directories
+("Character Profiles", "Data", "Output", "Source", and "Unique Profiles"), two "readme" .txt files (including this one), and the executable
+("Support Deck Builder.exe").
+	
+
+Follow these steps to ensure that the program will operate successfully:
+	1) Unzip the contents to a local directory. I recommend placing the program into your User Directory (So for me, it would be placed into:
+	Paz/Support Deck Builder). This ensures that the program will always have authority to write the output files it creates. If you're uncomfortable
+	doing this with a pre-compiled program, then go ahead and download or copy the source code to compile yourself.
+	
+	2) In the same Directory, check that there are five sub-directories: "Character Profiles"; "Data"; "Output"; "Source"; and "Unique Profiles". If
+	these directories do not exist, please create them (case sensitive) before attempting to use the Support Deck Solver. The directories
+	"Character Profiles", "Output", and "Unique Profiles" should be empty.
+	
+	3) Look inside the Data directory - there should be seven different files: 
+		i) cardTypes.txt   ii) characterNames.txt   iii) numericTypes.txt   iv) supportCards.txt
+		v) supportSkillLevels.txt   vi) supportSkills.txt   vii) char_aff_table.xlsx
+		
+	   Look inside the "Source" directory - there should be six different files:
+		i) main.cpp   ii) declarations.h   iii) classes.h
+		iv) sort_algorithm.cpp   v) functions.cpp   vi) misc_functions.cpp
+
+	 If you do not see these files, either download them or copy the contents from dropbox. The first six files listed in "Data" are essential for the
+	 program to operate properly - char_aff_table.xlsx is not necessary for the program's success. If you still cannot obtain a copy of the files,
+	 send me PM via AppInvasion.
+	 
+	 In the "Character Profiles" directory, there should be one sub-directory - "Exact Profiles". If this directory does not exist, go ahead and
+	 create it (exactly as named, case sensitive).
+	 
+	4) Once the three steps above are completed, if the program is located in your User Directory, go ahead and start up the program and follow the
+	 instructions on-screen. If the program is located outside of your User Directory, right click the executable and select "Run as Administrator" -
+	 however, this is only necessary to do if you want the program to write output files.
+	 
+	5) Enjoy!
+	
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+															Starting up the Program
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+	
+Once you start the program, I recommend you resize your command window to be about twice as large as the default size. Sometimes the onscreen output
+will wrap around onto the next line - if this doesn't bother you then continue onwards.
+	
+There will be a very brief pause while the program loads and builds its database of cards, unique profiles, affiliations, and support skills. Once it
+is complete, you will be presented with a single line of text:
+
+		"Check combinations (1) or check stats (2) or print profile info (3) or Quit (0)?:  "
+
+Entering "1" will launch the support deck solver, "2" will launch the statistics component, "3" will print out info about each character card, and "0"
+will quit the application. After you make your initial choice, you will be prompted with more choices - simply follow the instructions provided.
+
+Let's work our way through starting up the Support Deck solving component. We have just entered "1" into the command line. We are now prompted with
+the following line:
+
+		"How many skills (2 - 6) do you want in your support deck?:  "
+
+The program will not proceed until you have entered an integer in the range described above. Once you have done so, the next line to appear is:
+	
+		"Enforce minimum skill levels? (Yes = 1):   "
+		
+Entering "1" tells the program that you are searching for specific minimum levels of your skills. Otherwise entering any other value tells the program
+that you're looking for any possible skill level combinations of your support skills. Next you will see:
+		
+		
+		1) Ambush
+		2) Battle Penalty Reduction
+		3) Battle Reward Credit UP
+		4) Call of the Light Side
+		5) Character Card HP UP
+		6) Lure of the Dark Side
+		7) Prep Skill Nullification
+		8) Prep Skill Trigger UP
+		9) Proximity Alarm
+		10) Undercover
+		11) Anti Lightsaber Tactics
+		
+		"Please choose a skill:  "
+	
+The above last line comes with the displayed list of support skills. After choosing our skill, we would then be presented with a list of cards which
+correspond to the chosen ability and asked if we wanted to ignore any of them during solving. For this, let's say we enter "1", which corresponds to
+Ambush:
+
+		1) 4* Agen Kolar
+		2) 4* Shadow Stormtrooper
+		3) 4* Wicket W Warrick
+		4) 3* Lachichuk
+		
+		"Ignore any skill cards? Enter the number of those you don't want to search - enter 0 when ready to proceed:  "
+	
+If we didn't want to search a specific card, we would just type the number next to its name and hit enter; entering "0" when ready to proceed. The
+program requires at least one card from a set of N support ability cards to be searched, so you may only ignore up to (N-1) cards from a given set.
+
+
+If we were enforcing a minimum skill level with Ambush, we would next see:
+
+		"Set minimum skill level (1 2 3):  "
+		
+The numbers in parentheses are the levels available for the selected skill - simply type in the desired minimum level and hit enter to progress. This
+line will not appear for skills with only one level.
+
+
+Once finished with all of our skills, we would next be prompted to set a minimum number of matching types for a card to possess in order for it to be
+included in the search:
+		
+		"Enter the minimum number of matching types per card: "
+		
+This value can range from 0 to 6 (the present maximum number of types on any card). The program will not proceed until a valid integer is entered.
+
+
+Next we would see
+
+		"Query through which rarity (1 2 3 4 5)? : "
+		
+Enter the rarity through which you want to search. Entering "5" would cause the program to search only 5*; entering "4" would cause it to search only
+5* and 4*; and so on.
+
+
+And lastly, we would be prompted to: 
+		
+		"Stop searching after a certain number of solutions? (Yes = 1):  "
+		
+If you want to stop after discovering some solutions, enter "1" and then enter the number of solutions for which you want to search. Otherwise enter
+any other value.
+
+And with that, the program will commence its solving of your support deck. Once it has completed, it will printout onto the screen if it managed to
+find any combinations; and if no solutions are found, it will printout the skill names and minimum enforced levels for which it tried to solve.
