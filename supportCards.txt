@@ -1,0 +1,43 @@
+Agen Kolar,Jedi,Clone Trooper,None
+Shadow Stormtrooper,Droid,Galactic Empire,None
+Wicket W Warrick,Ewok,Rebel Alliance,None
+Lachichuk,Wookiee,Clone Trooper,None
+Jabba the Hutt,Jabbas Crime Syndicate,None,None
+Sebulba,Podracer,None,None
+Lando Calrissian,Rebel Alliance,Galactic Empire,None
+Sio Bibble,Senator,Nabooan,None
+Greedo,Bounty Hunter,Rebel Alliance,None
+San Hill,Droid,Separatist,None
+Bib Fortuna,Beast,Jabbas Crime Syndicate,None
+Han Solo,Rebel Alliance,Wookiee,None
+Adi Gallia,Jedi,Sith,None
+Ben Kenobi,Jedi,Sith,None
+Master Yoda [Jedi Council],Jedi,Sith,None
+Rabe,Female,Nabooan,None
+Shu Mai,Female,Separatist,None
+Dexter Jettster,Male,Galactic Republic,None
+Shmi Skywalker,Female,Tatooinian,None
+Darth Vader [Death Star],Jedi,Sith,None
+Anakin Skywalker [Sith],Jedi,Sith,None
+Dooku,Jedi,Sith,None
+Admiral Ackbar,Gungan,Rebel Alliance,None
+Obi-Wan Kenobi [Padawan],Galactic Republic,Tatooinian,None
+Grand Moff Tarkin,Clone Trooper,Galactic Empire,None
+Bossk,Bounty Hunter,Wookiee,None
+Chief Chirpa,Beast,Ewok,None
+Boss Nass,Jedi,Gungan,None
+Mon Mothma,Senator,Rebel Alliance,None
+Jabba the Hutt,Female,Jabbas Crime Syndicate,None
+Sly Moore,Senator,Sith,None
+Logray,Droid,Ewok,None
+Queen Apailana,Female,Nabooan,Galactic Empire
+Queen Jamillia,Female,Jedi,Nabooan
+Luminara Unduli,Jedi,Separatist,None
+DRK-1 Dark Eye Probe Droid,Sith,Tatooinian,None
+Boushh,Bounty Hunter,Beast,None
+General Ceel,Droid,Gungan,None
+Garindan,Galactic Empire,Tatooinian,None
+Obi-Wan Kenobi [Jedi Knight],Jedi,Bounty Hunter,None
+Clone Trooper: 501st Legion,Galactic Republic,Separatist,None
+ARC Trooper Fives,Jedi,Bounty Hunter,Clone Trooper
+Umbaran Soldier,Sith,Bounty Hunter,Separatist

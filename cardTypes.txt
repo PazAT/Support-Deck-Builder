@@ -1,0 +1,24 @@
+Male
+Female
+Droid
+Senator
+Jedi
+Sith
+Podracer
+Bounty Hunter
+Beast
+Ewok
+Clone Trooper
+Gungan
+Nabooan
+Rebel Alliance
+Galactic Empire
+Galactic Republic
+Separatist
+Wookiee
+Tatooinian
+Jabbas Crime Syndicate
+Mandalorian
+Resistance
+First Order
+Fringer
