@@ -14,6 +14,8 @@
 
 12 (Female)  12.9 (Tatooinian)  14.9 (Male)  4.3 (Jedi)  14 (Galactic Republic)  9.7 (Nabooan)  3.3 (Droid)  13.9 (Sith)  10.6 (Galactic Empire)  5.4 (Senator)
 
+Minimum cost: 140			Maximum Cost: 152
+
 ----------------------------------------------------------------------
 
 
