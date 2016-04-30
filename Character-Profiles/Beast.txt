@@ -1,0 +1,15 @@
+Acklay
+Rarity: 3*		Cost: 16
+
+Nexu
+Rarity: 3*		Cost: 16
+
+Reek
+Rarity: 3*		Cost: 16
+
+Wampa
+Rarity: 3*		Cost: 7
+
+Wampa
+Rarity: 1*		Cost: 4
+
