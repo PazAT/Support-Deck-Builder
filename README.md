@@ -231,31 +231,33 @@ set of affiliations
 		files called "Null_Hp_5_Prep_5.txt" and "Null_Hp_5_Prep_5_BASE.txt".
 
 		An output entry will look like:
-
 			----------------------------------------------------------------------
 				Ambush, level 1
-				Battle Penalty Reduction, level 1
-				Battle Reward Credit UP, level 2
-
-			4*  Shadow Stormtrooper   5*  Jabba the Hutt   4*  Lando Calrissian
-
-			6 (Droid,  Galactic Empire)  6 (Jabbas Crime Syndicate)  7 (Rebel Alliance,  Galactic Empire)
-
-				5*  Droid,  Rebel Alliance
+				Battle Penalty Reduction, level 4
+				Battle Reward Credit UP, level 1
+			
+			4*  Shadow Stormtrooper   5*  Jabba the Hutt   3*  Greedo
+			
+			6 (Droid,  Galactic Empire)  17 (Jabbas Crime Syndicate)  4 (Bounty Hunter,  Rebel Alliance)
+			
+				5*  Male,  Bounty Hunter,  Jabbas Crime Syndicate,  Mandalorian	(calculated with awakened bonus)
+				5*  Male,  Bounty Hunter,  Jabbas Crime Syndicate,  Mandalorian	(calculated with awakened bonus)
 				5*  Droid,  Rebel Alliance
 				4*  Droid,  Galactic Empire
-				3*  Droid,  Tatooinian,  Jabbas Crime Syndicate
-
-
-			14 (Male)  8.6 (Galactic Empire)  8.7 (Tatooinian)  8.7 (Jabbas Crime Syndicate)  14.9 (Rebel Alliance)  18.2 (Droid)
-
+			
+			
+			23.8 (Male)  8.6 (Galactic Empire)  8.7 (Tatooinian)  19.5 (Jabbas Crime Syndicate)  14.1 (Bounty Hunter)  10.8 (Mandalorian)  9.6 (Droid)  5.3 (Rebel Alliance)
+			
+			Minimum cost: 128			Maximum Cost: 171
+			
 			----------------------------------------------------------------------
 						
 		At the top of the entry is a block with the skill names and their discovered levels
 		Next are the skill cards used (rarity and name)
 		In the middle are the type and value requirements for the skill levels listed at the top
 		The lower block contains the rarity and affiliations of the cards used in the solution
-		And lastly at the bottom is the total affiliation values using the above cards
+		The second line above the bottom is the total affiliation values using the above cards
+		And lastly is the cost range for the above cards
 
 
 	V.ii Unique Profile Output
