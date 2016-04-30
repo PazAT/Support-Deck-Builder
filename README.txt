@@ -21,7 +21,7 @@ Readme for the Support Deck Builder
 	
 This program's primary purpose is to brute force solve for 2-6 skill support deck combinations given sets of character affiliations. It solves by
 assuming each avaliable card is at the highest possible build - emax or awakened. If combinations are located, they are printed to a ".txt" document
-located in the "Output" folder. If no combinations are located, the output file(s) is notated as such and a printout appears on screen notifying the
+located in the "Output" directory. If no combinations are located, the output file(s) is notated as such and a printout appears on screen notifying the
 user that no combinations could be located. In addition, this program contains a statistics feature for analyzing various information about the
 characters and unique profiles.
 
@@ -210,12 +210,12 @@ support skills, respectively. In contrast, the other files are very simple to re
 
 	V. Output
 	
-This program will produce output files to four locations: 1) directory "Output"; 2) directory "Unique Profiles"; 3) directory "Character Profiles"; and 4) "Exact Profiles", a subdirectory of "Character Profiles".
+This program will produce output files to four locations: 1) directory "Output"; 2) directory "UniqueProfiles"; 3) directory "CharacterProfiles"; and 4) "ExactProfiles", a subdirectory of "CharacterProfiles".
 
 "Output" contains the solutions found by the program during its combination searches
-"Unique Profiles" contains information about affiliation distributions of the current set of character cards
-"Character Profiles" contains the names of Character Cards that possess at least a user specified given set of affiliations
-"Character Profiles\Exact Profiles" contains the names, rarity, and cost of Character Cards which possess the exact specified
+"UniqueProfiles" contains information about affiliation distributions of the current set of character cards
+"CharacterProfiles" contains the names of Character Cards that possess at least a user specified given set of affiliations
+"CharacterProfiles\ExactProfiles" contains the names, rarity, and cost of Character Cards which possess the exact specified
 set of affiliations
 
 	V.i Support Output
@@ -263,7 +263,7 @@ set of affiliations
 
 	V.ii Unique Profile Output
 	
-		Output written to the "Unique Profile" directory are .txt files which contain information about the current unique affiliation profiles in
+		Output written to the "UniqueProfile" directory are .txt files which contain information about the current unique affiliation profiles in
 		the game. There are three possible files that can be written into that folder from the statistics component:
 		
 		"All_Cards__All_Types.txt" - tabbed spaced text file of the affiliations of each card in the program's database. (Not actually unique)
@@ -276,7 +276,7 @@ set of affiliations
 		created from the statistics component and are named based on the affiliations queried - so if you were searching for cards possessing
 		"Podracer" and "Tatooinian" and "Resistance", the output file would be named "Podracer_Tatooinian_Resistance.txt".
 		
-		In the subdirectory "Exact Profiles", the same naming scheme is present, but the only members in each file are
+		In the subdirectory "ExactProfiles", the same naming scheme is present, but the only members in each file are
 		cards who possess exactly the specified affiliations.
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
