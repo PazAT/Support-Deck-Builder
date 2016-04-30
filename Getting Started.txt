@@ -21,7 +21,8 @@ Follow these steps to ensure that the program will operate successfully:
 	
 	2) In the same Directory, check that there are five sub-directories: "Character Profiles"; "Data"; "Output"; "Source"; and "Unique Profiles". If
 	these directories do not exist, please create them (case sensitive) before attempting to use the Support Deck Solver. The directories
-	"Character Profiles", "Output", and "Unique Profiles" should be empty.
+	"Character Profiles", "Output", and "Unique Profiles" should be empty. Remove any hyphens ( "-" ) from directory names. The names of the
+	directories should exactly match what they are called in this file.
 	
 	3) Look inside the Data directory - there should be seven different files: 
 		i) cardTypes.txt   ii) characterNames.txt   iii) numericTypes.txt   iv) supportCards.txt
