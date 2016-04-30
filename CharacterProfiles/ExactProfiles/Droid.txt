@@ -1,0 +1,9 @@
+2-1B [Healer]
+Rarity: 3*		Cost: 20
+
+C-3PO: Battle Droid
+Rarity: 3*		Cost: 8
+
+Pit Droid [Mechanic]
+Rarity: 3*		Cost: 19
+
