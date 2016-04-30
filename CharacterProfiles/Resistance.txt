@@ -1,0 +1,35 @@
+BB-8
+	Rarity:  5	Cost:  22	Awakened
+
+Chewbacca [A Hero Returned]
+	Rarity:  5	Cost:  39	Awakened
+
+Finn
+	Rarity:  5	Cost:  32	Awakened
+
+Rey
+	Rarity:  5	Cost:  31	Awakened
+
+Finn
+	Rarity:  4	Cost:  15	Awakened
+
+Han Solo [Double Dealer]
+	Rarity:  4	Cost:  17	Awakened
+
+Poe Dameron
+	Rarity:  4	Cost:  16	Awakened
+
+Rey
+	Rarity:  4	Cost:  16	Awakened
+
+BB-8
+	Rarity:  3	Cost:  11	Awakened
+
+C-3PO [Trusted Companion]
+	Rarity:  3	Cost:  12	Awakened
+
+Jessika Pava
+	Rarity:  3	Cost:  11	Awakened
+
+Resistance Trooper
+	Rarity:  3	Cost:  10	Awakened
