@@ -266,7 +266,6 @@ set of affiliations
 		Output written to the "UniqueProfile" directory are .txt files which contain information about the current unique affiliation profiles in
 		the game. There are three possible files that can be written into that folder from the statistics component:
 		
-		"All_Cards__All_Types.txt" - tabbed spaced text file of the affiliations of each card in the program's database. (Not actually unique)
 		"Unique_Card_Affiliations.txt" - list of each unique affiliation profile per rarity
 		"unique_profile_dist.txt" - number of character cards that possess each unique profile (e.g., how many exactly Jedi, Male, Republic cards)
 		
