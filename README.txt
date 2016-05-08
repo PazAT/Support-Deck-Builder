@@ -241,10 +241,10 @@ set of affiliations
 			
 			6 (Droid,  Galactic Empire)  17 (Jabbas Crime Syndicate)  4 (Bounty Hunter,  Rebel Alliance)
 			
-				5*  Male,  Bounty Hunter,  Jabbas Crime Syndicate,  Mandalorian	(calculated with awakened bonus)
-				5*  Male,  Bounty Hunter,  Jabbas Crime Syndicate,  Mandalorian	(calculated with awakened bonus)
-				5*  Droid,  Rebel Alliance
-				4*  Droid,  Galactic Empire
+				5*  Male,  Bounty Hunter,  Jabbas Crime Syndicate,  Mandalorian	(calculated with awakened bonus)	(3 character cards with 1 awakened)
+				5*  Male,  Bounty Hunter,  Jabbas Crime Syndicate,  Mandalorian	(calculated with awakened bonus)	(3 character cards with 1 awakened)
+				5*  Droid,  Rebel Alliance	(2 character cards)
+				4*  Droid,  Galactic Empire	(1 character cards)
 			
 			
 			23.8 (Male)  8.6 (Galactic Empire)  8.7 (Tatooinian)  19.5 (Jabbas Crime Syndicate)  14.1 (Bounty Hunter)  10.8 (Mandalorian)  9.6 (Droid)  5.3 (Rebel Alliance)
@@ -256,7 +256,7 @@ set of affiliations
 		At the top of the entry is a block with the skill names and their discovered levels
 		Next are the skill cards used (rarity and name)
 		In the middle are the type and value requirements for the skill levels listed at the top
-		The lower block contains the rarity and affiliations of the cards used in the solution
+		The lower block contains the rarity and affiliations of the cards used in the solution, as well as the number of how many character cards of at least those affiliations exist
 		The second line above the bottom is the total affiliation values using the above cards
 		And lastly is the cost range for the above cards
 
@@ -264,7 +264,7 @@ set of affiliations
 	V.ii Unique Profile Output
 	
 		Output written to the "UniqueProfile" directory are .txt files which contain information about the current unique affiliation profiles in
-		the game. There are three possible files that can be written into that folder from the statistics component:
+		the game. There are two possible files that can be written into that folder from the statistics component:
 		
 		"Unique_Card_Affiliations.txt" - list of each unique affiliation profile per rarity
 		"unique_profile_dist.txt" - number of character cards that possess each unique profile (e.g., how many exactly Jedi, Male, Republic cards)
