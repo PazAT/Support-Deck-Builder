@@ -20,7 +20,7 @@ void create_supportCards(AllSupportSkills* allsupportskills, ALL_Cards* all_card
 
     /** This function builds the structures from the text files in the "Data" directory **/
 
-    int x,y,z, none_counter=0, is_not_same_aff=0;
+    int x,y,z,w, none_counter=0, is_not_same_aff=0, type_counter=0;
     string placeholder, placeholder1, placeholder2, placeholder3, placeholder4;
     ifstream myfile;
 
@@ -131,6 +131,7 @@ void create_supportCards(AllSupportSkills* allsupportskills, ALL_Cards* all_card
     myfile.close();
 
     all_cards->number_of_characters=0;
+    unique_affiliations->number_of_characters=0;
 
     myfile.open("Data/characterNames.txt");
 
@@ -148,6 +149,18 @@ void create_supportCards(AllSupportSkills* allsupportskills, ALL_Cards* all_card
 
     myfile.close();
 
+    for(x=0;x<all_cards->number_of_characters;x++){
+        all_cards->card[x].num_profiles_exact=0;
+        all_cards->card[x].num_profiles_at_least=0;
+        all_cards->card[x].num_profiles_awakened_exact=0;
+        all_cards->card[x].num_profiles_awakened_at_least=0;
+
+        unique_affiliations->card[x].num_profiles_exact=0;
+        unique_affiliations->card[x].num_profiles_awakened_exact=0;
+        unique_affiliations->card[x].num_profiles_at_least=0;
+        unique_affiliations->card[x].num_profiles_awakened_at_least=0;
+    }
+
     myfile.open("Data/numericTypes.txt");
 
     if(myfile.is_open()){
@@ -155,6 +168,8 @@ void create_supportCards(AllSupportSkills* allsupportskills, ALL_Cards* all_card
             is_not_same_aff=0;
             myfile >> all_cards->card[x].rarity >> all_cards->card[x].cost >> all_cards->card[x].number_of_types >> all_cards->card[x].affiliation_sum >> all_cards->card[x].is_awakened;
             all_cards->card[x].card_ID=x;
+            all_cards->card[x].num_profiles_exact=1;
+            all_cards->card[x].num_profiles_awakened_exact=all_cards->card[x].is_awakened;
             if(x==0){
                 unique_affiliations->card[0].rarity=all_cards->card[x].rarity;
                 unique_affiliations->card[0].number_of_types=all_cards->card[x].number_of_types;
@@ -163,6 +178,10 @@ void create_supportCards(AllSupportSkills* allsupportskills, ALL_Cards* all_card
                 unique_affiliations->card[0].card_ID=0;
                 unique_affiliations->number_of_characters=1;
                 unique_affiliations->card[0].cost=0;
+                unique_affiliations->card[0].num_profiles_exact++;
+                unique_affiliations->card[0].num_profiles_at_least++;
+                unique_affiliations->card[0].num_profiles_awakened_exact=all_cards->card[x].is_awakened;
+                unique_affiliations->card[0].num_profiles_awakened_at_least=all_cards->card[x].is_awakened;
 
             }else{
                 for(y=0;y<x;y++){
@@ -189,6 +208,48 @@ void create_supportCards(AllSupportSkills* allsupportskills, ALL_Cards* all_card
     }
 
     myfile.close();
+
+    for(x=0;x<unique_affiliations->number_of_characters;x++){
+        for(y=0;y<all_cards->number_of_characters;y++){
+            if(all_cards->card[y].rarity==unique_affiliations->card[x].rarity && all_cards->card[y].affiliation_sum==unique_affiliations->card[x].affiliation_sum){
+                unique_affiliations->card[x].num_profiles_exact++;
+            }else
+                if(all_cards->card[y].rarity==unique_affiliations->card[x].rarity){
+                    type_counter=0;
+
+                    for(z=0;z<unique_affiliations->card[x].number_of_types;z++){
+                        for(w=0;w<all_cards->card[y].number_of_types;w++){
+                            if(strcmp(all_cards->card[y].cardtype[w].affiliation,unique_affiliations->card[x].cardtype[z].affiliation)==0){
+                                type_counter++;
+                            }
+                        }
+                    }
+
+                    if(type_counter==unique_affiliations->card[x].number_of_types){
+                        unique_affiliations->card[x].num_profiles_at_least++;
+                    }
+                }
+
+            if(all_cards->card[y].rarity==unique_affiliations->card[x].rarity && all_cards->card[y].affiliation_sum==unique_affiliations->card[x].affiliation_sum && all_cards->card[y].is_awakened==1){
+                unique_affiliations->card[x].num_profiles_awakened_exact++;
+            }else
+                if(unique_affiliations->card[x].rarity==all_cards->card[y].rarity && all_cards->card[y].is_awakened==1){
+                    type_counter=0;
+
+                    for(z=0;z<unique_affiliations->card[x].number_of_types;z++){
+                        for(w=0;w<all_cards->card[y].number_of_types;w++){
+                            if(strcmp(all_cards->card[y].cardtype[w].affiliation,unique_affiliations->card[x].cardtype[z].affiliation)==0){
+                                type_counter++;
+                            }
+                        }
+                    }
+
+                    if(type_counter==unique_affiliations->card[x].number_of_types){
+                        unique_affiliations->card[x].num_profiles_awakened_at_least++;
+                    }
+                }
+        }
+    }
 
     for(x=0;x<all_cards->number_of_characters;x++){
         all_cards->card[x].has_skill=false;
@@ -726,7 +787,7 @@ void print_output(SupportDeck *supportdeck, AllSupportSkills *allsupportskills, 
 
         Printout includes: the skills being searched, their discovered minimum level, the support cards used, the requirements
         for the given support skill levels, the unique rarity profiles used, the total type value for the affiliations in the
-        Support Deck, and the cost range for the support deck.
+        Support Deck, the cost range for the support deck, and the number of cards with the given rarity and affiliation profile.
 
         If the output is sent to the emax/awakened file, unique profiles will be marked if they were calculated with the +0.1
         awakened bonus.
@@ -790,6 +851,14 @@ void print_output(SupportDeck *supportdeck, AllSupportSkills *allsupportskills, 
 
         if(unique_affiliations->card[support_array[j]].is_awakened==1 && supportdeck->bases_only==1){
             output_file << "\t(calculated with awakened bonus)";
+        }
+
+        output_file << "\t(" << unique_affiliations->card[support_array[j]].num_profiles_exact+unique_affiliations->card[support_array[j]].num_profiles_at_least << " character cards";
+
+        if(unique_affiliations->card[support_array[j]].num_profiles_awakened_exact+unique_affiliations->card[support_array[j]].num_profiles_awakened_at_least>0){
+            output_file << " with " << unique_affiliations->card[support_array[j]].num_profiles_awakened_exact+unique_affiliations->card[support_array[j]].num_profiles_awakened_at_least << " awakened)";
+        }else{
+            output_file << ")";
         }
 
         output_file << "\n";
