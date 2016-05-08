@@ -96,7 +96,7 @@ struct SupportDeck{
 };
 extern SupportDeck supportdeck;
 
-void create_supportCards(AllSupportSkills* allsupportskills, ALL_Cards* all_cards, ALL_Cards* unique_affiliations, Affiliation_Array* affiliation_array);
+void create_Database(AllSupportSkills* allsupportskills, ALL_Cards* all_cards, ALL_Cards* unique_affiliations, Affiliation_Array* affiliation_array);
 void create_affiliations(Affiliation_Array *affiliation_array, ALL_Cards *all_cards);
 void reset_support_deck(SupportDeck *supportdeck);
 void set_min_max_costs(ALL_Cards *all_cards, ALL_Cards *unique_cards);
