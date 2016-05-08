@@ -19,11 +19,8 @@ int main(){
 
     srand(time(NULL));
 
-    //the following four functions create the data used by the program
-    create_supportCards(&allsupportskills, &all_cards, &unique_affiliations, &affiliation_array);
-    create_affiliations(&affiliation_array, &all_cards);
-    create_affiliations(&affiliation_array,&unique_affiliations);
-    set_min_max_costs(&all_cards, &unique_affiliations);
+    //the following function creates the data used by the program
+    create_Database(&allsupportskills, &all_cards, &unique_affiliations, &affiliation_array);
 
     do{
         cout << "Check combinations (1) or check stats (2) or print profile info (3) or Quit (0)? :  ";
