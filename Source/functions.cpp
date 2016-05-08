@@ -16,7 +16,7 @@ ALL_Cards all_cards;
 ALL_Cards unique_affiliations;
 SupportDeck supportdeck;
 
-void create_supportCards(AllSupportSkills* allsupportskills, ALL_Cards* all_cards, ALL_Cards* unique_affiliations, Affiliation_Array* affiliation_array){
+void create_Database(AllSupportSkills* allsupportskills, ALL_Cards* all_cards, ALL_Cards* unique_affiliations, Affiliation_Array* affiliation_array){
 
     /** This function builds the structures from the text files in the "Data" directory **/
 
@@ -149,18 +149,6 @@ void create_supportCards(AllSupportSkills* allsupportskills, ALL_Cards* all_card
 
     myfile.close();
 
-    for(x=0;x<all_cards->number_of_characters;x++){
-        all_cards->card[x].num_profiles_exact=0;
-        all_cards->card[x].num_profiles_at_least=0;
-        all_cards->card[x].num_profiles_awakened_exact=0;
-        all_cards->card[x].num_profiles_awakened_at_least=0;
-
-        unique_affiliations->card[x].num_profiles_exact=0;
-        unique_affiliations->card[x].num_profiles_awakened_exact=0;
-        unique_affiliations->card[x].num_profiles_at_least=0;
-        unique_affiliations->card[x].num_profiles_awakened_at_least=0;
-    }
-
     myfile.open("Data/numericTypes.txt");
 
     if(myfile.is_open()){
@@ -209,9 +197,26 @@ void create_supportCards(AllSupportSkills* allsupportskills, ALL_Cards* all_card
 
     myfile.close();
 
+    create_affiliations(affiliation_array, all_cards);
+    create_affiliations(affiliation_array,unique_affiliations);
+
+    for(x=0;x<all_cards->number_of_characters;x++){
+        all_cards->card[x].num_profiles_exact=0;
+        all_cards->card[x].num_profiles_at_least=0;
+        all_cards->card[x].num_profiles_awakened_exact=0;
+        all_cards->card[x].num_profiles_awakened_at_least=0;
+    }
+
+    for(x=0;x<unique_affiliations->number_of_characters;x++){
+        unique_affiliations->card[x].num_profiles_exact=0;
+        unique_affiliations->card[x].num_profiles_awakened_exact=0;
+        unique_affiliations->card[x].num_profiles_at_least=0;
+        unique_affiliations->card[x].num_profiles_awakened_at_least=0;
+    }
+
     for(x=0;x<unique_affiliations->number_of_characters;x++){
         for(y=0;y<all_cards->number_of_characters;y++){
-            if(all_cards->card[y].rarity==unique_affiliations->card[x].rarity && all_cards->card[y].affiliation_sum==unique_affiliations->card[x].affiliation_sum){
+            if( (all_cards->card[y].rarity==unique_affiliations->card[x].rarity) && (all_cards->card[y].affiliation_sum==unique_affiliations->card[x].affiliation_sum) ){
                 unique_affiliations->card[x].num_profiles_exact++;
             }else
                 if(all_cards->card[y].rarity==unique_affiliations->card[x].rarity){
@@ -230,10 +235,10 @@ void create_supportCards(AllSupportSkills* allsupportskills, ALL_Cards* all_card
                     }
                 }
 
-            if(all_cards->card[y].rarity==unique_affiliations->card[x].rarity && all_cards->card[y].affiliation_sum==unique_affiliations->card[x].affiliation_sum && all_cards->card[y].is_awakened==1){
+            if( (all_cards->card[y].rarity==unique_affiliations->card[x].rarity) && (all_cards->card[y].affiliation_sum==unique_affiliations->card[x].affiliation_sum) && (all_cards->card[y].is_awakened==1) ) {
                 unique_affiliations->card[x].num_profiles_awakened_exact++;
             }else
-                if(unique_affiliations->card[x].rarity==all_cards->card[y].rarity && all_cards->card[y].is_awakened==1){
+                if( (unique_affiliations->card[x].rarity==all_cards->card[y].rarity) && (all_cards->card[y].is_awakened==1) ) {
                     type_counter=0;
 
                     for(z=0;z<unique_affiliations->card[x].number_of_types;z++){
@@ -272,6 +277,8 @@ void create_supportCards(AllSupportSkills* allsupportskills, ALL_Cards* all_card
             }
         }
     }
+
+    set_min_max_costs(all_cards, unique_affiliations);
 
 }
 
