@@ -50,7 +50,7 @@ void construct_support_deck(SupportDeck *supportdeck, AllSupportSkills *allsuppo
         base_filename.append("_");
         base_filename.append(int_convertor.str());
 
-        delete &int_convertor;
+        delete [] &int_convertor;
     }
 
     for(i=1;i<supportdeck->number_of_skills;i++){
@@ -69,7 +69,7 @@ void construct_support_deck(SupportDeck *supportdeck, AllSupportSkills *allsuppo
             base_filename.append("_");
             base_filename.append(int_convertor.str());
 
-            delete &int_convertor;
+            delete [] &int_convertor;
         }
     }
 

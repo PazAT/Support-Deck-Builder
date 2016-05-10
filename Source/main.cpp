@@ -19,7 +19,7 @@ int main(){
 
     srand(time(NULL));
 
-    //the following function creates the data used by the program
+    //the following four functions create the data used by the program
     create_Database(&allsupportskills, &all_cards, &unique_affiliations, &affiliation_array);
 
     do{
@@ -98,7 +98,7 @@ int main(){
 
                     }while(get_skill>allsupportskills.numberOfSkills || get_skill<1 || is_double==1);
 
-                    strcpy(supportdeck.skills_in_deck[x],allsupportskills.supportskill[get_skill-1].skillName);
+                    supportdeck.skills_in_deck[x]=allsupportskills.supportskill[get_skill-1].skillName;
                     supportdeck.skill_locator[x]=get_skill-1;
 
                     for(i=0;i<allsupportskills.supportskill[get_skill-1].numberOfCards;i++){
