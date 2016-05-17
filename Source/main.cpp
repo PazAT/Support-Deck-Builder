@@ -39,7 +39,7 @@ int main(){
             cout << "\n\nHow many skills (2 - 6) do you want in your support deck?: ";
             cin >> supportdeck.number_of_skills;
 
-            while(!(cin.good()) || supportdeck.number_of_skills>SUPPORTDECK || supportdeck.number_of_skills<2){
+            while(!(cin.good()) || supportdeck.number_of_skills>6 || supportdeck.number_of_skills<2){
                 cin.clear();
                 cin.ignore(256, '\n');
                 cout << "Please enter a number from 2 to 6: ";
