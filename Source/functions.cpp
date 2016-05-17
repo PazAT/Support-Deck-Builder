@@ -518,7 +518,7 @@ void create_affiliations(Affiliation_Array *affiliation_array, ALL_Cards *all_ca
 
 void reset_support_deck(SupportDeck *supportdeck){
 
-    /** Clears all previous information from the support deck structure. Essentially initializes the support deck **/
+    /** Clears all previous information from the support deck structure. Could be considered an initializer for the support deck **/
 
     int i,j;
 
@@ -546,16 +546,14 @@ void reset_support_deck(SupportDeck *supportdeck){
         }
     }
 
-    for(i=0;i<MAXTYPES;i++){
-        supportdeck->required_types[i].affiliation="";
-    }
-
     for(i=0;i<MAXAFFILIATIONS;i++){
         supportdeck->current_types[i].aff_name="";
         supportdeck->current_types[i].type_value=0.0;
 
         supportdeck->current_base_types[i].aff_name="";
         supportdeck->current_base_types[i].type_value=0.0;
+
+        supportdeck->required_types[i].affiliation="";
     }
 
 }

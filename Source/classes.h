@@ -11,7 +11,7 @@ extern CardType cardtype;
 
 struct Card{
 
-    int number_of_types, rarity, evo_level, is_awakened, card_ID, skill_ID, skillcard_ID;
+    int number_of_types, evo_level, rarity, is_awakened, card_ID, skill_ID, skillcard_ID;
     int num_profiles_exact, num_profiles_awakened_exact, num_profiles_at_least, num_profiles_awakened_at_least;
     unsigned int affiliation_sum;
     double cost, min_cost, max_cost;
@@ -84,7 +84,7 @@ extern Affiliation_Array aff_counter;
 
 struct SupportDeck{
 
-    CardType required_types[MAXTYPES];
+    CardType required_types[MAXAFFILIATIONS];
     Affiliation current_types[MAXAFFILIATIONS], current_base_types[MAXAFFILIATIONS];
     string skills_in_deck[SUPPORTDECK];
     int skill_locator[SUPPORTDECK], card_locator[SUPPORTDECK], skill_threshold[SUPPORTDECK];
