@@ -1,5 +1,5 @@
 Agen Kolar,Jedi,Clone Trooper,None
-Shadow Stormtrooper,Droid,Galactic Empire,None
+Shadow Trooper,Droid,Galactic Empire,None
 Wicket W Warrick,Ewok,Rebel Alliance,None
 Lachichuk,Wookiee,Clone Trooper,None
 Jabba the Hutt,Jabbas Crime Syndicate,None,None

@@ -22,6 +22,7 @@ Bossk
 C-3PO
 C-3PO & R2-D2 [May the 4th Limited Edition]
 Cad Bane
+Cad Bane [Steeled Killer]
 Captain Phasma
 Chewbacca
 Chewbacca [A Hero Returned]
@@ -65,7 +66,9 @@ General Grievous [Elusive Commander]
 General Grievous [Last Stand]
 General Grievous [The Atrocious Executioner]
 General Hux
+General Hux [Calculated Tactician]
 General Kalani
+General Organa
 General Veers
 Grand Moff Tarkin
 Grand Moff Tarkin [The Merciless]
@@ -124,19 +127,21 @@ Qui-Gon Jinn [The Final Duel]
 Quinlan Vos
 R2-D2
 R2-D2 [May the 4th Limited Edition]
+Rako Hardeen
 Rancor
 Rey
 Rey [Starkiller Base]
 Sebulba
 Senator Palpatine
 Shaak Ti
-Shadow Stormtrooper
+Shadow Trooper
 Supreme Chancellor Palpatine
 Wedge Antilles
 Zam Wesell
 4-LOM
 Aayla Secura
 Adi Gallia
+Admiral Statura
 Agen Kolar
 Anakin Skywalker
 ARC Trooper Fives
@@ -235,13 +240,14 @@ Scout Trooper & 74-Z Speeder Bike
 Sebulba
 Senate Guard
 Shaak Ti
-Shadow Stormtrooper
+Shadow Trooper
 Shu Mai
 Sim Aloo
 Snowtrooper
 Supreme Chancellor Palpatine
 Tactical Droid
 Tarfful
+Tasu Leech
 Teemto Pagalies
 TIE Fighter Pilot
 Tion Medon
@@ -313,6 +319,7 @@ Death Star Gunner
 Depa Billaba
 Dexter Jettster
 Dooku
+Dr. Kalonia [Healer]
 DRK-1 Dark Eye Probe Droid
 Droideka
 EV-9D9
@@ -381,6 +388,7 @@ R4-G9
 R7-D4
 RA-7
 Rancor
+Razoo Qin-Fee
 Rebel Commando
 Reek
 Resistance Trooper
