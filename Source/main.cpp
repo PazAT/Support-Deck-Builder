@@ -14,7 +14,7 @@ using namespace std;
 int main(){
 
     int x,i, z=0, choice, get_skill, new_search, translator, keep_adding;
-    int effective_chars=0, using_rarity=4, path, not_done=1, is_double=0;
+    int effective_chars=0, using_rarity=4, path, not_done=1, is_double=0, wants_max_cost=0, user_max_cost;
     ifstream myfile;
 
     srand(time(NULL));
@@ -44,6 +44,25 @@ int main(){
                 cin.ignore(256, '\n');
                 cout << "Please enter a number from 2 to 6: ";
                 cin >>supportdeck.number_of_skills;
+            }
+
+            cout << "\n\nSet a maximum cap cost? (Yes = 1): ";
+            cin >> wants_max_cost;
+
+            if(wants_max_cost==1){
+                cout << "\n\tEnter the desired maximum cap cost (not less than zero):  ";
+                cin >> user_max_cost;
+
+                while(!(cin.good()) || user_max_cost<0){
+                    cin.clear();
+                    cin.ignore(256, '\n');
+                    cout << "\n\n\tInvalid entry.";
+                    cout << "\n\tEnter the desired maximum cap cost (not less than zero):  ";
+                    cin >> user_max_cost;
+                }
+
+                supportdeck.user_set_max_cost=user_max_cost;
+                supportdeck.max_cost_set=true;
             }
 
             if(supportdeck.number_of_skills>1){

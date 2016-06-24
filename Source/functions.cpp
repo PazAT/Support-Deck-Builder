@@ -530,8 +530,10 @@ void reset_support_deck(SupportDeck *supportdeck){
     supportdeck->looking_for_specific_level=0;
     supportdeck->breaking_at_solution=0;
     supportdeck->breaking_early=0;
+    supportdeck->user_set_max_cost=0;
 
     supportdeck->solution_threshold_reached=false;
+    supportdeck->max_cost_set=false;
 
     for(i=0;i<SUPPORTDECK;i++){
         supportdeck->skill_locator[i]=0;
@@ -563,15 +565,19 @@ void set_min_max_costs(ALL_Cards *all_cards, ALL_Cards *unique_cards){
 
     /**
         Creates the minimum and maximum costs for entries in the unique affiliations structure.
-        All entries in the all_cards structure are set to be zero since this variable is never used
-        with that structure, only with the unique_affiliations structure.
+        All entries in the all_cards structure are set to be their real cost
     **/
 
     int i,j, is_first=1;
 
     for(i=0;i<all_cards->number_of_characters;i++){
-        all_cards->card[i].max_cost=0;
-        all_cards->card[i].min_cost=0;
+        all_cards->card[i].min_cost=all_cards->card[i].cost;
+
+        if(all_cards->card[i].is_awakened==1){
+            all_cards->card[i].max_cost=ceil(1.1*all_cards->card[i].cost);
+        }else{
+            all_cards->card[i].max_cost=all_cards->card[i].cost;
+        }
     }
 
     for(i=0;i<unique_cards->number_of_characters;i++){
@@ -635,7 +641,7 @@ double get_max_cost(ALL_Cards *all_cards, ALL_Cards *unique_cards, int support_a
     double cost=0.0;
 
     for(i=0;i<numSkills;i++){
-        cost+=all_cards->card[support_array[i]].cost;
+        cost+=all_cards->card[support_array[i]].max_cost;
     }
 
     for(i=numSkills;i<SUPPORTDECK;i++){
@@ -1302,23 +1308,56 @@ void find_combinations(SupportDeck *supportdeck, ALL_Cards *all_cards, ALL_Cards
 
                 if(skill_level_check(allsupportskills, supportdeck, skill_card_locator, base_skill_level_tracker)==supportdeck->number_of_skills){
                     if(skill_threshold_check(supportdeck,base_skill_level_tracker)==supportdeck->number_of_skills){
-                        base_entry_counter++;
-                        print_output(supportdeck, allsupportskills, all_cards, unique_affiliations, skill_level_tracker, support_array, baseoutput);
+                        if(supportdeck->max_cost_set==true){
+                            if(get_min_cost(all_cards, unique_affiliations, support_array, supportdeck->number_of_skills)<=supportdeck->user_set_max_cost){
+                                base_entry_counter++;
+                                print_output(supportdeck, allsupportskills, all_cards, unique_affiliations, skill_level_tracker, support_array, baseoutput);
+                            }
+                        }else{
+                            base_entry_counter++;
+                            print_output(supportdeck, allsupportskills, all_cards, unique_affiliations, skill_level_tracker, support_array, baseoutput);
+                        }
                     }else{
                         supportdeck->bases_only=1;
+
+                        if(supportdeck->max_cost_set==true){
+                            if(get_min_cost(all_cards, unique_affiliations, support_array, supportdeck->number_of_skills)<=supportdeck->user_set_max_cost){
+                                entry_counter++;
+                                print_output(supportdeck, allsupportskills, all_cards, unique_affiliations, skill_level_tracker, support_array, myoutput);
+                            }
+                        }else{
+                            entry_counter++;
+                            print_output(supportdeck, allsupportskills, all_cards, unique_affiliations, skill_level_tracker, support_array, myoutput);
+                        }
+                    }
+                }else{
+                    supportdeck->bases_only=1;
+
+                    if(supportdeck->max_cost_set==true){
+                        if(get_min_cost(all_cards, unique_affiliations, support_array, supportdeck->number_of_skills)<=supportdeck->user_set_max_cost){
+                            //notate that a combination has been found
+                            entry_counter++;
+                            print_output(supportdeck, allsupportskills, all_cards, unique_affiliations, skill_level_tracker, support_array, myoutput);
+                        }
+                    }else{
+                        //notate that a combination has been found
+                        entry_counter++;
+                        print_output(supportdeck, allsupportskills, all_cards, unique_affiliations, skill_level_tracker, support_array, myoutput);
+                    }
+
+                }
+            }else{
+                if(supportdeck->max_cost_set==true){
+                    if(get_min_cost(all_cards, unique_affiliations, support_array, supportdeck->number_of_skills)<=supportdeck->user_set_max_cost){
+                        //notate that a combination has been found
                         entry_counter++;
                         print_output(supportdeck, allsupportskills, all_cards, unique_affiliations, skill_level_tracker, support_array, myoutput);
                     }
                 }else{
-                //notate that a combination has been found
-                supportdeck->bases_only=1;
-                entry_counter++;
-                print_output(supportdeck, allsupportskills, all_cards, unique_affiliations, skill_level_tracker, support_array, myoutput);
+                    //notate that a combination has been found
+                    entry_counter++;
+                    print_output(supportdeck, allsupportskills, all_cards, unique_affiliations, skill_level_tracker, support_array, myoutput);
                 }
-            }else{
-                //notate that a combination has been found
-                entry_counter++;
-                print_output(supportdeck, allsupportskills, all_cards, unique_affiliations, skill_level_tracker, support_array, myoutput);
             }
         } //end skill threshold check
     } //end skill level check

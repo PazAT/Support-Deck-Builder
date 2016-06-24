@@ -88,10 +88,10 @@ struct SupportDeck{
     Affiliation current_types[MAXAFFILIATIONS], current_base_types[MAXAFFILIATIONS];
     string skills_in_deck[SUPPORTDECK];
     int skill_locator[SUPPORTDECK], card_locator[SUPPORTDECK], skill_threshold[SUPPORTDECK];
-    int number_of_skills, types_needed, numTypes_in_deck, bases_only, type_threshold;
+    int number_of_skills, types_needed, numTypes_in_deck, bases_only, type_threshold, user_set_max_cost;
     int looking_for_specific_level, ignore_list[SUPPORTDECK][MAXSUPPORTCARDS], breaking_early, breaking_at_solution;
     int num_allowed_cards[SUPPORTDECK], num_ignored_cards[SUPPORTDECK];
-    bool solution_threshold_reached;
+    bool solution_threshold_reached, max_cost_set;
 
 };
 extern SupportDeck supportdeck;

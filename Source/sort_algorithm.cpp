@@ -105,7 +105,7 @@ void construct_support_deck(SupportDeck *supportdeck, AllSupportSkills *allsuppo
                 for(m=0;m<supportdeck->num_allowed_cards[1];m++){
                     skill_card_locator[1]=allowed_skill_cards[1][m];
 
-                    presearch_config(allsupportskills, unique_affiliations, supportdeck, support_array, effective_chars, unique_profile_match, numChars);
+                    presearch_config(allsupportskills, unique_affiliations, supportdeck, skill_card_locator, effective_chars, unique_profile_match, numChars);
 
                     for(j=0;j<supportdeck->number_of_skills;j++){
                         support_array[j]=supportdeck->card_locator[j];
