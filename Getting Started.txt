@@ -10,7 +10,7 @@ Before proceeding, I must point out that this program has only been compiled for
 this time.
 
 The "Support Deck Builder.zip" file should include everything you need to successfully run this program. Inside the .zip should be five directories
-("CharacterProfiles", "Data", "Output", "Source", and "UniqueProfiles"), two "readme" .txt files (including this one), and the executable
+("Character Profiles", "Data", "Output", "Source", and "Unique Profiles"), two "readme" .txt files (including this one), and the executable
 ("Support Deck Builder.exe").
 	
 
@@ -19,9 +19,9 @@ Follow these steps to ensure that the program will operate successfully:
 	Paz/Support Deck Builder). This ensures that the program will always have authority to write the output files it creates. If you're uncomfortable
 	doing this with a pre-compiled program, then go ahead and download or copy the source code to compile yourself.
 	
-	2) In the same Directory, check that there are five sub-directories: "CharacterProfiles"; "Data"; "Output"; "Source"; and "UniqueProfiles". If
-	these directories do not exist, please create them (case sensitive) before attempting to use the Support Deck Solver. The directory
-	"CharacterProfiles" should have one sub-directory inside of it, called "ExactProfiles".
+	2) In the same Directory, check that there are five sub-directories: "Character Profiles"; "Data"; "Output"; "Source"; and "Unique Profiles". If
+	these directories do not exist, please create them (case sensitive) before attempting to use the Support Deck Solver. The directories
+	"Character Profiles", "Output", and "Unique Profiles" should be empty.
 	
 	3) Look inside the Data directory - there should be seven different files: 
 		i) cardTypes.txt   ii) characterNames.txt   iii) numericTypes.txt   iv) supportCards.txt
@@ -35,7 +35,7 @@ Follow these steps to ensure that the program will operate successfully:
 	 program to operate properly - char_aff_table.xlsx is not necessary for the program's success. If you still cannot obtain a copy of the files,
 	 send me PM via AppInvasion.
 	 
-	 In the "CharacterProfiles" directory, there should be one sub-directory - "ExactProfiles". If this directory does not exist, go ahead and
+	 In the "Character Profiles" directory, there should be one sub-directory - "Exact Profiles". If this directory does not exist, go ahead and
 	 create it (exactly as named, case sensitive).
 	 
 	4) Once the three steps above are completed, if the program is located in your User Directory, go ahead and start up the program and follow the
@@ -68,6 +68,15 @@ the following line:
 		"How many skills (2 - 6) do you want in your support deck?:  "
 
 The program will not proceed until you have entered an integer in the range described above. Once you have done so, the next line to appear is:
+
+		"Set a maximum cap cost? (Yes = 1): "
+
+Entering anything except "1" will tell the program that you don't care about cap cost, while entering "1" will lead to the next prompt. Let's say we
+entered "1" - we would now see:
+
+		"Enter the desired maximum cap cost (not less than zero):  "
+
+Here, you enter in your desired maximum cap cost; it can be "0" (which will return no combinations every time). The next line to appear is then:
 	
 		"Enforce minimum skill levels? (Yes = 1):   "
 		
