@@ -48,6 +48,7 @@ Darth Vader [Galactic Terror]
 Darth Vader [His Master's Bidding]
 Darth Vader [Master of Evil]
 Darth Vader [May the 4th Limited Edition]
+Darth Vader [Shadows of Fear]
 Darth Vader [The Dark Usurper]
 Darth Vader [The Penultimate Conflict]
 Darth Vader [TIE Advance]
@@ -62,6 +63,7 @@ Emperor's Royal Guard
 Finn
 FN-2199 "Nines"
 General Grievous
+General Grievous [Assault on Kamino]
 General Grievous [Elusive Commander]
 General Grievous [Last Stand]
 General Grievous [The Atrocious Executioner]
@@ -84,6 +86,8 @@ Jango Fett [Assassin Without Peer]
 Jango Fett [The Original Warrior]
 Jar Jar Binks
 Jar Jar Binks [Gungan Senator]
+Ki-Adi-Mundi
+Ki-Adi-Mundi
 Kit Fisto
 Kylo Ren
 Kylo Ren [Starkiller Base]
@@ -95,6 +99,7 @@ Leia Organa [A Time to Strike]
 Leia Organa [Speeder Chase]
 Luke Skywalker
 Luke Skywalker [Heir to an Empire]
+Luke Skywalker [Jedi in Training]
 Luke Skywalker [Jedi Knight]
 Luke Skywalker [Man of Destiny]
 Luke Skywalker [May the 4th Limited Edition]
@@ -131,9 +136,12 @@ Rako Hardeen
 Rancor
 Rey
 Rey [Starkiller Base]
+Savage Opress
+Savage Opress
 Sebulba
 Senator Palpatine
 Shaak Ti
+Shaak Ti [Tipoca Guardian]
 Shadow Trooper
 Supreme Chancellor Palpatine
 Wedge Antilles
@@ -207,6 +215,7 @@ Jan Dodonna
 Jango Fett
 Ki-Adi-Mundi
 Kit Fisto
+Kylo Ren
 Lando Calrissian
 Lando Calrissian [Palace Guard]
 Leia Organa [Endor Celebration]
