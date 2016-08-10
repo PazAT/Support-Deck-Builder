@@ -88,7 +88,6 @@ Jango Fett [The Original Warrior]
 Jar Jar Binks
 Jar Jar Binks [Gungan Senator]
 Ki-Adi-Mundi
-Ki-Adi-Mundi
 Kit Fisto
 Kylo Ren
 Kylo Ren [Starkiller Base]
@@ -138,7 +137,6 @@ Rako Hardeen
 Rancor
 Rey
 Rey [Starkiller Base]
-Savage Opress
 Savage Opress
 Sebulba
 Senator Palpatine
