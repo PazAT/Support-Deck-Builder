@@ -34,6 +34,7 @@ Clone Commander Appo
 Clone Commander Cody DS
 Clone Commander Cody LS
 Clone Commander Thire
+Darth Bane
 Darth Maul
 Darth Maul [Assassin]
 Darth Maul [Malice Reborn]
@@ -110,6 +111,7 @@ Mace Windu [Master of Vaapad]
 Magnaguard
 Master Yoda
 Master Yoda [Aspect of the Light]
+Master Yoda [Defiance of Evil]
 Master Yoda [Exile on Dagobah]
 Master Yoda [Reluctant General]
 Master Yoda [The Grand Master]
@@ -193,7 +195,9 @@ DD-13 [Healer]
 Dooku
 Droideka
 Dwarf Spider Droid
+Echo
 Emperor's Royal Guard
+EV-A4-D [Mechanic]
 Finn
 First Order TIE Fighter Pilot
 Garven Dreis
@@ -277,6 +281,8 @@ Ahsoka Tano
 Anakin Skywalker [Jedi Initiate]
 Anakin Skywalker [Padawan]
 Anakin Skywalker [Sith]
+Aqua Droid
+ARC Trooper Colt
 Asajj Ventress
 Assault Battle Droid
 AT-AT Pilot
