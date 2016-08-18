@@ -17,30 +17,30 @@ The "Support Deck Builder.zip" file should include everything you need to succes
 Follow these steps to ensure that the program will operate successfully:
 	1) Unzip the contents to a local directory. I recommend placing the program into your User Directory (So for me, it would be placed into:
 	Paz/Support Deck Builder). This ensures that the program will always have authority to write the output files it creates. If you're uncomfortable
-	doing this with a pre-compiled program, then go ahead and download or copy the source code to compile yourself.
+	doing this with this program, then go ahead and download or copy the source code to compile and/or edit yourself.
 	
-	2) In the same Directory, check that there are five sub-directories: "Character Profiles"; "Data"; "Output"; "Source"; and "Unique Profiles". If
-	these directories do not exist, please create them (case sensitive) before attempting to use the Support Deck Solver. The directories
-	"Character Profiles", "Output", and "Unique Profiles" should be empty.
+	2) In the same Directory, check that there are five sub-directories: "CharacterProfiles"; "Data"; "Output"; "Source"; and "UniqueProfiles". If
+	these directories do not exist, please create them (case sensitive, no spaces) before attempting to use the Support Deck Solver. The directories
+	"CharacterProfiles", "Output", and "UniqueProfiles" should be empty.
 	
 	3) Look inside the Data directory - there should be seven different files: 
 		i) cardTypes.txt   ii) characterNames.txt   iii) numericTypes.txt   iv) supportCards.txt
-		v) supportSkillLevels.txt   vi) supportSkills.txt   vii) char_aff_table.xlsx
+		v) supportSkillLevels.txt   vi) supportSkills.txt   vii) "Support Deck Tables.xlsx"
 		
 	   Look inside the "Source" directory - there should be six different files:
 		i) main.cpp   ii) declarations.h   iii) classes.h
 		iv) sort_algorithm.cpp   v) functions.cpp   vi) misc_functions.cpp
 
-	 If you do not see these files, either download them or copy the contents from dropbox. The first six files listed in "Data" are essential for the
-	 program to operate properly - char_aff_table.xlsx is not necessary for the program's success. If you still cannot obtain a copy of the files,
+	 If you do not see these files, either download them or copy the contents from GitHub. The first six files listed in "Data" are essential for the
+	 program to operate properly - "Support Deck Tables.xlsx" is not necessary for the program's success. If you still cannot obtain a copy of the files,
 	 send me PM via AppInvasion.
 	 
-	 In the "Character Profiles" directory, there should be one sub-directory - "Exact Profiles". If this directory does not exist, go ahead and
+	 In the "CharacterProfiles" directory, there should be one sub-directory - "ExactProfiles". If this directory does not exist, go ahead and
 	 create it (exactly as named, case sensitive).
 	 
 	4) Once the three steps above are completed, if the program is located in your User Directory, go ahead and start up the program and follow the
 	 instructions on-screen. If the program is located outside of your User Directory, right click the executable and select "Run as Administrator" -
-	 however, this is only necessary to do if you want the program to write output files.
+	 however, this is only necessary to do if you want ensure that the program can write output files.
 	 
 	5) Enjoy!
 	
@@ -51,11 +51,11 @@ Follow these steps to ensure that the program will operate successfully:
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 	
-Once you start the program, I recommend you resize your command window to be about twice as large as the default size. Sometimes the onscreen output
-will wrap around onto the next line - if this doesn't bother you then continue onwards.
+Once you start the program, I recommend you resize your command window to be at least twice as large as the default size. Sometimes the onscreen output
+will wrap around onto the next line - if this doesn't bother you then continue.
 	
-There will be a very brief pause while the program loads and builds its database of cards, unique profiles, affiliations, and support skills. Once it
-is complete, you will be presented with a single line of text:
+There will be a very brief pause while the program loads and builds its database of character cards, unique profiles, affiliations, support skills, and support cards.
+Once it is complete, you will be presented with a single line of text:
 
 		"Check combinations (1) or check stats (2) or print profile info (3) or Quit (0)?:  "
 
