@@ -1308,7 +1308,7 @@ void find_combinations(SupportDeck *supportdeck, ALL_Cards *all_cards, ALL_Cards
 
                 if(skill_level_check(allsupportskills, supportdeck, skill_card_locator, base_skill_level_tracker)==supportdeck->number_of_skills){
                     if(skill_threshold_check(supportdeck,base_skill_level_tracker)==supportdeck->number_of_skills){
-                        if(supportdeck->max_cost_set==true){
+                        if(supportdeck->max_cost_set){
                             if(get_min_cost(all_cards, unique_affiliations, support_array, supportdeck->number_of_skills)<=supportdeck->user_set_max_cost){
                                 base_entry_counter++;
                                 print_output(supportdeck, allsupportskills, all_cards, unique_affiliations, skill_level_tracker, support_array, baseoutput);
@@ -1320,7 +1320,7 @@ void find_combinations(SupportDeck *supportdeck, ALL_Cards *all_cards, ALL_Cards
                     }else{
                         supportdeck->bases_only=1;
 
-                        if(supportdeck->max_cost_set==true){
+                        if(supportdeck->max_cost_set){
                             if(get_min_cost(all_cards, unique_affiliations, support_array, supportdeck->number_of_skills)<=supportdeck->user_set_max_cost){
                                 entry_counter++;
                                 print_output(supportdeck, allsupportskills, all_cards, unique_affiliations, skill_level_tracker, support_array, myoutput);
@@ -1333,7 +1333,7 @@ void find_combinations(SupportDeck *supportdeck, ALL_Cards *all_cards, ALL_Cards
                 }else{
                     supportdeck->bases_only=1;
 
-                    if(supportdeck->max_cost_set==true){
+                    if(supportdeck->max_cost_set){
                         if(get_min_cost(all_cards, unique_affiliations, support_array, supportdeck->number_of_skills)<=supportdeck->user_set_max_cost){
                             //notate that a combination has been found
                             entry_counter++;
@@ -1347,7 +1347,7 @@ void find_combinations(SupportDeck *supportdeck, ALL_Cards *all_cards, ALL_Cards
 
                 }
             }else{
-                if(supportdeck->max_cost_set==true){
+                if(supportdeck->max_cost_set){
                     if(get_min_cost(all_cards, unique_affiliations, support_array, supportdeck->number_of_skills)<=supportdeck->user_set_max_cost){
                         //notate that a combination has been found
                         entry_counter++;
