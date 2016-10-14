@@ -15,10 +15,12 @@ Barriss Offee [Fallen Jedi]
 BB-8
 Ben Kenobi
 Ben Kenobi [Jedi in Hiding]
+Black Krrsantan
 Boba Fett
 Boba Fett [Death for Hire]
 Boba Fett [The Relentless Hunter]
 Bossk
+Bossk [Licensed Hunter]
 C-3PO
 C-3PO & R2-D2 [May the 4th Limited Edition]
 Cad Bane
@@ -54,6 +56,7 @@ Darth Vader [The Dark Usurper]
 Darth Vader [The Penultimate Conflict]
 Darth Vader [TIE Advance]
 Dengar
+Director Krennic
 Dooku
 Dooku [Darth Lord]
 Dooku [Enemy of the Republic]
@@ -76,6 +79,7 @@ General Veers
 Grand Moff Tarkin
 Grand Moff Tarkin [The Merciless]
 Han Solo
+Han Solo [Heroic Smuggler]
 Han Solo [Quick Draw]
 Han Solo [Smuggler for Hire]
 IG-88b
@@ -87,15 +91,18 @@ Jango Fett [Assassin Without Peer]
 Jango Fett [The Original Warrior]
 Jar Jar Binks
 Jar Jar Binks [Gungan Senator]
+Jyn Erso
 Ki-Adi-Mundi
 Kit Fisto
 Kylo Ren
+Kylo Ren [Dark Prodigy]
 Kylo Ren [Starkiller Base]
 Lando Calrissian
 Lando Calrissian [Clever Move]
 Leia Organa
 Leia Organa [1st Anniversary Limited Edition]
 Leia Organa [A Time to Strike]
+Leia Organa [Princess]
 Leia Organa [Speeder Chase]
 Luke Skywalker
 Luke Skywalker [Heir to an Empire]
@@ -144,6 +151,7 @@ Shaak Ti
 Shaak Ti [Tipoca Guardian]
 Shadow Trooper
 Supreme Chancellor Palpatine
+Warrick W. Wicket
 Wedge Antilles
 Zam Wesell
 4-LOM
@@ -190,6 +198,7 @@ Clone Sergeant Fox
 Darth Sidious
 Darth Vader [Death Star]
 DD-13 [Healer]
+Dengar
 Dooku
 Droideka
 Dwarf Spider Droid
@@ -231,6 +240,7 @@ Master Yoda
 Megablaster Heavy Assault Trooper
 Moff Jerjerrod
 Mon Mothma
+Nik Sant
 Nute Gunray
 Obi-Wan Kenobi [Padawan]
 Orn Free Taa
