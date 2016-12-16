@@ -1,4 +1,6 @@
 # Support-Deck-Builder
+/** This program has not yet been updated to reflect the changes to support decks as of 14/12/16. An update with those changes is impending and should be available by 18/12/16. **/
+
 A brute force solver for Support Decks in SWFC
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
