@@ -7,3 +7,12 @@ Rarity: 3*		Cost: 8
 Pit Droid [Mechanic]
 Rarity: 3*		Cost: 19
 
+2-1B [Healer]
+Rarity: 1*		Cost: 1
+
+Pit Droid [Mechanic]
+Rarity: 1*		Cost: 1
+
+R1-G4
+Rarity: 1*		Cost: 1
+

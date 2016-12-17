@@ -1,3 +1,24 @@
 Lobot
 Rarity: 3*		Cost: 7
 
+Captain Antilles
+Rarity: 2*		Cost: 3
+
+Constable Zuvio
+Rarity: 2*		Cost: 6
+
+Fode and Beed
+Rarity: 2*		Cost: 3
+
+Lampay Fay
+Rarity: 1*		Cost: 2
+
+Lobot
+Rarity: 1*		Cost: 2
+
+Nabrun Leids
+Rarity: 1*		Cost: 1
+
+Ugloste
+Rarity: 1*		Cost: 1
+
