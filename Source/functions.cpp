@@ -1375,6 +1375,8 @@ void find_combinations(SupportDeck *supportdeck, ALL_Cards *all_cards, ALL_Cards
 
 string numToText(int number){
 
+/** This function takes numbers and returns them as string. Used in naming the output files **/
+	
     string result;
 
     if(number==1){
@@ -1399,6 +1401,8 @@ string numToText(int number){
 }
 
 int willUseCardSlot(int totalcards, int position){
+    /** This function checks if the card slot after the current one is being used. If it is, it returns true, otherwise false **/
+	
     int result=0;
 
     if(position<=totalcards){
