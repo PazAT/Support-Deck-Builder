@@ -1,5 +1,6 @@
 # Support-Deck-Builder
-/** This program has not yet been updated to reflect the changes to support decks as of 14/12/16. An update with those changes is impending and should be available by 18/12/16. **/
+
+/**	This program has been updated with the changes made by Konami on 14/12/16	**/
 
 A brute force solver for Support Decks in SWFC
 
@@ -27,7 +28,7 @@ located in the "Output" directory. If no combinations are located, the output fi
 user that no combinations could be located. In addition, this program contains a statistics feature for analyzing various information about the
 characters and unique profiles.
 
-Included are five controllable optimizations for searching:
+Included are six controllable optimizations for searching:
 		
 	1) thresholding cards to search based on N affiliation matches
 		-With this option, the user specifies N affiliations a card must match of the total needed affiliations for a support deck
@@ -47,9 +48,13 @@ Included are five controllable optimizations for searching:
 	5) thresholding solutions based on total cost
 		-The user sets a maximum cap cost for their support deck, and the solver excludes all solutions whose minimum cap cost is
 		-greater than the user defined value.
+	
+	6) Limiting the support deck size to N total cards
+		-User sets how many total cards (skill cards + non-skill cards) they want to use in their support deck. Minimum value is the number of skills
+		-selected, maximum is the support deck max size.
 
 
-Once these options have been set, the program will commence its solving. Solving can take at few as 3 seconds, or as long as 10 minutes, depending
+Once these options have been set, the program will commence its solving. Solving can take at few as 3 seconds, or as long as 5 minutes, depending
 on the skills and options chosen. This is a brute force solver, so the program will search through every viable combination specified by the chosen
 options until all possible combinations have been examined.
 
@@ -91,8 +96,10 @@ The only file not referenced by the program is "Support Deck Tables.xlsx". That 
 	IV. Understanding the Files
 	
 The "Data" files are the program's database, so to speak. In particular, the files "numericTypes.txt" and "supportSkillLevels.txt" are the most
-important and coincidentally, the most cryptic upon first glance. Each of these files contains numerical information pertaining to characters and
-support skills, respectively. In contrast, the other files are simpler to read.
+important. Each of these files contains numerical information pertaining to characters and support skills, respectively. In contrast,
+the other files are simpler to read.
+
+The following text gives the templates for each file you will find in the "Data" directory.
 
 	supportSkills.txt
 		the name of each support skill and its nickname on the line directly below
@@ -131,8 +138,8 @@ support skills, respectively. In contrast, the other files are simpler to read.
 
 		Following this line is a variable number of lines with a variable number of integers on each line. The number of lines which follow is
 		equal to the second number on the first line - each of those lines represent an individual skill card. On each of those lines, the number
-		of integers is equal to the [skill max level] + 1. The first N integers represent the type value requirements for each level of a skill
-		with max level N and the very last integer on the line is the skill card's rarity.
+		of integers is equal to the [skill max level] + 1. The very last integer on those lines is the skill card's rarity, and the preceeding
+		integers are the type value requirements for each level of the support skill.
 		
 		The template for a skill card line is as follows
 		
@@ -141,24 +148,24 @@ support skills, respectively. In contrast, the other files are simpler to read.
 		So Character Card HP UP would look like the following:
 		
 			5 4
-			3 5 7 9 12 2
-			3 5 7 9 12 2
-			3 5 7 9 12 3
-			3 5 7 9 12 2
+			2 3 5 7 9 2
+			2 3 5 7 9 2
+			2 3 5 7 9 3
+			2 3 5 7 9 2
 
 		The first line tells us that Character Card HP UP has "5" max levels and "4" Character Cards possess it. The next 4 lines then tell us
 		the individual value requirements for each skill card that has HP UP and the rarity of that skill card. So we see that the first card has
-		value requirements of "3", "5", "7", "9", and "12" for levels 1 to 5, and it is rarity "2". The first card of this skill corresponds
+		value requirements of "2", "3", "5", "7", and "9" for levels 1 to 5, and it is rarity "2". The first card of this skill corresponds
 		to Rabe in the file "supportCards.txt"
 		
 		Looking at Call to the Light Side,
 		
 			1 3
-			4 4
-			4 4
-			4 3
+			3 4
+			3 4
+			3 3
 			
-		We can see that the skill has "1" max level and "3" Character Cards possess it. The first of these cards requires "4" type values and it is
+		We can see that the skill has "1" max level and "3" Character Cards possess it. The first of these cards requires "3" type values and it is
 		of rarity "4". The first card of this skill correpsonds to Adi Gallia in the file "supportCards.txt".
 		
 		Note that not every two integer line is a start of a new skill card - with skills that have only 1 max level, their entries are all two
@@ -188,8 +195,8 @@ support skills, respectively. In contrast, the other files are simpler to read.
 		
 		The affiliation sum is generated by using powers of 2. The power given to an affiliation is equal to how many affiliations are before it
 		in the file "cardTypes.txt". So for "Male", the first listed affiliation, it would have a power equal to "0" (zero) because no affiliation comes
-		before it. "Female" would have a power of "1" (since only one affiliation comes before it); "Droid" would have "2"; and so on, down to
-		"Fringer", which has a power of "23" because there are 23 affiliations before it.
+		before it. "Female" would have a power of "1" (since only one affiliation comes before it); "Droid" would have "2"; and so on. "Fringer" has
+		a power of "23" because there are 23 affiliations before it.
 		
 		Taking a look at the very first entry, we see
 		
@@ -203,11 +210,11 @@ support skills, respectively. In contrast, the other files are simpler to read.
 		that the affiliation sum was generated by: 2^1 + 2^4 + 2^15 = 32786. When the program reads this value, it will deconstruct it by using
 		the number of affiliation values to pull out Aayla's affiliations in written form.
 		
-		Choosing another entry (from line 199):
+		Choosing another entry (from line 234):
 		
 			4	15	4	1114241	1
 			
-		Looking at line 199 in "characterNames.txt", we see that these values belong to "Jango Fett".
+		Looking at line 234 in "characterNames.txt", we see that these values belong to "Jango Fett".
 		
 		This Jango is rarity "4", costs "15", has "4" different types, has an affiliation sum of "1114241", and is awakened (last value is "1").
 		Looking at Jango's types in-game, we see that they are: Male, Bounty Hunter, Separatist, and Mandalorian; and so the affiliation sum is
@@ -217,7 +224,8 @@ support skills, respectively. In contrast, the other files are simpler to read.
 
 	V. Output
 	
-This program will produce output files to four locations: 1) directory "Output"; 2) directory "UniqueProfiles"; 3) directory "CharacterProfiles"; and 4) "ExactProfiles", a subdirectory of "CharacterProfiles".
+This program will produce output files to four locations: 1) directory "Output"; 2) directory "UniqueProfiles"; 3) directory "CharacterProfiles";
+and 4) "ExactProfiles", a subdirectory of "CharacterProfiles".
 
 "Output" contains the solutions found by the program during its combination searches
 "UniqueProfiles" contains information about affiliation distributions of the current set of character cards
