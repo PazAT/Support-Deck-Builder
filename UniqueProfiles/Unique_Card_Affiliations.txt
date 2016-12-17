@@ -1,0 +1,231 @@
+5*  Female,  Jedi,  Galactic Republic
+5*  Male,  Rebel Alliance
+5*  Male,  Jedi,  Galactic Republic,  Tatooinian
+5*  Male,  Podracer,  Tatooinian
+5*  Male,  Sith,  Galactic Empire,  Tatooinian
+5*  Female,  Separatist
+5*  Female,  Bounty Hunter
+5*  Droid,  Resistance
+5*  Male,  Jedi,  Tatooinian
+5*  Male,  Bounty Hunter,  Wookiee,  Jabbas Crime Syndicate
+5*  Male,  Bounty Hunter,  Jabbas Crime Syndicate,  Mandalorian
+5*  Male,  Bounty Hunter
+5*  Droid,  Rebel Alliance
+5*  Female,  First Order
+5*  Male,  Galactic Republic,  Wookiee
+5*  Male,  Wookiee,  Resistance,  Fringer
+5*  Male,  Rebel Alliance,  Wookiee
+5*  Male,  Clone Trooper,  Galactic Republic
+5*  Male,  Clone Trooper,  Galactic Empire,  Galactic Republic
+5*  Male,  Sith
+5*  Male,  Droid,  Sith
+5*  Male,  Senator,  Sith,  Nabooan,  Galactic Empire,  Galactic Republic
+5*  Male,  Senator,  Sith,  Nabooan,  Galactic Empire
+5*  Male,  Sith,  Galactic Empire
+5*  Male,  Jedi,  Sith,  Galactic Empire
+5*  Male,  Galactic Empire
+5*  Male,  Sith,  Separatist
+5*  Droid,  Separatist
+5*  Male,  Sith,  Nabooan,  Galactic Empire
+5*  Male,  Resistance
+5*  Male,  First Order
+5*  Male,  Droid,  Separatist
+5*  Female,  Resistance
+5*  Male,  Rebel Alliance,  Fringer
+5*  Male,  Resistance,  Fringer
+5*  Droid,  Bounty Hunter
+5*  Male,  Tatooinian,  Jabbas Crime Syndicate
+5*  Male,  Bounty Hunter,  Separatist,  Mandalorian
+5*  Male,  Gungan,  Nabooan
+5*  Male,  Senator,  Gungan,  Nabooan,  Galactic Republic
+5*  Female,  Rebel Alliance
+5*  Male,  Jedi,  Galactic Republic
+5*  Male,  Jedi,  Rebel Alliance,  Tatooinian
+5*  Male,  Jedi
+5*  Female,  Fringer
+5*  Male,  Separatist
+5*  Male,  Jedi,  Beast,  Galactic Republic
+5*  Female,  Senator,  Nabooan,  Galactic Republic
+5*  Male,  Separatist,  Mandalorian
+5*  Female,  Nabooan,  Galactic Republic
+5*  Droid,  Nabooan,  Galactic Republic
+5*  Male,  Jedi,  Bounty Hunter,  Galactic Republic
+5*  Beast,  Tatooinian,  Jabbas Crime Syndicate
+5*  Male,  Podracer
+5*  Male,  Senator,  Sith,  Nabooan,  Galactic Republic
+5*  Male,  Ewok
+4*  Droid,  Bounty Hunter
+4*  Female,  Jedi,  Galactic Republic
+4*  Male,  Resistance
+4*  Male,  Jedi,  Galactic Republic
+4*  Male,  Tatooinian
+4*  Male,  Clone Trooper,  Galactic Republic
+4*  Female,  Bounty Hunter
+4*  Male,  Fringer
+4*  Male,  Bounty Hunter,  Jabbas Crime Syndicate
+4*  Male,  Jedi,  Tatooinian
+4*  Male,  Tatooinian,  Jabbas Crime Syndicate
+4*  Male,  Bounty Hunter,  Jabbas Crime Syndicate,  Mandalorian
+4*  Male,  Rebel Alliance
+4*  Male,  Gungan,  Nabooan
+4*  Male,  Bounty Hunter
+4*  Female,  Bounty Hunter,  Rebel Alliance
+4*  Droid,  Separatist
+4*  Droid,  Galactic Republic,  Tatooinian
+4*  Male,  Nabooan,  Galactic Republic
+4*  Female,  First Order
+4*  Male,  Nabooan
+4*  Male,  Rebel Alliance,  Wookiee
+4*  Male,  Galactic Empire
+4*  Male,  Senator,  Sith,  Nabooan,  Galactic Empire
+4*  Male,  Sith,  Galactic Empire
+4*  Droid,  Galactic Empire
+4*  Male,  Sith,  Separatist
+4*  Droid,  Galactic Republic
+4*  Male,  First Order
+4*  Male,  Podracer
+4*  Male,  Droid,  Separatist
+4*  Male,  Bounty Hunter,  Separatist,  Mandalorian
+4*  Female,  Rebel Alliance
+4*  Male,  Jedi,  Rebel Alliance,  Tatooinian
+4*  Female,  Senator,  Galactic Republic
+4*  Male,  Separatist
+4*  Male,  Senator,  Galactic Republic
+4*  Female,  Nabooan,  Galactic Republic
+4*  Droid,  Nabooan,  Galactic Republic
+4*  Beast,  Tatooinian,  Jabbas Crime Syndicate
+4*  Female,  Resistance
+4*  Male,  Beast,  Galactic Empire
+4*  Male,  Galactic Republic
+4*  Female,  Separatist
+4*  Male,  Senator,  Sith,  Nabooan,  Galactic Republic
+4*  Male,  Galactic Republic,  Wookiee
+4*  Male,  Ewok
+3*  Droid
+3*  Female,  Jedi,  Galactic Republic
+3*  Beast
+3*  Male,  Rebel Alliance
+3*  Male,  Galactic Empire
+3*  Male,  Jedi,  Galactic Republic,  Tatooinian
+3*  Male,  Sith,  Tatooinian
+3*  Droid,  Separatist
+3*  Male,  Clone Trooper,  Galactic Republic
+3*  Female,  Sith,  Separatist
+3*  Male,  Senator,  Galactic Republic
+3*  Droid,  Resistance
+3*  Male,  Bounty Hunter,  Jabbas Crime Syndicate,  Mandalorian
+3*  Male,  Gungan,  Nabooan
+3*  Female,  Galactic Republic
+3*  Droid,  Galactic Republic
+3*  Droid,  Tatooinian
+3*  Male,  Nabooan,  Galactic Republic
+3*  Male,  Ewok
+3*  Male,  Jedi,  Galactic Republic
+3*  Male,  Sith
+3*  Male,  Senator,  Sith,  Nabooan,  Galactic Empire,  Galactic Republic
+3*  Male,  Sith,  Galactic Empire
+3*  Male,  Tatooinian
+3*  Male,  Separatist
+3*  Male,  Galactic Republic
+3*  Male,  Sith,  Separatist
+3*  Female,  Resistance
+3*  Droid,  Sith
+3*  Droid,  Tatooinian,  Jabbas Crime Syndicate
+3*  Beast,  Gungan
+3*  Male,  First Order
+3*  Droid,  Galactic Empire,  Galactic Republic
+3*  Droid,  Nabooan
+3*  Male,  Tatooinian,  Jabbas Crime Syndicate
+3*  Male,  Droid,  Separatist
+3*  Male,  Bounty Hunter,  Tatooinian,  Jabbas Crime Syndicate
+3*  Droid,  Bounty Hunter
+3*  Male,  Bounty Hunter,  Separatist,  Mandalorian
+3*  Droid,  Rebel Alliance
+3*  Male,  Galactic Republic,  Wookiee
+3*  Female,  Senator,  Rebel Alliance
+3*  Female,  Rebel Alliance
+3*  Male
+3*  Male,  Senator,  Separatist
+3*  Male,  Rebel Alliance,  Tatooinian
+3*  Male,  Jedi,  Beast,  Rebel Alliance,  Tatooinian
+3*  Female,  Senator,  Nabooan,  Galactic Republic
+3*  Female,  Nabooan,  Galactic Republic
+3*  Droid,  Galactic Empire
+3*  Beast,  Tatooinian,  Jabbas Crime Syndicate
+3*  Male,  Fringer
+3*  Male,  Resistance
+3*  Female,  Bounty Hunter
+3*  Female,  Ewok
+2*  Droid,  Bounty Hunter
+2*  Female,  Jedi,  Galactic Republic
+2*  Male,  Jedi,  Galactic Republic
+2*  Male,  Tatooinian
+2*  Male,  Bounty Hunter
+2*  Female,  Bounty Hunter
+2*  Male,  Senator,  Galactic Republic
+2*  Droid,  Resistance
+2*  Male,  Jedi,  Tatooinian
+2*  Female,  Tatooinian
+2*  Male,  Tatooinian,  Jabbas Crime Syndicate
+2*  Male,  Bounty Hunter,  Jabbas Crime Syndicate,  Mandalorian
+2*  Female,  Bounty Hunter,  Rebel Alliance
+2*  Droid,  Galactic Republic,  Tatooinian
+2*  Male
+2*  Male,  Fringer
+2*  Female,  First Order
+2*  Male,  Rebel Alliance
+2*  Male,  Rebel Alliance,  Wookiee
+2*  Male,  Wookiee,  Resistance,  Fringer
+2*  Female,  Nabooan,  Galactic Republic
+2*  Male,  Sith
+2*  Male,  Sith,  Galactic Empire
+2*  Female,  Senator,  Separatist
+2*  Male,  Bounty Hunter,  Tatooinian
+2*  Male,  Resistance
+2*  Male,  First Order
+2*  Male,  Galactic Empire
+2*  Female,  Nabooan
+2*  Female,  Bounty Hunter,  Tatooinian
+2*  Female,  Rebel Alliance
+2*  Male,  Jedi,  Rebel Alliance,  Tatooinian
+2*  Female,  Fringer
+2*  Male,  Senator,  Separatist
+2*  Male,  Nabooan,  Galactic Republic
+2*  Droid,  Nabooan,  Galactic Republic
+2*  Female,  Gungan,  Nabooan
+2*  Female,  Resistance
+2*  Male,  Separatist
+2*  Male,  Nabooan
+2*  Male,  Podracer
+2*  Female,  Separatist
+2*  Male,  Galactic Republic
+1*  Droid
+1*  Female,  Jedi,  Galactic Republic
+1*  Male,  Rebel Alliance
+1*  Male,  Galactic Empire
+1*  Female
+1*  Male,  Galactic Republic
+1*  Male,  Podracer
+1*  Male,  Tatooinian
+1*  Male,  Gungan,  Nabooan
+1*  Male,  Nabooan,  Galactic Republic
+1*  Male,  Separatist
+1*  Female,  Rebel Alliance,  Tatooinian
+1*  Male,  Resistance
+1*  Male,  First Order
+1*  Male,  Bounty Hunter,  Tatooinian,  Jabbas Crime Syndicate
+1*  Male,  Galactic Republic,  Wookiee
+1*  Male,  Rebel Alliance,  Tatooinian
+1*  Male
+1*  Female,  Senator,  Rebel Alliance
+1*  Male,  Senator,  Separatist
+1*  Male,  Tatooinian,  Jabbas Crime Syndicate
+1*  Male,  Jedi,  Galactic Republic
+1*  Droid,  Separatist
+1*  Female,  Nabooan,  Galactic Republic
+1*  Male,  Nabooan
+1*  Male,  Fringer
+1*  Beast,  Tatooinian,  Jabbas Crime Syndicate
+1*  Male,  Rebel Alliance,  Tatooinian,  Jabbas Crime Syndicate
+1*  Female,  Galactic Republic
+1*  Beast
