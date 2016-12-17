@@ -10,7 +10,7 @@ Before proceeding, I must point out that this program has only been compiled for
 this time.
 
 The "Support Deck Builder.zip" file should include everything you need to successfully run this program. Inside the .zip should be five directories
-("Character Profiles", "Data", "Output", "Source", and "Unique Profiles"), two "readme" .txt files (including this one), and the executable
+("CharacterProfiles", "Data", "Output", "Source", and "UniqueProfiles"), two "readme" .txt files (including this one), and the executable
 ("Support Deck Builder.exe").
 	
 
@@ -20,29 +20,29 @@ Follow these steps to ensure that the program will operate successfully:
 	doing this with this program, then go ahead and download or copy the source code to compile and/or edit yourself.
 	
 	2) In the same Directory, check that there are five sub-directories: "CharacterProfiles"; "Data"; "Output"; "Source"; and "UniqueProfiles". If
-	these directories do not exist, please create them (case sensitive, no spaces) before attempting to use the Support Deck Solver. The directories
-	"CharacterProfiles", "Output", and "UniqueProfiles" should be empty.
+	these directories do not exist, please create them (case sensitive, no spaces) before attempting to use the Support Deck Solver.
 	
 	3) Look inside the Data directory - there should be seven different files: 
 		i) cardTypes.txt   ii) characterNames.txt   iii) numericTypes.txt   iv) supportCards.txt
 		v) supportSkillLevels.txt   vi) supportSkills.txt   vii) "Support Deck Tables.xlsx"
 		
-	   Look inside the "Source" directory - there should be six different files:
+	4) Look inside the "Source" directory - there should be six different files:
 		i) main.cpp   ii) declarations.h   iii) classes.h
 		iv) sort_algorithm.cpp   v) functions.cpp   vi) misc_functions.cpp
 
-	 If you do not see these files, either download them or copy the contents from GitHub. The first six files listed in "Data" are essential for the
+	5) If you do not see these files, either download them or copy the contents from GitHub. The first six files listed under "Data" are essential for the
 	 program to operate properly - "Support Deck Tables.xlsx" is not necessary for the program's success. If you still cannot obtain a copy of the files,
 	 send me PM via AppInvasion.
 	 
-	 In the "CharacterProfiles" directory, there should be one sub-directory - "ExactProfiles". If this directory does not exist, go ahead and
-	 create it (exactly as named, case sensitive).
+	6) In the "CharacterProfiles" directory, there should be one sub-directory - "ExactProfiles". If this directory does not exist, go ahead and
+	 create it (exactly as named, case sensitive and no spaces).
 	 
-	4) Once the three steps above are completed, if the program is located in your User Directory, go ahead and start up the program and follow the
-	 instructions on-screen. If the program is located outside of your User Directory, right click the executable and select "Run as Administrator" -
-	 however, this is only necessary to do if you want ensure that the program can write output files.
+	7) Once the six steps above are completed, if the program is located in your User Directory, go ahead and start up the program and follow the
+	 instructions on-screen. If the program is located outside of your User Directory, It may be necessary to right click the executable and select
+	 "Run as Administrator" to get the program to run as intended - however, this is only necessary to do if you want ensure that the program can
+	 write output files.
 	 
-	5) Enjoy!
+	8) Enjoy!
 	
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -52,9 +52,9 @@ Follow these steps to ensure that the program will operate successfully:
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 	
 Once you start the program, I recommend you resize your command window to be at least twice as large as the default size. Sometimes the onscreen output
-will wrap around onto the next line - if this doesn't bother you then continue.
+will wrap around onto the next line or run off the side - if this doesn't bother you then continue.
 	
-There will be a very brief pause while the program loads and builds its database of character cards, unique profiles, affiliations, support skills, and support cards.
+There will be a very brief pause while the program loads and builds its databases.
 Once it is complete, you will be presented with a single line of text:
 
 		"Check combinations (1) or check stats (2) or print profile info (3) or Quit (0)?:  "
@@ -68,6 +68,14 @@ the following line:
 		"How many skills (2 - 6) do you want in your support deck?:  "
 
 The program will not proceed until you have entered an integer in the range described above. Once you have done so, the next line to appear is:
+
+		"How many total cards (2 - 7) do you want in your deck?:  "
+
+This line sets the limit on the number of extra cards that will be searched during the solving. The minimum value allowed is equal to the number of
+skills you chose; the maximum is always the current max size of the support deck. This means if you choose 3 skills and then set a total deck size of
+3, the program will search 0 additional cards - the combinations checked will be those of only the support skill cards with the desired skills.
+If you had set total size to 4, the program would search 1 additional card for a total of 3 support skill cards + 1 non-skilled card. Following this
+is the line:
 
 		"Set a maximum cap cost? (Yes = 1): "
 
@@ -103,7 +111,7 @@ correspond to the chosen ability and asked if we wanted to ignore any of them du
 Ambush:
 
 		1) 4* Agen Kolar
-		2) 4* Shadow Stormtrooper
+		2) 4* Shadow Trooper
 		3) 4* Wicket W Warrick
 		4) 3* Lachichuk
 		
@@ -131,7 +139,7 @@ This value can range from 0 to 6 (the present maximum number of types on any car
 
 Next we would see
 
-		"Query through which rarity (1 2 3 4 5)? : "
+		"Query through which rarity (5 4 3 2 1)? : "
 		
 Enter the rarity through which you want to search. Entering "5" would cause the program to search only 5*; entering "4" would cause it to search only
 5* and 4*; and so on.
@@ -145,4 +153,5 @@ If you want to stop after discovering some solutions, enter "1" and then enter t
 any other value.
 
 And with that, the program will commence its solving of your support deck. Once it has completed, it will printout onto the screen if it managed to
-find any combinations; and if no solutions are found, it will printout the skill names and minimum enforced levels for which it tried to solve.
+find any combinations; and if no solutions are found, it will printout the skill names, minimum enforced levels, and total cards used for which it
+tried to solve.
