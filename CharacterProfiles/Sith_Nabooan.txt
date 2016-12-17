@@ -1,0 +1,26 @@
+Darth Sidious
+	Rarity:  5	Cost:  34
+
+Darth Sidious [Ruthless Ambition]
+	Rarity:  5	Cost:  40
+
+Darth Sidious [Sith Dictator]
+	Rarity:  5	Cost:  39
+
+Emperor Palpatine
+	Rarity:  5	Cost:  22	Awakened
+
+Senator Palpatine
+	Rarity:  5	Cost:  24
+
+Supreme Chancellor Palpatine
+	Rarity:  5	Cost:  26
+
+Darth Sidious
+	Rarity:  4	Cost:  17	Awakened
+
+Supreme Chancellor Palpatine
+	Rarity:  4	Cost:  18
+
+Darth Sidious
+	Rarity:  3	Cost:  12
