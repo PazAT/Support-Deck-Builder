@@ -46,6 +46,16 @@ int main(){
                 cin >>supportdeck.number_of_skills;
             }
 
+            cout << "\n\nHow many total cards (" << supportdeck.number_of_skills << " - " << SUPPORTDECK << ") do you want in your support deck?: ";
+            cin >> supportdeck.total_cards_to_use;
+
+            while(!(cin.good()) || supportdeck.total_cards_to_use>SUPPORTDECK || supportdeck.total_cards_to_use<supportdeck.number_of_skills){
+                cin.clear();
+                cin.ignore(256, '\n');
+                cout << "Please enter a number from " << supportdeck.number_of_skills << " to " << SUPPORTDECK << ": ";
+                cin >>supportdeck.total_cards_to_use;
+            }
+
             cout << "\n\nSet a maximum cap cost? (Yes = 1): ";
             cin >> wants_max_cost;
 
@@ -193,31 +203,33 @@ int main(){
                     cout << "\n\n";
                 }
 
-                cout << "Enter the minimum number of matching types per card: ";
-                cin >> supportdeck.type_threshold;
-
-                while(!(cin.good()) || supportdeck.type_threshold<0 || supportdeck.type_threshold>MAXTYPES){
-                    cout << "\nInvalid value. Enter again: ";
-                    cin.clear();
-                    cin.ignore(256, '\n');
-                    cin >> supportdeck.type_threshold;
-
-                }
-
-                cout << "\nQuery through which rarity (1 2 3 4 5)? : ";
-                cin >> using_rarity;
-
-                if( !(cin.good()) || using_rarity<1 || using_rarity>5){
-                    cin.clear();
-                    cin.ignore(256, '\n');
-                    using_rarity=4;
-                }
-
                 effective_chars=0;
 
-                for(i=0;i<unique_affiliations.number_of_characters;i++){
-                    if(unique_affiliations.card[i].rarity>=using_rarity){
-                        effective_chars++;
+                if(supportdeck.total_cards_to_use>supportdeck.number_of_skills){
+                    cout << "Enter the minimum number of matching types per card: ";
+                    cin >> supportdeck.type_threshold;
+
+                    while(!(cin.good()) || supportdeck.type_threshold<0 || supportdeck.type_threshold>MAXTYPES){
+                        cout << "\nInvalid value. Enter again: ";
+                        cin.clear();
+                        cin.ignore(256, '\n');
+                        cin >> supportdeck.type_threshold;
+
+                    }
+
+                    cout << "\nQuery through which rarity (5 4 3 2 1)? : ";
+                    cin >> using_rarity;
+
+                    if( !(cin.good()) || using_rarity<1 || using_rarity>5){
+                        cin.clear();
+                        cin.ignore(256, '\n');
+                        using_rarity=4;
+                    }
+
+                    for(i=0;i<unique_affiliations.number_of_characters;i++){
+                        if(unique_affiliations.card[i].rarity>=using_rarity){
+                            effective_chars++;
+                        }
                     }
                 }
 

@@ -13,7 +13,7 @@ struct Card{
 
     int number_of_types, evo_level, rarity, is_awakened, card_ID, skill_ID, skillcard_ID;
     int num_profiles_exact, num_profiles_awakened_exact, num_profiles_at_least, num_profiles_awakened_at_least;
-    unsigned int affiliation_sum;
+    unsigned long int affiliation_sum;
     double cost, min_cost, max_cost;
     string name, skillname;
     bool has_skill;
@@ -69,7 +69,7 @@ extern AllSupportSkills allsupportskills;
 struct Affiliation{
 
     string aff_name;
-    double type_value;
+    unsigned long int type_value;
 
 };
 extern Affiliation affiliation;
@@ -90,7 +90,7 @@ struct SupportDeck{
     int skill_locator[SUPPORTDECK], card_locator[SUPPORTDECK], skill_threshold[SUPPORTDECK];
     int number_of_skills, types_needed, numTypes_in_deck, bases_only, type_threshold, user_set_max_cost;
     int looking_for_specific_level, ignore_list[SUPPORTDECK][MAXSUPPORTCARDS], breaking_early, breaking_at_solution;
-    int num_allowed_cards[SUPPORTDECK], num_ignored_cards[SUPPORTDECK];
+    int num_allowed_cards[SUPPORTDECK], num_ignored_cards[SUPPORTDECK], total_cards_to_use;
     bool solution_threshold_reached, max_cost_set;
 
 };
@@ -120,8 +120,8 @@ void print_endround_info(double run_start, double run_end, int entry_tracker[SUP
 int skill_threshold_check(SupportDeck *supportdeck, int skill_level_tracker[SUPPORTDECK]);
 void filter_allowed_skill_cards(SupportDeck *supportdeck, AllSupportSkills *allsupportskills, int skill_card_array[SUPPORTDECK][MAXSUPPORTCARDS]);
 
-double get_min_cost(ALL_Cards *all_cards, ALL_Cards *unique_cards, int support_array[SUPPORTDECK], int numSkills);
-double get_max_cost(ALL_Cards *all_cards, ALL_Cards *unique_cards, int support_array[SUPPORTDECK], int numSkills);
+double get_min_cost(ALL_Cards *all_cards, ALL_Cards *unique_cards, int totalcards, int support_array[SUPPORTDECK], int numSkills);
+double get_max_cost(ALL_Cards *all_cards, ALL_Cards *unique_cards, int totalcards, int support_array[SUPPORTDECK], int numSkills);
 void presearch_config(AllSupportSkills *allsupportskills, ALL_Cards *unique_affiliations, SupportDeck *supportdeck, int skill_card_locator[SUPPORTDECK], int effective_chars, int unique_profile_match[MAXCHARACTERS], int &numChars);
 void find_combinations(SupportDeck *supportdeck, ALL_Cards *all_cards, ALL_Cards *unique_affiliations, AllSupportSkills *allsupportskills, int support_array[SUPPORTDECK], int skill_card_locator[SUPPORTDECK], int &entry_counter, int &base_entry_counter, int entry_tracker[MAXSUPPORTCARDS], int index, ofstream &myoutput, ofstream &baseoutput);
 
@@ -136,3 +136,6 @@ void print_skills(AllSupportSkills allsupportskills);
 void track_awaken(ALL_Cards *all_cards, ALL_Cards *unique_affiliations);
 void print_exact_profiles(ALL_Cards *all_cards);
 void check_stats(ALL_Cards *all_cards, ALL_Cards *unique_cards, Affiliation_Array *affiliation_array, AllSupportSkills *allsupportskills);
+
+string numToText(int number);
+int willUseCardSlot(int totalcards, int position);

@@ -289,8 +289,8 @@ void create_affiliations(Affiliation_Array *affiliation_array, ALL_Cards *all_ca
 
     int numTypes, i, t;
     unsigned int j, k, m, n, p, q, r;
-    unsigned int place_sum, upper_limit;
-    double val1, val2, val3, val4, val5, val6;
+    unsigned long int place_sum, upper_limit;
+    unsigned long int val1, val2, val3, val4, val5, val6;
 
     for(i=0;i<all_cards->number_of_characters;i++){
        place_sum=all_cards->card[i].affiliation_sum;
@@ -531,6 +531,7 @@ void reset_support_deck(SupportDeck *supportdeck){
     supportdeck->breaking_at_solution=0;
     supportdeck->breaking_early=0;
     supportdeck->user_set_max_cost=0;
+    supportdeck->total_cards_to_use=SUPPORTDECK;
 
     supportdeck->solution_threshold_reached=false;
     supportdeck->max_cost_set=false;
@@ -614,7 +615,7 @@ void set_min_max_costs(ALL_Cards *all_cards, ALL_Cards *unique_cards){
 }
 
 
-double get_min_cost(ALL_Cards *all_cards, ALL_Cards *unique_cards, int support_array[SUPPORTDECK], int numSkills){
+double get_min_cost(ALL_Cards *all_cards, ALL_Cards *unique_cards, int totalcards, int support_array[SUPPORTDECK], int numSkills){
 
     /** Returns the minumum cost for a Support Deck with a set of specific affiliation profiles **/
 
@@ -625,7 +626,7 @@ double get_min_cost(ALL_Cards *all_cards, ALL_Cards *unique_cards, int support_a
         cost+=all_cards->card[support_array[i]].cost;
     }
 
-    for(i=numSkills;i<SUPPORTDECK;i++){
+    for(i=numSkills;i<totalcards;i++){
         cost+=unique_cards->card[support_array[i]].min_cost;
     }
 
@@ -633,7 +634,7 @@ double get_min_cost(ALL_Cards *all_cards, ALL_Cards *unique_cards, int support_a
 }
 
 
-double get_max_cost(ALL_Cards *all_cards, ALL_Cards *unique_cards, int support_array[SUPPORTDECK], int numSkills){
+double get_max_cost(ALL_Cards *all_cards, ALL_Cards *unique_cards, int totalcards, int support_array[SUPPORTDECK], int numSkills){
 
     /** Returns the maximum cost for a Support Deck with a set of specific affiliation profiles **/
 
@@ -644,7 +645,7 @@ double get_max_cost(ALL_Cards *all_cards, ALL_Cards *unique_cards, int support_a
         cost+=all_cards->card[support_array[i]].max_cost;
     }
 
-    for(i=numSkills;i<SUPPORTDECK;i++){
+    for(i=numSkills;i<totalcards;i++){
         cost+=unique_cards->card[support_array[i]].max_cost;
     }
 
@@ -711,7 +712,7 @@ int generate_deck_types(SupportDeck *supportdeck, ALL_Cards *all_cards, ALL_Card
         } //closes j loop for checking and adding cardtype values
 
         // types for non-support skills
-        for(j=supportdeck->number_of_skills;j<SUPPORTDECK;j++){
+        for(j=supportdeck->number_of_skills;j<supportdeck->total_cards_to_use;j++){
             for(q=0;q<unique_affiliations->card[support_array[j]].number_of_types;q++){
                 aff_counter=0;
                 for(r=0;r<current_type_counter;r++){
@@ -764,7 +765,7 @@ int generate_deck_types(SupportDeck *supportdeck, ALL_Cards *all_cards, ALL_Card
             } //closes j loop for checking and adding cardtype values
 
             // types for non-support skills
-            for(j=supportdeck->number_of_skills;j<SUPPORTDECK;j++){
+            for(j=supportdeck->number_of_skills;j<supportdeck->total_cards_to_use;j++){
                 for(q=0;q<unique_affiliations->card[support_array[j]].number_of_types;q++){
                     aff_counter=0;
                     for(r=0;r<current_type_counter;r++){
@@ -851,7 +852,7 @@ void print_output(SupportDeck *supportdeck, AllSupportSkills *allsupportskills, 
     output_file << "\n\n";
 
     //non-support cards
-    for(j=supportdeck->number_of_skills;j<SUPPORTDECK;j++){
+    for(j=supportdeck->number_of_skills;j<supportdeck->total_cards_to_use;j++){
         output_file << "\t" << unique_affiliations->card[support_array[j]].rarity << "*  ";
         for(m=0;m<unique_affiliations->card[support_array[j]].number_of_types;m++){
             output_file << unique_affiliations->card[support_array[j]].cardtype[m].affiliation;
@@ -902,7 +903,7 @@ void print_output(SupportDeck *supportdeck, AllSupportSkills *allsupportskills, 
 
     output_file << "\n\n";
 
-    output_file << "Minimum cost: " << get_min_cost(all_cards, unique_affiliations, support_array, supportdeck->number_of_skills) << "\t\t\tMaximum Cost: " << get_max_cost(all_cards, unique_affiliations,support_array,supportdeck->number_of_skills);
+    output_file << "Minimum cost: " << get_min_cost(all_cards, unique_affiliations, supportdeck->total_cards_to_use, support_array, supportdeck->number_of_skills) << "\t\t\tMaximum Cost: " << get_max_cost(all_cards, unique_affiliations,supportdeck->total_cards_to_use, support_array,supportdeck->number_of_skills);
 
     output_file << "\n\n";
 
@@ -1170,10 +1171,10 @@ void reset_types_in_deck(SupportDeck *supportdeck){
 
     //erase previous run's values
     for(p=0;p<supportdeck->numTypes_in_deck;p++){
-        supportdeck->current_types[p].type_value=0.0;
+        supportdeck->current_types[p].type_value=0;
         supportdeck->current_types[p].aff_name="";
 
-        supportdeck->current_base_types[p].type_value=0.0;
+        supportdeck->current_base_types[p].type_value=0;
         supportdeck->current_base_types[p].aff_name="";
     }
 
@@ -1309,7 +1310,7 @@ void find_combinations(SupportDeck *supportdeck, ALL_Cards *all_cards, ALL_Cards
                 if(skill_level_check(allsupportskills, supportdeck, skill_card_locator, base_skill_level_tracker)==supportdeck->number_of_skills){
                     if(skill_threshold_check(supportdeck,base_skill_level_tracker)==supportdeck->number_of_skills){
                         if(supportdeck->max_cost_set){
-                            if(get_min_cost(all_cards, unique_affiliations, support_array, supportdeck->number_of_skills)<=supportdeck->user_set_max_cost){
+                            if(get_min_cost(all_cards, unique_affiliations, supportdeck->total_cards_to_use, support_array, supportdeck->number_of_skills)<=supportdeck->user_set_max_cost){
                                 base_entry_counter++;
                                 print_output(supportdeck, allsupportskills, all_cards, unique_affiliations, skill_level_tracker, support_array, baseoutput);
                             }
@@ -1321,7 +1322,7 @@ void find_combinations(SupportDeck *supportdeck, ALL_Cards *all_cards, ALL_Cards
                         supportdeck->bases_only=1;
 
                         if(supportdeck->max_cost_set){
-                            if(get_min_cost(all_cards, unique_affiliations, support_array, supportdeck->number_of_skills)<=supportdeck->user_set_max_cost){
+                            if(get_min_cost(all_cards, unique_affiliations, supportdeck->total_cards_to_use, support_array, supportdeck->number_of_skills)<=supportdeck->user_set_max_cost){
                                 entry_counter++;
                                 print_output(supportdeck, allsupportskills, all_cards, unique_affiliations, skill_level_tracker, support_array, myoutput);
                             }
@@ -1334,7 +1335,7 @@ void find_combinations(SupportDeck *supportdeck, ALL_Cards *all_cards, ALL_Cards
                     supportdeck->bases_only=1;
 
                     if(supportdeck->max_cost_set){
-                        if(get_min_cost(all_cards, unique_affiliations, support_array, supportdeck->number_of_skills)<=supportdeck->user_set_max_cost){
+                        if(get_min_cost(all_cards, unique_affiliations, supportdeck->total_cards_to_use, support_array, supportdeck->number_of_skills)<=supportdeck->user_set_max_cost){
                             //notate that a combination has been found
                             entry_counter++;
                             print_output(supportdeck, allsupportskills, all_cards, unique_affiliations, skill_level_tracker, support_array, myoutput);
@@ -1348,7 +1349,7 @@ void find_combinations(SupportDeck *supportdeck, ALL_Cards *all_cards, ALL_Cards
                 }
             }else{
                 if(supportdeck->max_cost_set){
-                    if(get_min_cost(all_cards, unique_affiliations, support_array, supportdeck->number_of_skills)<=supportdeck->user_set_max_cost){
+                    if(get_min_cost(all_cards, unique_affiliations, supportdeck->total_cards_to_use, support_array, supportdeck->number_of_skills)<=supportdeck->user_set_max_cost){
                         //notate that a combination has been found
                         entry_counter++;
                         print_output(supportdeck, allsupportskills, all_cards, unique_affiliations, skill_level_tracker, support_array, myoutput);
@@ -1370,4 +1371,39 @@ void find_combinations(SupportDeck *supportdeck, ALL_Cards *all_cards, ALL_Cards
         }
     }
 
+}
+
+string numToText(int number){
+
+    string result;
+
+    if(number==1){
+        result="1";
+    }else
+        if(number==2){
+            result="2";
+        }else
+            if(number==3){
+                result="3";
+            }else
+                if(number==4){
+                    result="4";
+                }else
+                    if(number==5){
+                        result="5";
+                    }else{
+                        result="0";
+                    }
+
+    return result;
+}
+
+int willUseCardSlot(int totalcards, int position){
+    int result=0;
+
+    if(position<=totalcards){
+        result=1;
+    }
+
+    return result;
 }

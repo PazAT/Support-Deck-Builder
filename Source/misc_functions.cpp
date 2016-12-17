@@ -117,7 +117,7 @@ void count_affiliations(ALL_Cards *all_cards, ALL_Cards *unique_affiliations, Af
         for(i=0;i<card_counter;i++){
             myoutput << all_cards->card[match_tracker[i]].name << "\n";
             myoutput << "\tRarity:  " << all_cards->card[match_tracker[i]].rarity << "\tCost:  " << all_cards->card[match_tracker[i]].cost;
-            if(all_cards->card[match_tracker[i]].is_awakened==true){
+            if(all_cards->card[match_tracker[i]].is_awakened){
                 myoutput << "\tAwakened";
             }
 
@@ -239,7 +239,7 @@ void count_affiliation_spread(ALL_Cards *all_cards, ALL_Cards *unique_affiliatio
     **/
 
     int i,j,x,y, sum_tracker, sum_array_size=0;
-    unsigned int sum_array[MAXCHARACTERS][3];
+    unsigned long int sum_array[MAXCHARACTERS][3];
 
     ofstream myoutput, card_profiles;
 
@@ -437,7 +437,7 @@ void print_exact_profiles(ALL_Cards *all_cards){
     **/
 
     int i,j,k,l, not_in_array=0, sum_size=0;
-    unsigned int affiliation_sum_tracker[MAXCHARACTERS], current_sum;
+    unsigned long int affiliation_sum_tracker[MAXCHARACTERS], current_sum;
     string filename, txt=".txt";
     ofstream myoutput;
 
@@ -645,13 +645,13 @@ void print_info(AllSupportSkills *allsupportskills, ALL_Cards *all_cards){
             }
             cout << ".\n";
 
-            if(all_cards->card[counter].is_awakened==true){
+            if(all_cards->card[counter].is_awakened){
                 cout << "This card can be awakened.\n";
             }else{
                 cout << "This card cannot be awakened.\n";
             }
 
-            if(all_cards->card[counter].has_skill==true){
+            if(all_cards->card[counter].has_skill){
                 cout << all_cards->card[counter].rarity << "* " << all_cards->card[counter].name << " has skill " << all_cards->card[counter].skillname << ", which requires:\n";
                 for(x=0;x<allsupportskills->supportskill[all_cards->card[counter].skill_ID].max_level;x++){
                     cout << "\t" << allsupportskills->supportskill[all_cards->card[counter].skill_ID].supportskillcard[all_cards->card[counter].skillcard_ID].supportskillreqs[x].typereq << " of ";
@@ -692,13 +692,13 @@ void print_info(AllSupportSkills *allsupportskills, ALL_Cards *all_cards){
                     }
                     cout << ".\n";
 
-                    if(all_cards->card[rand_char].is_awakened==true){
+                    if(all_cards->card[rand_char].is_awakened){
                         cout << "This card can be awakened.\n";
                     }else{
                         cout << "This card cannot be awakened.\n";
                     }
 
-                    if(all_cards->card[rand_char].has_skill==true){
+                    if(all_cards->card[rand_char].has_skill){
                         cout << all_cards->card[rand_char].rarity << "* " << all_cards->card[rand_char].name << " has skill " << all_cards->card[rand_char].skillname << ", which requires:\n";
                         for(x=0;x<allsupportskills->supportskill[all_cards->card[rand_char].skill_ID].max_level;x++){
                             cout << "\t" << allsupportskills->supportskill[all_cards->card[rand_char].skill_ID].supportskillcard[all_cards->card[rand_char].skillcard_ID].supportskillreqs[x].typereq << " of ";
