@@ -2,6 +2,7 @@ Aayla Secura
 Admiral Ackbar
 Admiral Ackbar [It's A Trap]
 Ahsoka Tano
+Ahsoka Tano [Wary Protector]
 Anakin Skywalker [Dual Wield]
 Anakin Skywalker [Jedi General]
 Anakin Skywalker [Padawan]
@@ -18,6 +19,7 @@ Ben Kenobi [Jedi in Hiding]
 Black Krrsantan
 Boba Fett
 Boba Fett [Death for Hire]
+Boba Fett [Lessons of Youth]
 Boba Fett [The Relentless Hunter]
 Bossk
 Bossk [Licensed Hunter]
@@ -26,6 +28,7 @@ C-3PO & R2-D2 [May the 4th Limited Edition]
 Cad Bane
 Cad Bane [Steeled Killer]
 Captain Phasma
+Cassian Andor
 Chewbacca
 Chewbacca [A Hero Returned]
 Chewbacca [Hero of Kashyyyk]
@@ -47,6 +50,7 @@ Darth Sidious [Sith Dictator]
 Darth Vader
 Darth Vader & Emperor Palpatine [2nd Anniversary Limited Edition]
 Darth Vader [Cloud City]
+Darth Vader [Dark Overseer]
 Darth Vader [Galactic Terror]
 Darth Vader [His Master's Bidding]
 Darth Vader [Master of Evil]
@@ -55,6 +59,7 @@ Darth Vader [Shadows of Fear]
 Darth Vader [The Dark Usurper]
 Darth Vader [The Penultimate Conflict]
 Darth Vader [TIE Advance]
+Death Trooper
 Dengar
 Director Krennic
 Dooku
@@ -122,6 +127,7 @@ Master Yoda [Exile on Dagobah]
 Master Yoda [Reluctant General]
 Master Yoda [The Grand Master]
 Maz Kanata
+Mon Mothma
 Nute Gunray
 Obi-Wan Kenobi [Jedi Master]
 Obi-Wan Kenobi [Last of the Order]
@@ -171,6 +177,7 @@ Ben Kenobi [Death Star]
 Bib Fortuna
 Bib Fortuna [Majordomo]
 Boba Fett
+Bodhi Rook
 Boss Nass
 Bossk
 Boushh
@@ -195,6 +202,7 @@ Clone Commander Neyo
 Clone Commander Neyo
 Clone Commander Wolffe
 Clone Sergeant Fox
+Combat Assault Tank Commander
 Darth Sidious
 Darth Vader [Death Star]
 DD-13 [Healer]
@@ -365,6 +373,7 @@ Jango Fett
 Jar Jar Binks
 Jessika Pava
 Jocasta Nu
+K-2SO
 Ki-Adi-Mundi
 Lachichuk
 Lama Su
@@ -423,6 +432,7 @@ Security Battle Droid
 Security Soldier
 Sephjet Josall
 Shaak Ti
+Shoretrooper
 Sly Moore
 Snowtrooper
 Stass Allie [Healer]
