@@ -40,6 +40,9 @@ void construct_support_deck(SupportDeck *supportdeck, AllSupportSkills *allsuppo
     filename.append(numToText(supportdeck->total_cards_to_use));
     filename.append("_card_");
 
+    base_filename.append(numToText(supportdeck->total_cards_to_use));
+    base_filename.append("_card_");
+
     filename.append(allsupportskills->supportskill[supportdeck->skill_locator[0]].skillNickname);
     base_filename.append(allsupportskills->supportskill[supportdeck->skill_locator[0]].skillNickname);
 
