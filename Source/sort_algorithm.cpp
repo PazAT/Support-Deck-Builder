@@ -37,6 +37,9 @@ void construct_support_deck(SupportDeck *supportdeck, AllSupportSkills *allsuppo
     ofstream myoutput, baseoutput;
     string filename="Output/", base_filename="Output/";
 
+    filename.append(numToText(supportdeck->total_cards_to_use));
+    filename.append("_card_");
+
     filename.append(allsupportskills->supportskill[supportdeck->skill_locator[0]].skillNickname);
     base_filename.append(allsupportskills->supportskill[supportdeck->skill_locator[0]].skillNickname);
 
@@ -496,7 +499,7 @@ void construct_support_deck(SupportDeck *supportdeck, AllSupportSkills *allsuppo
                 cout << "\t\t" << allsupportskills->supportskill[supportdeck->skill_locator[i]].skillName;
                 cout << ", level " << supportdeck->skill_threshold[i] << "\n";
             }
-            cout << "\tusing " << supportdeck->total_cards_to_use << " total cards.\n";
+            cout << "\tusing " << supportdeck->total_cards_to_use << " total cards with " << supportdeck->type_threshold << " matching types.\n";
         }else{
             cout << "\n\tFound " << entry_counter+base_entry_counter << " total solutions, " << entry_counter << " emax/awakened and " << base_entry_counter << " base solutions";
         }
