@@ -1,0 +1,103 @@
+	Prep Skill Trigger UP, level 5
+	Prep Skill Nullification, level 1
+	Proximity Alarm, level 3
+	Anti Lightsaber Tactics, level 1
+
+4*  Jabba the Hutt   4*  Obi-Wan Kenobi [Padawan]   4*  Boushh   4*  ARC Trooper Fives
+
+9 (Female,  Jabbas Crime Syndicate)  6 (Galactic Republic,  Tatooinian)  9 (Bounty Hunter,  Beast)  4 (Jedi,  Bounty Hunter,  Clone Trooper)
+
+	5*  Female,  Bounty Hunter	(3 character cards with 1 awakened)
+	5*  Male,  Jedi,  Beast,  Galactic Republic	(1 character cards)
+	5*  Beast,  Tatooinian,  Jabbas Crime Syndicate	(1 character cards)
+
+
+17 (Male)  9 (Tatooinian)  9 (Jabbas Crime Syndicate)  9 (Jedi)  13 (Galactic Republic)  9 (Female)  9 (Bounty Hunter)  4 (Rebel Alliance)  4 (Clone Trooper)  10 (Beast)
+
+Minimum cost: 154			Maximum Cost: 169
+
+----------------------------------------------------------------------
+
+	Prep Skill Trigger UP, level 4
+	Prep Skill Nullification, level 1
+	Proximity Alarm, level 3
+	Anti Lightsaber Tactics, level 1
+
+4*  Jabba the Hutt   4*  Obi-Wan Kenobi [Padawan]   4*  Boushh   4*  ARC Trooper Fives
+
+7 (Female,  Jabbas Crime Syndicate)  6 (Galactic Republic,  Tatooinian)  9 (Bounty Hunter,  Beast)  4 (Jedi,  Bounty Hunter,  Clone Trooper)
+
+	5*  Female,  Bounty Hunter	(3 character cards with 1 awakened)
+	5*  Male,  Jedi,  Beast,  Galactic Republic	(1 character cards)
+	4*  Beast,  Tatooinian,  Jabbas Crime Syndicate	(1 character cards)
+
+
+17 (Male)  8 (Tatooinian)  8 (Jabbas Crime Syndicate)  9 (Jedi)  13 (Galactic Republic)  9 (Female)  9 (Bounty Hunter)  4 (Rebel Alliance)  4 (Clone Trooper)  9 (Beast)
+
+Minimum cost: 135			Maximum Cost: 150
+
+----------------------------------------------------------------------
+
+	Prep Skill Trigger UP, level 5
+	Prep Skill Nullification, level 1
+	Proximity Alarm, level 3
+	Anti Lightsaber Tactics, level 1
+
+4*  Jabba the Hutt   4*  Obi-Wan Kenobi [Padawan]   4*  Boushh   4*  ARC Trooper Fives
+
+9 (Female,  Jabbas Crime Syndicate)  6 (Galactic Republic,  Tatooinian)  9 (Bounty Hunter,  Beast)  4 (Jedi,  Bounty Hunter,  Clone Trooper)
+
+	5*  Female,  Bounty Hunter	(3 character cards with 1 awakened)
+	5*  Beast,  Tatooinian,  Jabbas Crime Syndicate	(1 character cards)
+	5*  Beast,  Tatooinian,  Jabbas Crime Syndicate	(1 character cards)
+
+
+12 (Male)  14 (Tatooinian)  14 (Jabbas Crime Syndicate)  4 (Jedi)  8 (Galactic Republic)  9 (Female)  9 (Bounty Hunter)  4 (Rebel Alliance)  4 (Clone Trooper)  10 (Beast)
+
+Minimum cost: 152			Maximum Cost: 167
+
+----------------------------------------------------------------------
+
+	Prep Skill Trigger UP, level 5
+	Prep Skill Nullification, level 1
+	Proximity Alarm, level 3
+	Anti Lightsaber Tactics, level 1
+
+4*  Jabba the Hutt   4*  Obi-Wan Kenobi [Padawan]   4*  Boushh   4*  ARC Trooper Fives
+
+9 (Female,  Jabbas Crime Syndicate)  6 (Galactic Republic,  Tatooinian)  9 (Bounty Hunter,  Beast)  4 (Jedi,  Bounty Hunter,  Clone Trooper)
+
+	5*  Female,  Bounty Hunter	(3 character cards with 1 awakened)
+	5*  Beast,  Tatooinian,  Jabbas Crime Syndicate	(1 character cards)
+	4*  Beast,  Tatooinian,  Jabbas Crime Syndicate	(1 character cards)
+
+
+12 (Male)  13 (Tatooinian)  13 (Jabbas Crime Syndicate)  4 (Jedi)  8 (Galactic Republic)  9 (Female)  9 (Bounty Hunter)  4 (Rebel Alliance)  4 (Clone Trooper)  9 (Beast)
+
+Minimum cost: 133			Maximum Cost: 148
+
+----------------------------------------------------------------------
+
+	Prep Skill Trigger UP, level 5
+	Prep Skill Nullification, level 1
+	Proximity Alarm, level 3
+	Anti Lightsaber Tactics, level 1
+
+4*  Jabba the Hutt   4*  Obi-Wan Kenobi [Padawan]   4*  Boushh   4*  ARC Trooper Fives
+
+9 (Female,  Jabbas Crime Syndicate)  6 (Galactic Republic,  Tatooinian)  9 (Bounty Hunter,  Beast)  4 (Jedi,  Bounty Hunter,  Clone Trooper)
+
+	5*  Female,  Bounty Hunter	(3 character cards with 1 awakened)
+	5*  Beast,  Tatooinian,  Jabbas Crime Syndicate	(1 character cards)
+	4*  Male,  Beast,  Galactic Empire	(1 character cards with 1 awakened)
+
+
+16 (Male)  9 (Tatooinian)  9 (Jabbas Crime Syndicate)  4 (Jedi)  8 (Galactic Republic)  9 (Female)  9 (Bounty Hunter)  4 (Rebel Alliance)  4 (Clone Trooper)  9 (Beast)  4 (Galactic Empire)
+
+Minimum cost: 134			Maximum Cost: 151
+
+----------------------------------------------------------------------
+
+
+
+	Found 5 base card only combinations!

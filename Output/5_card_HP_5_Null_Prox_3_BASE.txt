@@ -1,0 +1,57 @@
+	Character Card HP UP, level 5
+	Prep Skill Nullification, level 1
+	Proximity Alarm, level 3
+
+3*  Dexter Jettster   4*  Obi-Wan Kenobi [Padawan]   3*  DRK-1 Dark Eye Probe Droid
+
+9 (Male,  Galactic Republic)  6 (Galactic Republic,  Tatooinian)  8 (Sith,  Tatooinian)
+
+	5*  Male,  Jedi,  Galactic Republic,  Tatooinian	(4 character cards with 3 awakened)
+	5*  Male,  Sith,  Galactic Empire,  Tatooinian	(1 character cards)
+
+
+17 (Male)  12 (Galactic Republic)  9 (Jedi)  3 (Droid)  8 (Sith)  10 (Tatooinian)  5 (Galactic Empire)
+
+Minimum cost: 87			Maximum Cost: 110
+
+----------------------------------------------------------------------
+
+	Character Card HP UP, level 5
+	Prep Skill Nullification, level 1
+	Proximity Alarm, level 3
+
+3*  Dexter Jettster   4*  Obi-Wan Kenobi [Padawan]   3*  DRK-1 Dark Eye Probe Droid
+
+9 (Male,  Galactic Republic)  6 (Galactic Republic,  Tatooinian)  8 (Sith,  Tatooinian)
+
+	5*  Male,  Sith,  Galactic Empire,  Tatooinian	(1 character cards)
+	4*  Droid,  Galactic Republic,  Tatooinian	(1 character cards)
+
+
+12 (Male)  11 (Galactic Republic)  4 (Jedi)  7 (Droid)  8 (Sith)  5 (Galactic Empire)  9 (Tatooinian)
+
+Minimum cost: 80			Maximum Cost: 80
+
+----------------------------------------------------------------------
+
+	Character Card HP UP, level 5
+	Prep Skill Nullification, level 1
+	Proximity Alarm, level 3
+
+3*  Dexter Jettster   4*  Obi-Wan Kenobi [Padawan]   3*  DRK-1 Dark Eye Probe Droid
+
+9 (Male,  Galactic Republic)  6 (Galactic Republic,  Tatooinian)  8 (Sith,  Tatooinian)
+
+	5*  Male,  Sith,  Galactic Empire,  Tatooinian	(1 character cards)
+	3*  Male,  Jedi,  Galactic Republic,  Tatooinian	(2 character cards)
+
+
+15 (Male)  10 (Galactic Republic)  7 (Jedi)  3 (Droid)  8 (Sith)  5 (Galactic Empire)  8 (Tatooinian)
+
+Minimum cost: 80			Maximum Cost: 80
+
+----------------------------------------------------------------------
+
+
+
+	Found 3 base card only combinations!
