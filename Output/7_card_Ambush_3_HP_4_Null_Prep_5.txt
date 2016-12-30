@@ -1,0 +1,23 @@
+	Character Card HP UP, level 4
+	Prep Skill Nullification, level 1
+	Ambush, level 3
+	Prep Skill Trigger UP, level 5
+
+3*  Dexter Jettster   3*  Chief Chirpa   4*  Wicket W Warrick   3*  Logray
+
+7 (Male,  Galactic Republic)  5 (Beast,  Ewok)  8 (Ewok,  Rebel Alliance)  9 (Droid,  Ewok)
+
+	5*  Droid,  Rebel Alliance	(2 character cards)
+	5*  Droid,  Rebel Alliance	(2 character cards)
+	5*  Male,  Jedi,  Beast,  Galactic Republic	(1 character cards with 1 awakened)
+
+
+18 (Male)  8 (Galactic Republic)  10 (Ewok)  10 (Droid)  10 (Rebel Alliance)  5 (Jedi)  5 (Beast)
+
+Minimum cost: 119			Maximum Cost: 155
+
+----------------------------------------------------------------------
+
+
+
+	Found 1 base card only combinations!
