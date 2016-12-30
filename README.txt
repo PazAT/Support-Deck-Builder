@@ -22,18 +22,19 @@ Readme for the Support Deck Builder
 	
 	I. Introduction & Description
 	
-This program's primary purpose is to brute force solve for 2-6 skill support deck combinations given sets of character affiliations. It solves by
-assuming each avaliable card is at the highest possible build - emax or awakened. If combinations are located, they are printed to a ".txt" document
-located in the "Output" directory. If no combinations are located, the output file(s) is notated as such and a printout appears on screen notifying the
-user that no combinations could be located. In addition, this program contains a statistics feature for analyzing various information about the
-characters and unique profiles.
+This program's primary purpose is to brute force solve for 2-6 skill support deck combinations for support deck sizes of 2-7 cards given sets of
+character affiliations. It solves by assuming each avaliable card is at the highest possible build - emax or awakened. If combinations are located,
+they are printed to a ".txt" document located in the "Output" directory. If no combinations are located, the output file(s) is notated as such and a
+printout appears on screen notifying the user that no combinations could be located. In addition, this program contains a statistics feature for
+analyzing various information about the characters and unique profiles.
 
 Included are six controllable optimizations for searching:
 		
 	1) thresholding cards to search based on N affiliation matches
 		-With this option, the user specifies N affiliations a card must match of the total needed affiliations for a support deck
-		-e.g., if Queen Apaliana and Dexster Jettster were your cards, and you entered "2" as your type match criteria, the program would only search cards who match
-		-at least 2 of their needed affiliations: So it would only search cards who match at least two of {Male, Naboo, Galactic Empire, and Galactic Republic}
+		-e.g., if Queen Apaliana and Dexster Jettster were your cards, and you entered "2" as your type match criteria, the program would only search
+		-cards who match at least 2 of their needed affiliations: So it would only search cards who match at least two of
+		-{Male, Naboo, Galactic Empire, and Galactic Republic}
 	
 	2) limiting searches to N* affiliation sets or better
 		-This option allows the user to control through how many levels of rarity are searched. The program starts searching at 5* and
@@ -54,7 +55,7 @@ Included are six controllable optimizations for searching:
 		-selected, maximum is the support deck max size.
 
 
-Once these options have been set, the program will commence its solving. Solving can take at few as 3 seconds, or as long as 5 minutes, depending
+Once these options have been set, the program will commence its solving. Solving can take at few as 3 seconds, or as long as 15 minutes, depending
 on the skills and options chosen. This is a brute force solver, so the program will search through every viable combination specified by the chosen
 options until all possible combinations have been examined.
 
@@ -68,9 +69,10 @@ Please see the file "Getting Started.txt" for installation instructions.
 
 	III. Files Used
 
-All files accessed by this program are in a local directory called "Data". The program uses these files to build its database of support skills, cards,
-and affiliations. Editing these files changes what data the program sees, and so it is advised that you do not edit them without reading the
+All files accessed by this program are in a local directory called "Data". The program uses these files to build its database of support skills,
+cards, and affiliations. Editing these files changes what data the program sees, and so it is advised that you do not edit them without reading the
 how-to-edit the files in section VI.
+
 The reason this information exists in .txt form and not in the source code is that it is designed to be more fluid with the release of new support
 abilities and cards. Instead of needing to edit the source code with each release one simply edits the correpsonding .txt file(s). This also allows
 the user an easy way to exclude items they do not want considered.
@@ -85,11 +87,11 @@ Inside of "Data", there are six .txt files and one .xlsx excel file. These files
 	6) supportSkills.txt
 	7) Support Deck Tables.xlsx
 
-Each line in numericTypes.txt has a matching character in the characterNames.txt file (1:1 map). However, each line in
-supportSkillLevels.txt does not have a matching line in supportCards.txt (not 1:1 map). More information is available in
-the next section.
+Each line in numericTypes.txt has a matching character in the characterNames.txt file. However, each line in supportSkillLevels.txt does not have
+a matching line in supportCards.txt. More information is available in the next section.
 			
-The only file not referenced by the program is "Support Deck Tables.xlsx". That file is just a simple spreadsheet to make editing information about cards and skills easier.
+The only file not referenced by the program is "Support Deck Tables.xlsx". That file is just a simple spreadsheet to make editing information about
+cards and skills easier.
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -102,7 +104,7 @@ the other files are simpler to read.
 The following text gives the templates for each file you will find in the "Data" directory.
 
 	supportSkills.txt
-		the name of each support skill and its nickname on the line directly below
+		the name of each support skill and its nickname on the line directly below. Nicknames are used when naming output files.
 			<support skill full name>
 			<support skill nickname>
 			
@@ -156,7 +158,7 @@ The following text gives the templates for each file you will find in the "Data"
 		The first line tells us that Character Card HP UP has "5" max levels and "4" Character Cards possess it. The next 4 lines then tell us
 		the individual value requirements for each skill card that has HP UP and the rarity of that skill card. So we see that the first card has
 		value requirements of "2", "3", "5", "7", and "9" for levels 1 to 5, and it is rarity "2". The first card of this skill corresponds
-		to Rabe in the file "supportCards.txt"
+		to "Rabe" in the file "supportCards.txt"
 		
 		Looking at Call to the Light Side,
 		
@@ -166,13 +168,13 @@ The following text gives the templates for each file you will find in the "Data"
 			3 3
 			
 		We can see that the skill has "1" max level and "3" Character Cards possess it. The first of these cards requires "3" type values and it is
-		of rarity "4". The first card of this skill correpsonds to Adi Gallia in the file "supportCards.txt".
+		of rarity "4". The first card of this skill correpsonds to "Adi Gallia" in the file "supportCards.txt".
 		
 		Note that not every two integer line is a start of a new skill card - with skills that have only 1 max level, their entries are all two
 		integer lines. For more insight on this file, please look at the "SS output" page in the excel spreadsheet "Support Deck Tables.xlsx".
+
+
 		
-
-
 	----------------------------------------------------------------------------------------------------------------------
 	
 	
@@ -181,7 +183,7 @@ The following text gives the templates for each file you will find in the "Data"
 		This file contains the name of each affiliation in the current game. Only one affiliation per line.
 
 	characterNames.txt
-		In here are the full names of the Character Cards. One character per line.
+		In here are the names of the Character Cards. One character per line.
 
 	*** numericalTypes.txt ***
 		Inside here, you'll find many lines, each of 5 sets of numbers. These numbers are tab spaced and each relates to a line in the file
@@ -194,9 +196,9 @@ The following text gives the templates for each file you will find in the "Data"
 		belonging to a card. The last value represents if a card is awakened ("1" if it is and "0" if it is not).
 		
 		The affiliation sum is generated by using powers of 2. The power given to an affiliation is equal to how many affiliations are before it
-		in the file "cardTypes.txt". So for "Male", the first listed affiliation, it would have a power equal to "0" (zero) because no affiliation comes
-		before it. "Female" would have a power of "1" (since only one affiliation comes before it); "Droid" would have "2"; and so on. "Fringer" has
-		a power of "23" because there are 23 affiliations before it.
+		in the file "cardTypes.txt". So for "Male", the first listed affiliation, it would have a power equal to "0" (zero) because no affiliation
+		comes before it. "Female" would have a power of "1" (since only one affiliation comes before it); "Droid" would have "2"; and so on.
+		"Fringer" has a power of "23" because there are 23 affiliations before it.
 		
 		Taking a look at the very first entry, we see
 		
@@ -224,27 +226,33 @@ The following text gives the templates for each file you will find in the "Data"
 
 	V. Output
 	
-This program will produce output files to four locations: 1) directory "Output"; 2) directory "UniqueProfiles"; 3) directory "CharacterProfiles";
-and 4) "ExactProfiles", a subdirectory of "CharacterProfiles".
+This program will produce output files to five locations: 1) directory "Output"; 2) "No_Combinations", a subdirectory of "Output";
+3) directory "UniqueProfiles"; 4) directory "CharacterProfiles"; and 5) "ExactProfiles", a subdirectory of "CharacterProfiles".
 
-"Output" contains the solutions found by the program during its combination searches
-"UniqueProfiles" contains information about affiliation distributions of the current set of character cards
-"CharacterProfiles" contains the names of Character Cards that possess at least a user specified given set of affiliations
+"Output" contains the solutions found by the program during its combination searches.
+
+"Output\No_Combinations" contains the text file "No_Combinations.txt", which tracks combinations of skills that do not have a solution. It records
+the skills, the minimum levels enforced, the type threshold used, and the minimum rarity searched.
+
+"UniqueProfiles" contains information about affiliation distributions of the current set of character cards.
+
+"CharacterProfiles" contains the names of Character Cards that possess at least a user specified given set of affiliations.
+
 "CharacterProfiles\ExactProfiles" contains the names, rarity, and cost of Character Cards which possess the exact specified
-set of affiliations
+set of affiliations.
 
-	V.i Support Output
+	V.i Support Decks Output
 		
 		Files in the Output directory are named based on the nicknames of the skills being searched (e.g., searching for Prep Skill Trigger UP,
-		Proximity Alarm, and Character Card HP UP will result in a file by the name of "Prep_Prox_HP.txt"). However, note that each ordering of a
-		set of skills, such as (Prep, Prox, HP) and (HP, Prox, Prep), will produce a distinct output file even if the contents of the files would
-		be identical.
+		Proximity Alarm, and Character Card HP UP will result in a file by the name of "HP_Prep_Prox.txt"). When naming files, the program will
+		organize the skill nicknames in the filename based on what order the skills appear in the file "supportSkills.txt". When you use the
+		program to find combinations, before solving it will check if a file with the parameters you specify already exists before continuing.
 		
-		Also generated is a file with the suffix "_bases" - when searching for specific skill levels, the program will check if each
-		successful combination can be made by using just bases of those cards. If you are searching for a minimum skill level, the program will
-		name files with the minimum level included - so if you were searching for Null, HP 5, and Prep 5, your output would be written to the
-		files called "Null_Hp_5_Prep_5.txt" and "Null_Hp_5_Prep_5_BASE.txt". This directory can easily get overcrowded with various files, so
-		it may help to create additional directories inside of the Output directory to hold the solutions discovered.
+		Also generated is a file with the suffix "_EMAX" - when searching for specific skill levels, the program will check if each
+		successful combination can be made by using emaxes and then bases of the cards. If you are searching for a minimum skill level,
+		the program will name files with the minimum level included - so if you were searching for Null, HP 5, and Prep 5, your output would be
+		written to the files called "Hp_5_Null_Prep_5.txt" and "Hp_5_Null_Prep_5_EMAX.txt". This directory can easily get overcrowded with various
+		files, so it may help to create additional directories inside of the Output directory to hold the solutions discovered.
 
 		An output entry will look like:
 			----------------------------------------------------------------------
