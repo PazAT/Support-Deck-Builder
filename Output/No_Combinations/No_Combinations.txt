@@ -1,0 +1,2 @@
+(Ambush, level 3)   (HP, level 5)   (Prep, level 5)   (Null, level 1)	6 cards using 2 matching types from 5* through 3*
+(Prox, level 3)   (HP, level 5)   (Prep, level 5)   (Null, level 1)	6 cards using 1 matching types from 5* through 3*
