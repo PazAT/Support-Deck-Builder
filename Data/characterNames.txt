@@ -63,7 +63,8 @@ Death Trooper
 Dengar
 Director Krennic
 Dooku
-Dooku [Darth Lord]
+Dooku [Dark Conspirator]
+Dooku [Dark Lord]
 Dooku [Enemy of the Republic]
 Dooku [Sith Lord]
 Droideka
@@ -142,6 +143,7 @@ Pong Krell
 Pre Vizsla
 Queen Amidala
 Qui-Gon Jinn
+Qui-Gon Jinn [Fated Duelist]
 Qui-Gon Jinn [The Final Duel]
 Quinlan Vos
 R2-D2
