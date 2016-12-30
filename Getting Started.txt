@@ -16,11 +16,11 @@ The "Support Deck Builder.zip" file should include everything you need to succes
 
 Follow these steps to ensure that the program will operate successfully:
 	1) Unzip the contents to a local directory. I recommend placing the program into your User Directory (So for me, it would be placed into:
-	Paz/Support Deck Builder). This ensures that the program will always have authority to write the output files it creates. If you're uncomfortable
-	doing this with this program, then go ahead and download or copy the source code to compile and/or edit yourself.
+	   Paz/Support Deck Builder). This ensures that the program will always have authority to write the output files it creates. If you're uncomfortable
+	   doing this with this program, then go ahead and download or copy the source code to compile and/or edit yourself.
 	
 	2) In the same Directory, check that there are five sub-directories: "CharacterProfiles"; "Data"; "Output"; "Source"; and "UniqueProfiles". If
-	these directories do not exist, please create them (case sensitive, no spaces) before attempting to use the Support Deck Solver.
+	   these directories do not exist, please create them (case sensitive, no spaces) before attempting to use the Support Deck Solver.
 	
 	3) Look inside the Data directory - there should be seven different files: 
 		i) cardTypes.txt   ii) characterNames.txt   iii) numericTypes.txt   iv) supportCards.txt
@@ -30,19 +30,22 @@ Follow these steps to ensure that the program will operate successfully:
 		i) main.cpp   ii) declarations.h   iii) classes.h
 		iv) sort_algorithm.cpp   v) functions.cpp   vi) misc_functions.cpp
 
-	5) If you do not see these files, either download them or copy the contents from GitHub. The first six files listed under "Data" are essential for the
-	 program to operate properly - "Support Deck Tables.xlsx" is not necessary for the program's success. If you still cannot obtain a copy of the files,
-	 send me PM via AppInvasion.
+	5) If you do not see these files, either download them or copy the contents from GitHub. The first six files listed under "Data" are essential for
+	   the program to operate properly - "Support Deck Tables.xlsx" is not necessary for the program's success. If you still cannot obtain a copy of
+	   the files, send me PM via AppInvasion.
 	 
 	6) In the "CharacterProfiles" directory, there should be one sub-directory - "ExactProfiles". If this directory does not exist, go ahead and
-	 create it (exactly as named, case sensitive and no spaces).
+	   create it (exactly as named, case sensitive and no spaces).
 	 
-	7) Once the six steps above are completed, if the program is located in your User Directory, go ahead and start up the program and follow the
-	 instructions on-screen. If the program is located outside of your User Directory, It may be necessary to right click the executable and select
-	 "Run as Administrator" to get the program to run as intended - however, this is only necessary to do if you want ensure that the program can
-	 write output files.
+	7) In the "Output" directoy, there should also be one sub-directory - "No_Combinations". If this directory does not exist, go ahead and
+	   create it (exactly as named, case sensitive and no spaces).
 	 
-	8) Enjoy!
+	8) Once the seven steps above are completed, if the program is located in your User Directory, go ahead and start up the program and follow the
+	   instructions on-screen. If the program is located outside of your User Directory, it may be necessary to right click the executable and select
+	   "Run as Administrator" to get the program to run as intended - however, this is only necessary to do if you want ensure that the program can
+	   write output files.
+	 
+	9) Enjoy!
 	
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
