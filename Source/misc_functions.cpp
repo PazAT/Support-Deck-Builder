@@ -12,7 +12,7 @@ void count_affiliations(ALL_Cards *all_cards, ALL_Cards *unique_affiliations, Af
 
     /**
         Counts cards that share a specific set of affiliations.
-        It will count both all cards in its database and the corresponding unqiue rarity profiles that
+        It will count both all cards in its database and the corresponding unique rarity profiles that
         have at least the specified affiliations
     **/
 
@@ -681,6 +681,8 @@ void print_info(AllSupportSkills *allsupportskills, ALL_Cards *all_cards){
 
     }else
         if(start==2){
+
+            srand(time(NULL));
 
             do{
                 rand_char=rand()%all_cards->number_of_characters;

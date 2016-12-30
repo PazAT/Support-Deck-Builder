@@ -90,7 +90,7 @@ struct SupportDeck{
     int skill_locator[SUPPORTDECK], card_locator[SUPPORTDECK], skill_threshold[SUPPORTDECK];
     int number_of_skills, types_needed, numTypes_in_deck, bases_only, type_threshold, user_set_max_cost;
     int looking_for_specific_level, ignore_list[SUPPORTDECK][MAXSUPPORTCARDS], breaking_early, breaking_at_solution;
-    int num_allowed_cards[SUPPORTDECK], num_ignored_cards[SUPPORTDECK], total_cards_to_use;
+    int num_allowed_cards[SUPPORTDECK], num_ignored_cards[SUPPORTDECK], total_cards_to_use, using_rarity;
     bool solution_threshold_reached, max_cost_set;
 
 };
@@ -102,7 +102,7 @@ void reset_support_deck(SupportDeck *supportdeck);
 void set_min_max_costs(ALL_Cards *all_cards, ALL_Cards *unique_cards);
 void print_info(AllSupportSkills *allsupportskills, ALL_Cards *all_cards);
 
-void construct_support_deck(SupportDeck *supportdeck, AllSupportSkills *allsupportskills, ALL_Cards *all_cards, ALL_Cards *unique_affiliations, int effective_chars);
+void construct_support_deck(SupportDeck *supportdeck, AllSupportSkills *allsupportskills, ALL_Cards *all_cards, ALL_Cards *unique_affiliations);
 void print_output(SupportDeck *supportdeck, AllSupportSkills *allsupportskills, ALL_Cards *all_cards, ALL_Cards *unique_affiliations, int skill_level[SUPPORTDECK], int support_array[SUPPORTDECK], ofstream& output_file);
 int generate_deck_types(SupportDeck *supportdeck, ALL_Cards *all_cards, ALL_Cards *unique_affiliations, int support_array[SUPPORTDECK]);
 int skill_level_check(AllSupportSkills *allsupportskills, SupportDeck *supportdeck, int skill_card_locator[SUPPORTDECK], int skill_threshold[SUPPORTDECK]);
@@ -139,3 +139,7 @@ void check_stats(ALL_Cards *all_cards, ALL_Cards *unique_cards, Affiliation_Arra
 
 string numToText(int number);
 int willUseCardSlot(int totalcards, int position);
+void deleteIfEmptyFile(ofstream &outputfile, string filename, int combinationCount);
+void trackNoCombinations(SupportDeck *supportdeck, AllSupportSkills *allskills);
+string nameFile(SupportDeck *supportdeck, AllSupportSkills *allsupportskills, bool emax);
+bool checkIfFileExists(SupportDeck *supportdeck, AllSupportSkills *allsupportskills);

@@ -531,6 +531,7 @@ void reset_support_deck(SupportDeck *supportdeck){
     supportdeck->breaking_at_solution=0;
     supportdeck->breaking_early=0;
     supportdeck->user_set_max_cost=0;
+    supportdeck->using_rarity=4;
     supportdeck->total_cards_to_use=SUPPORTDECK;
 
     supportdeck->solution_threshold_reached=false;
@@ -1415,4 +1416,111 @@ int willUseCardSlot(int totalcards, int position){
     }
 
     return result;
+}
+
+void deleteIfEmptyFile(ofstream &outputfile, string filename, int combinationCount){
+ /** This function deletes an empty file: a file with no combinations **/
+    if(combinationCount==0){
+
+        if(outputfile.is_open()){
+        outputfile.close();
+        }
+
+        remove(filename.c_str());
+    }
+}
+
+void trackNoCombinations(SupportDeck *supportdeck, AllSupportSkills *allskills){
+    /** This function tracks which skill combinations do not exist **/
+    string noComboName="Output/No_Combinations/No_Combinations.txt";
+    ofstream noCombo;
+
+    noCombo.open(noComboName.c_str(), ios::out | ios::app);
+
+    if(noCombo.is_open()){
+        if(supportdeck->looking_for_specific_level==1){
+            noCombo << "(" << allskills->supportskill[supportdeck->skill_locator[0]].skillNickname << ", level " << supportdeck->skill_threshold[0] << ")";
+            for(int i=1;i<supportdeck->number_of_skills;i++){
+                noCombo << "   (" << allskills->supportskill[supportdeck->skill_locator[i]].skillNickname << ", level " << supportdeck->skill_threshold[i] << ")";
+            }
+        }else{
+            noCombo << "(" << allskills->supportskill[supportdeck->skill_locator[0]].skillNickname << ")";
+            for(int i=1;i<supportdeck->number_of_skills;i++){
+                noCombo << "   (" << allskills->supportskill[supportdeck->skill_locator[i]].skillNickname << ")";
+            }
+        }
+
+        noCombo << "\t" << supportdeck->total_cards_to_use << " cards using " << supportdeck->type_threshold << " matching types from 5* through " << supportdeck->using_rarity <<"*";
+        noCombo << "\n";
+    }
+
+
+    noCombo.close();
+}
+
+string nameFile(SupportDeck *supportdeck, AllSupportSkills *allsupportskills, bool emax){
+    string filename="Output/";
+    int sort_min_index[SUPPORTDECK], index_size;
+
+    sort_min_index[0]=0;
+    index_size=1;
+
+    for(int k=1;k<supportdeck->number_of_skills;k++){
+        bool was_placed=false;
+        for(int j=0;j<index_size;j++){
+            if(!was_placed && supportdeck->skill_locator[k]<supportdeck->skill_locator[sort_min_index[j]]){
+                for(int x=index_size;x>j;x--){
+                    sort_min_index[x]=sort_min_index[x-1];
+                }
+                sort_min_index[j]=k;
+                was_placed=true;
+                index_size++;
+            }
+        }
+        if(!was_placed){
+            sort_min_index[index_size]=k;
+            index_size++;
+        }
+    }
+
+    filename.append(numToText(supportdeck->total_cards_to_use));
+    filename.append("_card_");
+
+    filename.append(allsupportskills->supportskill[supportdeck->skill_locator[sort_min_index[0]]].skillNickname);
+
+    if(supportdeck->looking_for_specific_level==1 && allsupportskills->supportskill[supportdeck->skill_locator[sort_min_index[0]]].max_level!=1){
+        filename.append("_");
+        filename.append(numToText(supportdeck->skill_threshold[sort_min_index[0]]));
+    }
+
+    for(int i=1;i<supportdeck->number_of_skills;i++){
+        int temp=supportdeck->skill_locator[sort_min_index[i]];
+        filename.append("_");
+        filename.append(allsupportskills->supportskill[temp].skillNickname);
+
+        if(supportdeck->looking_for_specific_level==1 && allsupportskills->supportskill[temp].max_level!=1){
+            filename.append("_");
+            filename.append(numToText(supportdeck->skill_threshold[sort_min_index[i]]));
+        }
+    }
+
+    if(emax){
+        filename.append("_EMAX");
+    }
+
+    filename.append(".txt");
+
+    return filename;
+}
+
+bool checkIfFileExists(SupportDeck *supportdeck, AllSupportSkills *allsupportskills){
+    string filename=nameFile(supportdeck, allsupportskills, false);
+    string emax_filename=nameFile(supportdeck, allsupportskills, true);
+    bool exist_state=false;
+
+    if(ifstream(filename.c_str()) || ifstream(emax_filename.c_str())){
+        exist_state=true;
+    }
+
+    return exist_state;
 }

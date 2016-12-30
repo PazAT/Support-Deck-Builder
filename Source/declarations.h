@@ -8,7 +8,6 @@
 #include <time.h>
 #include <sstream>
 
-
 #define MAXSUPPORTLEVEL 5
 #define MAXTYPES 6
 

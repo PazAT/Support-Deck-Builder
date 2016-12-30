@@ -14,10 +14,9 @@ using namespace std;
 int main(){
 
     int x,i, z=0, choice, get_skill, new_search, translator, keep_adding;
-    int effective_chars=0, using_rarity=4, path, not_done=1, is_double=0, wants_max_cost=0, user_max_cost;
+    int path, is_double=0, wants_max_cost=0, user_max_cost;
+    bool still_in_use=true, continue_with_solving;
     ifstream myfile;
-
-    srand(time(NULL));
 
     //the following four functions create the data used by the program
     create_Database(&allsupportskills, &all_cards, &unique_affiliations, &affiliation_array);
@@ -76,7 +75,7 @@ int main(){
             }
 
             if(supportdeck.number_of_skills>1){
-                cout << "\nEnforce minimum skill levels? (Yes = 1): ";
+                cout << "\n\nEnforce minimum skill levels? (Yes = 1): ";
                 cin >> choice;
 
                 supportdeck.looking_for_specific_level=1;
@@ -93,7 +92,7 @@ int main(){
                 for(z=0;z<allsupportskills.numberOfSkills;z++){
                     cout << z+1 << ") " << allsupportskills.supportskill[z].skillName << endl;
                 }
-                cout << endl << endl;
+                cout << "\n\n";
 
                 for(x=0;x<supportdeck.number_of_skills;x++){
                     do{
@@ -123,8 +122,6 @@ int main(){
                             cout << "\n\tSkill already chosen - choose a different one.\n\n";
                         }
 
-
-
                     }while(get_skill>allsupportskills.numberOfSkills || get_skill<1 || is_double==1);
 
                     supportdeck.skills_in_deck[x]=allsupportskills.supportskill[get_skill-1].skillName;
@@ -134,7 +131,7 @@ int main(){
                         cout << i+1 << ") " << allsupportskills.supportskill[get_skill-1].supportskillcard[i].rarity << "* " << allsupportskills.supportskill[get_skill-1].supportskillcard[i].charactername << "\n";
                     }
 
-                    cout << "\nIgnore any skill cards? Enter the number of those you don't want to search - enter 0 when ready to proceed:  ";
+                    cout << "\nIgnore any skill cards? Enter the index of those you don't want to search - enter 0 when ready to proceed:  ";
 
                     keep_adding=0;
 
@@ -203,61 +200,70 @@ int main(){
                     cout << "\n\n";
                 }
 
-                effective_chars=0;
+                continue_with_solving=true;
 
-                if(supportdeck.total_cards_to_use>supportdeck.number_of_skills){
-                    cout << "Enter the minimum number of matching types per card: ";
-                    cin >> supportdeck.type_threshold;
+                if(checkIfFileExists(&supportdeck,&allsupportskills)){
+                    cout << "\n\nA file containing combinations for these skills already exists.";
+                    cout << "\nRunning the solver will overwrite the exisiting file.";
+                    cout << "\n\n\tContinue with solving? (Yes = 1):  ";
+                    cin >> continue_with_solving;
 
-                    while(!(cin.good()) || supportdeck.type_threshold<0 || supportdeck.type_threshold>MAXTYPES){
-                        cout << "\nInvalid value. Enter again: ";
+                    if(!cin.good()){
                         cin.clear();
-                        cin.ignore(256, '\n');
+                        cin.ignore(256,'\n');
+                        continue_with_solving=false;
+                    }
+                }
+
+                if(continue_with_solving){
+                    if(supportdeck.total_cards_to_use>supportdeck.number_of_skills){
+                        cout << "\n\nEnter the minimum number of matching types per card: ";
                         cin >> supportdeck.type_threshold;
 
-                    }
+                        while(!(cin.good()) || supportdeck.type_threshold<0 || supportdeck.type_threshold>MAXTYPES){
+                            cout << "\nInvalid value. Enter again: ";
+                            cin.clear();
+                            cin.ignore(256, '\n');
+                            cin >> supportdeck.type_threshold;
 
-                    cout << "\nQuery through which rarity (5 4 3 2 1)? : ";
-                    cin >> using_rarity;
+                        }
 
-                    if( !(cin.good()) || using_rarity<1 || using_rarity>5){
-                        cin.clear();
-                        cin.ignore(256, '\n');
-                        using_rarity=4;
-                    }
+                        cout << "\n\nQuery through which rarity (5 4 3 2 1)? : ";
+                        cin >> supportdeck.using_rarity;
 
-                    for(i=0;i<unique_affiliations.number_of_characters;i++){
-                        if(unique_affiliations.card[i].rarity>=using_rarity){
-                            effective_chars++;
+                        if( !(cin.good()) || supportdeck.using_rarity<1 || supportdeck.using_rarity>5){
+                            cin.clear();
+                            cin.ignore(256, '\n');
+                            supportdeck.using_rarity=4;
                         }
                     }
-                }
 
-                cout << "Stop searching after a certain number of solutions? (Yes = 1):  ";
-                cin >> supportdeck.breaking_early;
+                    cout << "\n\nStop searching after a certain number of solutions? (Yes = 1):  ";
+                    cin >> supportdeck.breaking_early;
 
-                if( !(cin.good()) || supportdeck.breaking_early!=1){
-                    cin.clear();
-                    cin.ignore(256, '\n');
-                    supportdeck.breaking_early=0;
-                    supportdeck.breaking_at_solution=0;
-                }else{
-                    cout << "Search for how many solutions?:  ";
-                    cin >> supportdeck.breaking_at_solution;
-
-                    while(!(cin.good()) || supportdeck.breaking_at_solution<1){
-                        cout << "\nInvalid value. Enter again: ";
+                    if( !(cin.good()) || supportdeck.breaking_early!=1){
                         cin.clear();
                         cin.ignore(256, '\n');
+                        supportdeck.breaking_early=0;
+                        supportdeck.breaking_at_solution=0;
+                    }else{
+                        cout << "\n\tSearch for how many solutions?:  ";
                         cin >> supportdeck.breaking_at_solution;
 
+                        while(!(cin.good()) || supportdeck.breaking_at_solution<1){
+                            cout << "\nInvalid value. Enter again: ";
+                            cin.clear();
+                            cin.ignore(256, '\n');
+                            cin >> supportdeck.breaking_at_solution;
+                        }
                     }
+
+                    construct_support_deck(&supportdeck, &allsupportskills, &all_cards, &unique_affiliations);
+
                 }
 
-                construct_support_deck(&supportdeck, &allsupportskills, &all_cards, &unique_affiliations, effective_chars);
-
             }else{
-                cout << "Thanks for using the support skill optimizer!!";
+                cout << "\n\n\t\tThanks for using the support skill optimizer!!";
             }
 
         }else
@@ -268,21 +274,21 @@ int main(){
                     print_info(&allsupportskills,&all_cards);
                 }else
                     if(path==0){
-                        not_done=0;
+                        still_in_use=false;
                     }
 
         if(path!=0){
-            cout << "\n\nDo something else? (Yes = 1): ";
-            cin >> not_done;
+            cout << "\n\n\n\t\tDo something else? (Yes = 1): ";
+            cin >> still_in_use;
 
-            if( !(cin.good()) || not_done!=1){
+            if( !(cin.good())){
                 cin.clear();
                 cin.ignore(256, '\n');
-                not_done=0;
+                still_in_use=false;
             }
         }
 
-    }while(not_done==1);
+    }while(still_in_use);
 
     return 0;
 }

@@ -28,51 +28,23 @@ using namespace std;
 
 **/
 
-void construct_support_deck(SupportDeck *supportdeck, AllSupportSkills *allsupportskills, ALL_Cards *all_cards, ALL_Cards *unique_affiliations, int effective_chars){
+void construct_support_deck(SupportDeck *supportdeck, AllSupportSkills *allsupportskills, ALL_Cards *all_cards, ALL_Cards *unique_affiliations){
 
-    int i=0,k,x,y,z,m,n,j, numChars=0, entry_counter=0, base_entry_counter=0;
+    int i=0,k,x,y,z,m,n,j, effective_chars=0, numChars=0, entry_counter=0, base_entry_counter=0;
     int support_array[SUPPORTDECK], skill_card_locator[SUPPORTDECK], entry_tracker[MAXSUPPORTCARDS];
     int unique_profile_match[MAXCHARACTERS], allowed_skill_cards[SUPPORTDECK][MAXSUPPORTCARDS];
     double time_start=time(0), time_end, run_start, run_end;
     ofstream myoutput, baseoutput;
-    string filename="Output/", base_filename="Output/";
+    string filename="", base_filename="";
 
-    filename.append(numToText(supportdeck->total_cards_to_use));
-    filename.append("_card_");
+    filename=nameFile(supportdeck,allsupportskills,true);
+    base_filename=nameFile(supportdeck,allsupportskills,false);
 
-    base_filename.append(numToText(supportdeck->total_cards_to_use));
-    base_filename.append("_card_");
-
-    filename.append(allsupportskills->supportskill[supportdeck->skill_locator[0]].skillNickname);
-    base_filename.append(allsupportskills->supportskill[supportdeck->skill_locator[0]].skillNickname);
-
-    if(supportdeck->looking_for_specific_level==1 && allsupportskills->supportskill[supportdeck->skill_locator[0]].max_level!=1){
-        filename.append("_");
-        filename.append(numToText(supportdeck->skill_threshold[0]));
-
-        base_filename.append("_");
-        base_filename.append(numToText(supportdeck->skill_threshold[0]));
-    }
-
-    for(i=1;i<supportdeck->number_of_skills;i++){
-        filename.append("_");
-        base_filename.append("_");
-        filename.append(allsupportskills->supportskill[supportdeck->skill_locator[i]].skillNickname);
-        base_filename.append(allsupportskills->supportskill[supportdeck->skill_locator[i]].skillNickname);
-
-        if(supportdeck->looking_for_specific_level==1 && allsupportskills->supportskill[supportdeck->skill_locator[i]].max_level!=1){
-            filename.append("_");
-            filename.append(numToText(supportdeck->skill_threshold[i]));
-
-            base_filename.append("_");
-            base_filename.append(numToText(supportdeck->skill_threshold[i]));
+    for(i=0;i<unique_affiliations->number_of_characters;i++){
+        if(unique_affiliations->card[i].rarity>=supportdeck->using_rarity){
+            effective_chars++;
         }
     }
-
-    base_filename.append("_BASE");
-
-    filename.append(".txt");
-    base_filename.append(".txt");
 
 
     myoutput.open(filename.c_str());
@@ -503,6 +475,8 @@ void construct_support_deck(SupportDeck *supportdeck, AllSupportSkills *allsuppo
                 cout << ", level " << supportdeck->skill_threshold[i] << "\n";
             }
             cout << "\tusing " << supportdeck->total_cards_to_use << " total cards with " << supportdeck->type_threshold << " matching types.\n";
+
+            trackNoCombinations(supportdeck, allsupportskills);
         }else{
             cout << "\n\tFound " << entry_counter+base_entry_counter << " total solutions, " << entry_counter << " emax/awakened and " << base_entry_counter << " base solutions";
         }
@@ -516,5 +490,8 @@ void construct_support_deck(SupportDeck *supportdeck, AllSupportSkills *allsuppo
     }else{
         cout << "Total run time: " << difftime(time_end,time_start) << " seconds\n";
     }
+
+    deleteIfEmptyFile(myoutput,filename,entry_counter);
+    deleteIfEmptyFile(baseoutput,base_filename,base_entry_counter);
 
 }
