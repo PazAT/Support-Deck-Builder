@@ -13,6 +13,7 @@ Asajj Ventress
 Aurra Sing
 Aurra Sing [Hired Gun]
 Barriss Offee [Fallen Jedi]
+Baze Malbus
 BB-8
 Ben Kenobi
 Ben Kenobi [Jedi in Hiding]
@@ -23,6 +24,7 @@ Boba Fett [Lessons of Youth]
 Boba Fett [The Relentless Hunter]
 Bossk
 Bossk [Licensed Hunter]
+C2-B5
 C-3PO
 C-3PO & R2-D2 [May the 4th Limited Edition]
 Cad Bane
@@ -33,6 +35,7 @@ Chewbacca
 Chewbacca [A Hero Returned]
 Chewbacca [Hero of Kashyyyk]
 Chewbacca [Wookiee Warrior]
+Chirrut Îmwe
 Clone Captain Rex
 Clone Captain Rex [Phase 2]
 Clone Commander Appo
@@ -82,6 +85,7 @@ General Hux [Calculated Tactician]
 General Kalani
 General Organa
 General Veers
+Grand Admiral Thrawn
 Grand Moff Tarkin
 Grand Moff Tarkin [The Merciless]
 Han Solo
@@ -152,12 +156,14 @@ Rako Hardeen
 Rancor
 Rey
 Rey [Starkiller Base]
+Sabine Wren
 Savage Opress
 Sebulba
 Senator Palpatine
 Shaak Ti
 Shaak Ti [Tipoca Guardian]
 Shadow Trooper
+Stormtrooper
 Supreme Chancellor Palpatine
 Warrick W. Wicket
 Wedge Antilles
