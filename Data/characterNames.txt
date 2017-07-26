@@ -1,9 +1,11 @@
 Aayla Secura
 Admiral Ackbar
 Admiral Ackbar [It's A Trap]
+Admiral Trench
 Ahsoka Tano
 Ahsoka Tano [Wary Protector]
 Anakin Skywalker [Dual Wield]
+Anakin Skywalker [Fallen Knight]
 Anakin Skywalker [Jedi General]
 Anakin Skywalker [Padawan]
 Anakin Skywalker [Race of Destiny]
@@ -12,6 +14,7 @@ Anakin Skywalker [The Fallen One]
 Asajj Ventress
 Aurra Sing
 Aurra Sing [Hired Gun]
+Bail Organa
 Barriss Offee [Fallen Jedi]
 Baze Malbus
 BB-8
@@ -29,7 +32,9 @@ C-3PO
 C-3PO & R2-D2 [May the 4th Limited Edition]
 Cad Bane
 Cad Bane [Steeled Killer]
+Captain Ithano
 Captain Phasma
+Captain Phasma [For the Order]
 Cassian Andor
 Chewbacca
 Chewbacca [A Hero Returned]
@@ -39,8 +44,8 @@ Chirrut Îmwe
 Clone Captain Rex
 Clone Captain Rex [Phase 2]
 Clone Commander Appo
-Clone Commander Cody DS
-Clone Commander Cody LS
+Clone Commander Cody
+Clone Commander Cody
 Clone Commander Thire
 Darth Bane
 Darth Maul
@@ -74,6 +79,9 @@ Droideka
 Emperor Palpatine
 Emperor's Royal Guard
 Finn
+Finn [Battle of Takodana]
+First Order Flametrooper
+First Order TIE/sf Pilot
 FN-2199 "Nines"
 General Grievous
 General Grievous [Assault on Kamino]
@@ -86,12 +94,16 @@ General Kalani
 General Organa
 General Veers
 Grand Admiral Thrawn
+Grand Inquisitor
 Grand Moff Tarkin
+Grand Moff Tarkin [Ruthless Power]
 Grand Moff Tarkin [The Merciless]
+Gregor
 Han Solo
 Han Solo [Heroic Smuggler]
 Han Solo [Quick Draw]
 Han Solo [Smuggler for Hire]
+Hera Syndulla
 IG-88b
 Jabba the Hutt
 Jabba the Hutt [1st Anniversary Limited Edition]
@@ -102,6 +114,7 @@ Jango Fett [The Original Warrior]
 Jar Jar Binks
 Jar Jar Binks [Gungan Senator]
 Jyn Erso
+Kanan Jarrus
 Ki-Adi-Mundi
 Kit Fisto
 Kylo Ren
@@ -114,6 +127,7 @@ Leia Organa [1st Anniversary Limited Edition]
 Leia Organa [A Time to Strike]
 Leia Organa [Princess]
 Leia Organa [Speeder Chase]
+Lor San Tekka
 Luke Skywalker
 Luke Skywalker [Heir to an Empire]
 Luke Skywalker [Jedi in Training]
@@ -132,17 +146,21 @@ Master Yoda [Exile on Dagobah]
 Master Yoda [Reluctant General]
 Master Yoda [The Grand Master]
 Maz Kanata
+Maz Kanata [Passing a Legacy]
 Mon Mothma
+Mother Talzin
 Nute Gunray
 Obi-Wan Kenobi [Jedi Master]
 Obi-Wan Kenobi [Last of the Order]
 Obi-Wan Kenobi [Padawan]
 Obi-Wan Kenobi [Republic General]
+Obi-Wan Kenobi [The Betrayed Mentor]
 Obi-Wan Kenobi [Varactyl Cavalry]
 Padme Amidala [Final Term]
 Padme Amidala [Resourceful Senator]
 Padme Amidala [Senator at War]
 Plo Koon [Jedi Pilot]
+Poe Dameron
 Pong Krell
 Pre Vizsla
 Queen Amidala
@@ -158,15 +176,17 @@ Rey
 Rey [Starkiller Base]
 Sabine Wren
 Savage Opress
+Saw Guerra
 Sebulba
 Senator Palpatine
+Seventh Sister Inquisitor
 Shaak Ti
 Shaak Ti [Tipoca Guardian]
 Shadow Trooper
 Stormtrooper
 Supreme Chancellor Palpatine
-Warrick W. Wicket
 Wedge Antilles
+Wicket W Warrick
 Zam Wesell
 4-LOM
 Aayla Secura
@@ -191,6 +211,7 @@ Bossk
 Boushh
 Boushh [Fearless and Inventive]
 BX Droid Commando
+C1-10P "Chopper"
 C-3PO
 Captain Panaka
 Captain Phasma
@@ -209,6 +230,8 @@ Clone Commander Gree
 Clone Commander Neyo
 Clone Commander Neyo
 Clone Commander Wolffe
+Clone Paratrooper
+Clone Paratrooper
 Clone Sergeant Fox
 Combat Assault Tank Commander
 Darth Sidious
@@ -222,11 +245,14 @@ Echo
 Emperor's Royal Guard
 EV-A4-D [Mechanic]
 Finn
+First Order Snowtrooper
 First Order TIE Fighter Pilot
 Garven Dreis
 Gasgano
 General Cracken
+General Draven
 General Grievous
+General Grievous [Cunning Fighter]
 General Rieekan
 General Tagge
 General Veers
@@ -234,14 +260,18 @@ Grand Moff Tarkin
 Han Solo
 Han Solo [Back of Beyond]
 Han Solo [Double Dealer]
+Han Solo [In Carbonite]
 Hardcase
+Highsinger
 IG-86
-IG-88B
+IG-88b
+Imperial Ground Crew
 Jabba the Hutt
 Jan Dodonna
 Jango Fett
 Ki-Adi-Mundi
 Kit Fisto
+Krismo Sodi
 Kylo Ren
 Lando Calrissian
 Lando Calrissian [Palace Guard]
@@ -259,6 +289,7 @@ Mon Mothma
 Nik Sant
 Nute Gunray
 Obi-Wan Kenobi [Padawan]
+Obi-Wan Kenobi [Resourceful Jedi]
 Orn Free Taa
 Orrimaarko
 Padme Amidala [Battle of Theed]
@@ -269,7 +300,9 @@ Queen Jamillia
 R2-D2
 R2-D2 [Mechanic]
 Rancor
+Rathtar
 Rey
+Rey [The Force Stirs]
 Saesee Tiin
 San Hill
 Sandtrooper
@@ -281,6 +314,7 @@ Shadow Trooper
 Shu Mai
 Sim Aloo
 Snowtrooper
+Stormtrooper
 Supreme Chancellor Palpatine
 Tactical Droid
 Tarfful
@@ -307,6 +341,7 @@ Anakin Skywalker [Padawan]
 Anakin Skywalker [Sith]
 Aqua Droid
 ARC Trooper Colt
+Arvel Crynyd
 Asajj Ventress
 Assault Battle Droid
 AT-AT Pilot
@@ -320,6 +355,7 @@ Barriss Offee
 Barrow Oicunn
 Battle Droid Assassin
 BB-8
+Bistan
 Boba Fett
 Boba Fett [Childhood]
 Boss Nass
@@ -361,6 +397,7 @@ Dooku
 Dr. Kalonia [Healer]
 DRK-1 Dark Eye Probe Droid
 Droideka
+Emperor's Royal Guard
 EV-9D9
 Fambaa
 First Order Flametrooper
@@ -373,15 +410,18 @@ General Ceel
 General Grievous
 General Madine
 General Veers
+Gherant
 Greedo
 Han Solo [Death Star]
-IG-88B
-Jabba the Hut
+IG-88b
+Imperial Combat Assault Tank Pilot
+Jabba the Hutt
 Jango Fett
 Jar Jar Binks
 Jessika Pava
 Jocasta Nu
 K-2SO
+Kage Warrior
 Ki-Adi-Mundi
 Lachichuk
 Lama Su
@@ -438,7 +478,9 @@ Sandtrooper
 Scout Trooper & 74-Z Speeder Bike
 Security Battle Droid
 Security Soldier
+Senate Guard
 Sephjet Josall
+Shaak
 Shaak Ti
 Shoretrooper
 Sly Moore
@@ -450,6 +492,7 @@ Stormtrooper [Stun Blaster]
 Taun We
 Teebo
 Ten Numb
+Todo 360 [Mechanic]
 URoRRuR'R'R
 Viper Probe Droid
 Wam Lufba
@@ -458,7 +501,7 @@ Wat Tambor
 Watto
 Zam Wesell
 Zephee
-4-L0M
+4-LOM
 Adi Gallia
 Agen Kolar
 Anakin Skywalker
@@ -500,7 +543,7 @@ Gragra
 Grand Moff Tarkin
 Han Solo
 Horox Ryyder
-IG-88B
+IG-88b
 Jobal Naberrier
 J'Quille
 Kardue'sai'Malloc
