@@ -57,7 +57,19 @@ Follow these steps to ensure that the program will operate successfully:
 Once you start the program, I recommend you resize your command window to be at least twice as large as the default size. Sometimes the onscreen output
 will wrap around onto the next line or run off the side - if this doesn't bother you then continue.
 	
-There will be a very brief pause while the program loads and builds its databases.
+There will be a (hopefully) brief pause while the program loads and builds its databases.
+Two lines will print out: 
+		
+		"Creating database . . ."
+		"Checking for new profiles . . ."
+
+When the program loads and builds the database, it checks to see if any new card profiles were added since the last time it was run. It does
+this by comparing against a file called "Unique_Card_Affiliations.txt", located in the "UniqueProfiles" directory. If no such file exists,
+it is created. So, if you delete that file, the program will always tell you that it created new profiles.
+
+HOWEVER, if there are any missing files or issues in the data, you will instead see a line(s) informing you of the issue(s). Some issues, such
+as missing files, will cause the program to exit. Others (such as negative card cost valuess) will only generate a line warning you of the issue.
+
 Once it is complete, you will be presented with a single line of text:
 
 		"Check combinations (1) or check stats (2) or print profile info (3) or Quit (0)?:  "
