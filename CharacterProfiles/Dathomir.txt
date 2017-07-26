@@ -1,0 +1,29 @@
+Asajj Ventress
+	Rarity:  5	Cost:  36	Awakened
+
+Darth Maul
+	Rarity:  5	Cost:  18	Awakened
+
+Darth Maul [Assassin]
+	Rarity:  5	Cost:  20	Awakened
+
+Darth Maul [Malice Reborn]
+	Rarity:  5	Cost:  38	Awakened
+
+Darth Maul [Rage of the Sith]
+	Rarity:  5	Cost:  40
+
+Mother Talzin
+	Rarity:  5	Cost:  42	Awakened
+
+Savage Opress
+	Rarity:  5	Cost:  33	Awakened
+
+Asajj Ventress
+	Rarity:  3	Cost:  12	Awakened
+
+Darth Maul
+	Rarity:  3	Cost:  12
+
+Darth Maul
+	Rarity:  2	Cost:  6
