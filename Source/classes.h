@@ -101,7 +101,7 @@ struct SupportDeck{
 };
 extern SupportDeck supportdeck;
 
-void create_Database(AllSupportSkills* allsupportskills, ALL_Cards* all_cards, ALL_Cards* unique_affiliations, Affiliation_Array* affiliation_array);
+bool create_Database(AllSupportSkills* allsupportskills, ALL_Cards* all_cards, ALL_Cards* unique_affiliations, Affiliation_Array* affiliation_array);
 void create_affiliations(Affiliation_Array *affiliation_array, ALL_Cards *all_cards);
 void reset_support_deck(SupportDeck *supportdeck);
 void set_min_max_costs(ALL_Cards *all_cards, ALL_Cards *unique_cards);
@@ -135,7 +135,7 @@ void count_affiliations(ALL_Cards *all_cards, ALL_Cards *unique_affiliations, Af
 void number_of_profiles(ALL_Cards *all_cards, ALL_Cards *unique_profiles);
 void return_affiliation_numbers(ALL_Cards *all_cards, ALL_Cards *unique_profiles, int number);
 void print_rarity(ALL_Cards *all_cards, ALL_Cards *unique_affiliations);
-void count_affiliation_spread(ALL_Cards *all_cards, ALL_Cards *unique_affiliations);
+void count_affiliation_spread(ALL_Cards *all_cards);
 
 void print_skills(AllSupportSkills allsupportskills);
 void track_awaken(ALL_Cards *all_cards, ALL_Cards *unique_affiliations);

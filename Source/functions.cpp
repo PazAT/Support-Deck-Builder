@@ -15,11 +15,17 @@ ALL_Cards all_cards;
 ALL_Cards unique_affiliations;
 SupportDeck supportdeck;
 
-void create_Database(AllSupportSkills* allsupportskills, ALL_Cards* all_cards, ALL_Cards* unique_affiliations, Affiliation_Array* affiliation_array){
+bool create_Database(AllSupportSkills* allsupportskills, ALL_Cards* all_cards, ALL_Cards* unique_affiliations, Affiliation_Array* affiliation_array){
 
-    /** This function builds the structures from the text files in the "Data" directory **/
+    /**
+        This function builds the structures from the text files in the "Data" directory
+
+        If there are any issues creating the database, this function returns false, and
+        the program will exit after displaying an error message.
+    **/
 
     int x,y,z,w, none_counter=0, is_not_same_aff=0, type_counter=0;
+    bool noIssue=true;
     string placeholder, placeholder1, placeholder2, placeholder3, placeholder4;
     ifstream myfile;
 
@@ -47,15 +53,41 @@ void create_Database(AllSupportSkills* allsupportskills, ALL_Cards* all_cards, A
             allsupportskills->numberOfSkills++;
 
         }while( !(myfile.eof()) );
+
+        myfile.close();
+    }else{
+        noIssue=false;
+        cout << "\tMissing file: supportSkills.txt\n";
+        goto IssueExit;
     }
 
-    myfile.close();
+    for(int check=0;check<allsupportskills->numberOfSkills;check++){
+        if(allsupportskills->supportskill[check].skillName==""){
+            noIssue=false;
+            cout << "\tMissing support skill in database.\n";
+            cout << "\t\tCheck file \"supportSkills.txt\".\n";
+            goto IssueExit;
+        }
+
+        if(allsupportskills->supportskill[check].skillNickname==""){
+            cout << "\tWarning: skill " <<allsupportskills->supportskill[check].skillName << " has blank nickname.\n";
+            cout << "\t\tOutput files will be affected. Check file \"supportSkills.txt\".\n";
+        }
+    }
 
     myfile.open("Data/supportSkillLevels.txt");
 
     if(myfile.is_open()){
         for(x=0;x<allsupportskills->numberOfSkills;x++){
             myfile >> allsupportskills->supportskill[x].max_level >> allsupportskills->supportskill[x].numberOfCards;
+            if(allsupportskills->supportskill[x].max_level<0){
+                noIssue=false;
+                cout << "\t\tMax level for skill ";
+                cout << allsupportskills->supportskill[x].skillName << " ";
+                cout << "set to negative.\n";
+                cout << "\t\tCheck file \"supportSkillLevels.txt\".\n";
+                goto IssueExit;
+            }
             for(y=0;y<allsupportskills->supportskill[x].numberOfCards;y++){
                 allsupportskills->supportskill[x].supportskillcard[y].skillcard_ID=y;
                 for(z=0;z<allsupportskills->supportskill[x].max_level;z++){
@@ -66,9 +98,22 @@ void create_Database(AllSupportSkills* allsupportskills, ALL_Cards* all_cards, A
             }
 
         }
+
+        myfile.close();
+    }else{
+        noIssue=false;
+        cout << "\tMissing file: supportSkillLevels.txt.\n";
+        goto IssueExit;
     }
 
-    myfile.close();
+    for(int check=0;check<allsupportskills->numberOfSkills;check++){
+        if(allsupportskills->supportskill[check].numberOfCards==0){
+            cout <<"\tWarning: number of cards for skill ";
+            cout << allsupportskills->supportskill[check].skillName << " ";
+            cout << "is set to 0.\n";
+            cout << "\t\tCheck file \"supportSkillLevels.txt\" for possible errors.\n";
+        }
+    }
 
     myfile.open("Data/supportCards.txt");
 
@@ -109,9 +154,12 @@ void create_Database(AllSupportSkills* allsupportskills, ALL_Cards* all_cards, A
             }
 
         }
+        myfile.close();
+    }else{
+        noIssue=false;
+        cout << "\tMissing file: supportCards.txt\n";
+        goto IssueExit;
     }
-
-    myfile.close();
 
     myfile.open("Data/cardTypes.txt");
 
@@ -126,8 +174,21 @@ void create_Database(AllSupportSkills* allsupportskills, ALL_Cards* all_cards, A
             affiliation_array->affiliation[affiliation_array->number_of_affiliations].type_value=pow(2,affiliation_array->number_of_affiliations);
             affiliation_array->number_of_affiliations++;
         }while( !(myfile.eof()) );
+
+        myfile.close();
+    }else{
+        noIssue=false;
+        cout << "\tMissing file: cardTypes.txt\n";
+        goto IssueExit;
     }
-    myfile.close();
+
+    for(int check=0;check<affiliation_array->number_of_affiliations;check++){
+        if(affiliation_array->affiliation[check].aff_name==""){
+            noIssue=false;
+            cout << "\tMissing affiliation name.\n";
+            goto IssueExit;
+        }
+    }
 
     all_cards->number_of_characters=0;
     unique_affiliations->number_of_characters=0;
@@ -144,9 +205,21 @@ void create_Database(AllSupportSkills* allsupportskills, ALL_Cards* all_cards, A
             all_cards->number_of_characters++;
 
         }while( !(myfile.eof()) );
+
+        myfile.close();
+    }else{
+        noIssue=false;
+        cout << "\tMissing file: characterNames.txt\n";
+        goto IssueExit;
     }
 
-    myfile.close();
+    for(int check=0;check<all_cards->number_of_characters;check++){
+        if(all_cards->card[check].name==""){
+            noIssue=false;
+            cout << "\tMissing character name in database (line " <<check+1<<").\n";
+            goto IssueExit;
+        }
+    }
 
     myfile.open("Data/numericTypes.txt");
 
@@ -192,92 +265,115 @@ void create_Database(AllSupportSkills* allsupportskills, ALL_Cards* all_cards, A
                 }
             }
         }
+
+        myfile.close();
+    }else{
+        noIssue=false;
+        cout << "\tMissing file: numericTypes.txt\n";
+        goto IssueExit;
     }
 
-    myfile.close();
+    for(int check=0;check<all_cards->number_of_characters;check++){
+        if(all_cards->card[check].rarity<1){
+            noIssue=false;
+            cout << "\tCard index " <<check+1<< " has incorrect rarity value.\n";
+            cout << "\t\tCheck file \"numericTypes.txt\".\n";
+            goto IssueExit;
+        }
 
-    create_affiliations(affiliation_array, all_cards);
-    create_affiliations(affiliation_array,unique_affiliations);
-
-    for(x=0;x<all_cards->number_of_characters;x++){
-        all_cards->card[x].num_profiles_exact=0;
-        all_cards->card[x].num_profiles_at_least=0;
-        all_cards->card[x].num_profiles_awakened_exact=0;
-        all_cards->card[x].num_profiles_awakened_at_least=0;
-    }
-
-    for(x=0;x<unique_affiliations->number_of_characters;x++){
-        unique_affiliations->card[x].num_profiles_exact=0;
-        unique_affiliations->card[x].num_profiles_awakened_exact=0;
-        unique_affiliations->card[x].num_profiles_at_least=0;
-        unique_affiliations->card[x].num_profiles_awakened_at_least=0;
-    }
-
-    for(x=0;x<unique_affiliations->number_of_characters;x++){
-        for(y=0;y<all_cards->number_of_characters;y++){
-            if( (all_cards->card[y].rarity==unique_affiliations->card[x].rarity) && (all_cards->card[y].affiliation_sum==unique_affiliations->card[x].affiliation_sum) ){
-                unique_affiliations->card[x].num_profiles_exact++;
-            }else
-                if(all_cards->card[y].rarity==unique_affiliations->card[x].rarity){
-                    type_counter=0;
-
-                    for(z=0;z<unique_affiliations->card[x].number_of_types;z++){
-                        for(w=0;w<all_cards->card[y].number_of_types;w++){
-                            if(all_cards->card[y].cardtype[w].affiliation==unique_affiliations->card[x].cardtype[z].affiliation){
-                                type_counter++;
-                            }
-                        }
-                    }
-
-                    if(type_counter==unique_affiliations->card[x].number_of_types){
-                        unique_affiliations->card[x].num_profiles_at_least++;
-                    }
-                }
-
-            if( (all_cards->card[y].rarity==unique_affiliations->card[x].rarity) && (all_cards->card[y].affiliation_sum==unique_affiliations->card[x].affiliation_sum) && (all_cards->card[y].is_awakened==1) ) {
-                unique_affiliations->card[x].num_profiles_awakened_exact++;
-            }else
-                if( (unique_affiliations->card[x].rarity==all_cards->card[y].rarity) && (all_cards->card[y].is_awakened==1) ) {
-                    type_counter=0;
-
-                    for(z=0;z<unique_affiliations->card[x].number_of_types;z++){
-                        for(w=0;w<all_cards->card[y].number_of_types;w++){
-                            if(all_cards->card[y].cardtype[w].affiliation==unique_affiliations->card[x].cardtype[z].affiliation){
-                                type_counter++;
-                            }
-                        }
-                    }
-
-                    if(type_counter==unique_affiliations->card[x].number_of_types){
-                        unique_affiliations->card[x].num_profiles_awakened_at_least++;
-                    }
-                }
+        if(all_cards->card[check].cost<0){
+            cout << "\tWarning: card index " <<check+1<< " has improper cost value (" <<all_cards->card[check].cost<<").\n";
+            cout << "\t\tCheck file \"numericTypes.txt\".\n";
         }
     }
 
-    for(x=0;x<all_cards->number_of_characters;x++){
-        all_cards->card[x].has_skill=false;
-        all_cards->card[x].skill_ID=0;
-        all_cards->card[x].skillcard_ID=0;
-        all_cards->card[x].skillname="None";
-    }
+    if(noIssue){
+        create_affiliations(affiliation_array, all_cards);
+        create_affiliations(affiliation_array,unique_affiliations);
 
-    for(x=0;x<allsupportskills->numberOfSkills;x++){
-        for(y=0;y<allsupportskills->supportskill[x].numberOfCards;y++){
-            for(z=0;z<all_cards->number_of_characters;z++){
-                if(allsupportskills->supportskill[x].supportskillcard[y].charactername==all_cards->card[z].name && allsupportskills->supportskill[x].supportskillcard[y].rarity==all_cards->card[z].rarity){
-                    allsupportskills->supportskill[x].supportskillcard[y].card_ID=all_cards->card[z].card_ID;
-                    all_cards->card[z].skill_ID=x;
-                    all_cards->card[z].skillcard_ID=y;
-                    all_cards->card[z].skillname=allsupportskills->supportskill[x].skillName;
-                    all_cards->card[z].has_skill=true;
-                    allsupportskills->supportskill[x].supportskillcard[y].cost=all_cards->card[z].cost;
+        for(x=0;x<all_cards->number_of_characters;x++){
+            all_cards->card[x].num_profiles_exact=0;
+            all_cards->card[x].num_profiles_at_least=0;
+            all_cards->card[x].num_profiles_awakened_exact=0;
+            all_cards->card[x].num_profiles_awakened_at_least=0;
+        }
+
+        for(x=0;x<unique_affiliations->number_of_characters;x++){
+            unique_affiliations->card[x].num_profiles_exact=0;
+            unique_affiliations->card[x].num_profiles_awakened_exact=0;
+            unique_affiliations->card[x].num_profiles_at_least=0;
+            unique_affiliations->card[x].num_profiles_awakened_at_least=0;
+        }
+
+        for(x=0;x<unique_affiliations->number_of_characters;x++){
+            for(y=0;y<all_cards->number_of_characters;y++){
+                if( (all_cards->card[y].rarity==unique_affiliations->card[x].rarity) && (all_cards->card[y].affiliation_sum==unique_affiliations->card[x].affiliation_sum) ){
+                    unique_affiliations->card[x].num_profiles_exact++;
+                }else
+                    if(all_cards->card[y].rarity==unique_affiliations->card[x].rarity){
+                        type_counter=0;
+
+                        for(z=0;z<unique_affiliations->card[x].number_of_types;z++){
+                            for(w=0;w<all_cards->card[y].number_of_types;w++){
+                                if(all_cards->card[y].cardtype[w].affiliation==unique_affiliations->card[x].cardtype[z].affiliation){
+                                    type_counter++;
+                                }
+                            }
+                        }
+
+                        if(type_counter==unique_affiliations->card[x].number_of_types){
+                            unique_affiliations->card[x].num_profiles_at_least++;
+                        }
+                    }
+
+                if( (all_cards->card[y].rarity==unique_affiliations->card[x].rarity) && (all_cards->card[y].affiliation_sum==unique_affiliations->card[x].affiliation_sum) && (all_cards->card[y].is_awakened==1) ) {
+                    unique_affiliations->card[x].num_profiles_awakened_exact++;
+                }else
+                    if( (unique_affiliations->card[x].rarity==all_cards->card[y].rarity) && (all_cards->card[y].is_awakened==1) ) {
+                        type_counter=0;
+
+                        for(z=0;z<unique_affiliations->card[x].number_of_types;z++){
+                            for(w=0;w<all_cards->card[y].number_of_types;w++){
+                                if(all_cards->card[y].cardtype[w].affiliation==unique_affiliations->card[x].cardtype[z].affiliation){
+                                    type_counter++;
+                                }
+                            }
+                        }
+
+                        if(type_counter==unique_affiliations->card[x].number_of_types){
+                            unique_affiliations->card[x].num_profiles_awakened_at_least++;
+                        }
+                    }
+            }
+        }
+
+        for(x=0;x<all_cards->number_of_characters;x++){
+            all_cards->card[x].has_skill=false;
+            all_cards->card[x].skill_ID=0;
+            all_cards->card[x].skillcard_ID=0;
+            all_cards->card[x].skillname="None";
+        }
+
+        for(x=0;x<allsupportskills->numberOfSkills;x++){
+            for(y=0;y<allsupportskills->supportskill[x].numberOfCards;y++){
+                for(z=0;z<all_cards->number_of_characters;z++){
+                    if(allsupportskills->supportskill[x].supportskillcard[y].charactername==all_cards->card[z].name && allsupportskills->supportskill[x].supportskillcard[y].rarity==all_cards->card[z].rarity){
+                        allsupportskills->supportskill[x].supportskillcard[y].card_ID=all_cards->card[z].card_ID;
+                        all_cards->card[z].skill_ID=x;
+                        all_cards->card[z].skillcard_ID=y;
+                        all_cards->card[z].skillname=allsupportskills->supportskill[x].skillName;
+                        all_cards->card[z].has_skill=true;
+                        allsupportskills->supportskill[x].supportskillcard[y].cost=all_cards->card[z].cost;
+                    }
                 }
             }
         }
+
+        set_min_max_costs(all_cards, unique_affiliations);
     }
 
-    set_min_max_costs(all_cards, unique_affiliations);
+    IssueExit:;
+    return noIssue;
 
 }
 
@@ -1610,14 +1706,14 @@ void checkForNewProfiles(ALL_Cards *unique_affiliations){
 
                 if(profile!=TEMPprofile){
                     newProfile=true;
-                    cout << "\tNew profile(s) found (compare).\n\n";
+                    cout << "\tNew profile(s) found.\n\n";
                     break;
                 }
             }
 
             if(card_profiles_IN.eof() && !TEMP_card_profiles_IN.eof()){
                 newProfile=true;
-                cout << "\tNew profile(s) found (eof).\n\n";
+                cout << "\tNew profile(s) found.\n\n";
             }
 
             card_profiles_IN.close();
@@ -1666,6 +1762,8 @@ void checkForNewProfiles(ALL_Cards *unique_affiliations){
                 card_profiles_OUT.close();
 
                 cout << newprofile_counter-oldprofile_counter << " new profiles found.\n\n";
+            }else{
+                cout << "No new profiles found.\n\n";
             }
 
             remove(TEMPfilename.c_str());

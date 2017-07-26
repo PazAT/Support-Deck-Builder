@@ -226,7 +226,7 @@ void track_awaken(ALL_Cards *all_cards, ALL_Cards *unique_affiliations){
 }
 
 
-void count_affiliation_spread(ALL_Cards *all_cards, ALL_Cards *unique_affiliations){
+void count_affiliation_spread(ALL_Cards *all_cards){
 
     /**
         This function produces one output text file to the "UniqueProfiles" directory:
@@ -268,9 +268,9 @@ void count_affiliation_spread(ALL_Cards *all_cards, ALL_Cards *unique_affiliatio
     if(myoutput.is_open()==true){
         for(i=0;i<sum_array_size;i++){
             if(sum_array[i][1]==1){
-                myoutput << "There is " << sum_array[i][1] << " character card whom is exactly: ";
+                myoutput << "There is " << sum_array[i][1] << " character card which is exactly: ";
             }else{
-                myoutput << "There are " << sum_array[i][1] << " character cards who are exactly: ";
+                myoutput << "There are " << sum_array[i][1] << " character cards which are exactly: ";
             }
 
             for(j=0;j<all_cards->card[sum_array[i][2]].number_of_types;j++){
@@ -567,7 +567,7 @@ void check_stats(ALL_Cards *all_cards, ALL_Cards *unique_cards, Affiliation_Arra
                             count_affiliations(all_cards,unique_cards,&aff_counter);
                         }else
                             if(choice==6){
-                                count_affiliation_spread(all_cards, unique_cards);
+                                count_affiliation_spread(all_cards);
                             }else
                                 if(choice==7){
                                     print_skills(*allsupportskills);
