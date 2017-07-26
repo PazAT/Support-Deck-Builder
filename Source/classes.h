@@ -1,3 +1,8 @@
+#ifndef CLASSES_H
+#define CLASSES_H
+
+#include "declarations.h"
+
 /**
     Here are the structures and function prototypes used for the entire program.
 **/
@@ -143,3 +148,7 @@ void deleteIfEmptyFile(ofstream &outputfile, string filename, int combinationCou
 void trackNoCombinations(SupportDeck *supportdeck, AllSupportSkills *allskills);
 string nameFile(SupportDeck *supportdeck, AllSupportSkills *allsupportskills, bool emax);
 bool checkIfFileExists(SupportDeck *supportdeck, AllSupportSkills *allsupportskills);
+void checkForNewProfiles(ALL_Cards *unique_affilitations);
+
+#endif
+//end CLASSES_H

@@ -1,6 +1,5 @@
 using namespace std;
 
-#include "declarations.h"
 #include "classes.h"
 
 /**
@@ -230,18 +229,15 @@ void track_awaken(ALL_Cards *all_cards, ALL_Cards *unique_affiliations){
 void count_affiliation_spread(ALL_Cards *all_cards, ALL_Cards *unique_affiliations){
 
     /**
-        This function produces two output text files to the "UniqueProfiles" directory.
-            1) "unique_profile_dist.txt"
+        This function produces one output text file to the "UniqueProfiles" directory:
+            "unique_profile_dist.txt"
                 -Counts how many cards possess each unique affiliation profile
-            2) "Unique_Cards_Affiliations.txt"
-                -Prints out all the unique affiliation profiles by rarity
-                -so for example, it would mark individual entries for (4* Beast) and (3* Beast)
     **/
 
     int i,j,x,y, sum_tracker, sum_array_size=0;
     unsigned long int sum_array[MAXCHARACTERS][3];
 
-    ofstream myoutput, card_profiles;
+    ofstream myoutput;
 
     sum_array[0][0]=all_cards->card[0].affiliation_sum;
     sum_array[0][1]=1;
@@ -291,23 +287,6 @@ void count_affiliation_spread(ALL_Cards *all_cards, ALL_Cards *unique_affiliatio
 
         myoutput.close();
     }
-
-    card_profiles.open("UniqueProfiles/Unique_Card_Affiliations.txt");
-
-    for(x=0;x<unique_affiliations->number_of_characters;x++){
-        card_profiles << unique_affiliations->card[x].rarity << "*  ";
-        for(y=0;y<unique_affiliations->card[x].number_of_types;y++){
-            card_profiles << unique_affiliations->card[x].cardtype[y].affiliation;
-            if(y+1<unique_affiliations->card[x].number_of_types){
-                card_profiles << ",  ";
-            }
-        }
-        if(x+1<unique_affiliations->number_of_characters){
-            card_profiles << "\n";
-        }
-    }
-
-    card_profiles.close();
 
     cout << "\n\n\tAffiliation distributions printed to folder 'UniqueProfiles'\n";
 }

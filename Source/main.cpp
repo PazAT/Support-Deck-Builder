@@ -1,6 +1,5 @@
 using namespace std;
 
-#include "declarations.h"
 #include "classes.h"
 
 /**
@@ -20,6 +19,9 @@ int main(){
 
     //the following four functions create the data used by the program
     create_Database(&allsupportskills, &all_cards, &unique_affiliations, &affiliation_array);
+
+    //check if any new profiles exist
+    checkForNewProfiles(&unique_affiliations);
 
     do{
         cout << "Check combinations (1) or check stats (2) or print profile info (3) or Quit (0)? :  ";
@@ -217,7 +219,7 @@ int main(){
 
                 if(continue_with_solving){
                     if(supportdeck.total_cards_to_use>supportdeck.number_of_skills){
-                        cout << "\n\nEnter the minimum number of matching types per card: ";
+                        cout << "Enter the minimum number of matching types per card: ";
                         cin >> supportdeck.type_threshold;
 
                         while(!(cin.good()) || supportdeck.type_threshold<0 || supportdeck.type_threshold>MAXTYPES){
@@ -287,6 +289,8 @@ int main(){
                 still_in_use=false;
             }
         }
+
+        cout << "\n\n";
 
     }while(still_in_use);
 

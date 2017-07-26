@@ -1,3 +1,6 @@
+#ifndef DECLARATIONS_H
+#define DECLARATIONS_H
+
 #include <iostream>
 #include <string>
 #include <math.h>
@@ -17,3 +20,5 @@
 const int MAXCHARACTERS = 1000;
 const int MAXAFFILIATIONS = 35;
 const int MAXSUPPORT = 20;
+
+#endif // DECLARATIONS_H

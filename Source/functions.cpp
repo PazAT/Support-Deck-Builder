@@ -1,6 +1,5 @@
 using namespace std;
 
-#include "declarations.h"
 #include "classes.h"
 
 /**
@@ -54,7 +53,7 @@ void create_Database(AllSupportSkills* allsupportskills, ALL_Cards* all_cards, A
 
     myfile.open("Data/supportSkillLevels.txt");
 
-    if(myfile.is_open()==true){
+    if(myfile.is_open()){
         for(x=0;x<allsupportskills->numberOfSkills;x++){
             myfile >> allsupportskills->supportskill[x].max_level >> allsupportskills->supportskill[x].numberOfCards;
             for(y=0;y<allsupportskills->supportskill[x].numberOfCards;y++){
@@ -1151,16 +1150,22 @@ void print_locations(AllSupportSkills *allsupportskill, SupportDeck *supportdeck
 
     /** Prints to the screen which cards are being searched and what number they are out of the total cards with that skill **/
 
-    int i;
+    int i, linewidth=75;
 
-    cout << setfill('-') << setw(50) << "-" << "\n\n";
+    cout << setfill('-') << setw(linewidth) << "-" << "\n\n";
+
+    cout << "checking\n";
 
     for(i=0;i<supportdeck->number_of_skills;i++){
-        cout << "checking skill card " << i+1 << ", " << skl_cd_loc[i]+1 << "/" << allsupportskill->supportskill[supportdeck->skill_locator[i]].numberOfCards;
-        cout << ", " << allsupportskill->supportskill[supportdeck->skill_locator[i]].supportskillcard[skl_cd_loc[i]].charactername << "\n\n";
+        cout << "\n\t" << allsupportskill->supportskill[supportdeck->skill_locator[i]].skillName << ", ";
+        cout << allsupportskill->supportskill[supportdeck->skill_locator[i]].supportskillcard[skl_cd_loc[i]].charactername;
+        cout << " (" << skl_cd_loc[i]+1 << "/" << allsupportskill->supportskill[supportdeck->skill_locator[i]].numberOfCards << ")";
+        cout << "\n";
     }
 
-    cout << setfill('-') << setw(50) << "-" << "\n\n";
+    cout << "\n";
+
+    cout << setfill('-') << setw(linewidth) << "-" << "\n\n";
 
 }
 
@@ -1523,4 +1528,148 @@ bool checkIfFileExists(SupportDeck *supportdeck, AllSupportSkills *allsupportski
     }
 
     return exist_state;
+}
+
+void checkForNewProfiles(ALL_Cards *unique_affiliations){
+
+    /**
+        Checks to see if any new profiles exist in your database.
+        Runs after the database is created. If there are any new
+        profiles found, then they are printed out the "UniqueProfiles"
+        directory, in the file "Unique_Card_Affiliations.txt". The format
+        is the following:
+            -Prints out all the unique affiliation profiles grouped by rarity
+            -example, it would mark individual entries for (4* Beast) and (3* Beast)
+    **/
+
+    int x,y;
+
+    string filename="UniqueProfiles/Unique_Card_Affiliations.txt", otherdummy;
+    ifstream card_profiles_IN;
+
+    card_profiles_IN.open(filename.c_str());
+
+    if(!card_profiles_IN.is_open()){
+        cout << "No previous profile data found.\n";
+        cout << "\tCreating profiles now.\n\n";
+
+        card_profiles_IN.close();
+        ofstream card_profiles_OUT;
+
+        card_profiles_OUT.open(filename.c_str());
+
+         for(x=0;x<unique_affiliations->number_of_characters;x++){
+            card_profiles_OUT << unique_affiliations->card[x].rarity << "*  ";
+            for(y=0;y<unique_affiliations->card[x].number_of_types;y++){
+                card_profiles_OUT << unique_affiliations->card[x].cardtype[y].affiliation;
+                if(y+1<unique_affiliations->card[x].number_of_types){
+                    card_profiles_OUT << ",  ";
+                }
+            }
+            if(x+1<unique_affiliations->number_of_characters){
+                card_profiles_OUT << "\n";
+            }
+        }
+
+        card_profiles_OUT.close();
+
+        cout << unique_affiliations->number_of_characters << " unique profiles created.\n\n";
+
+    }else{
+        string TEMPfilename = "UniqueProfiles/Unique_Card_Affiliations_TEMP.txt";
+        ofstream TEMP_card_profiles_OUT;
+
+        TEMP_card_profiles_OUT.open(TEMPfilename.c_str());
+
+        if(TEMP_card_profiles_OUT.is_open()){
+            for(x=0;x<unique_affiliations->number_of_characters;x++){
+                TEMP_card_profiles_OUT << unique_affiliations->card[x].rarity << "*  ";
+                for(y=0;y<unique_affiliations->card[x].number_of_types;y++){
+                    TEMP_card_profiles_OUT << unique_affiliations->card[x].cardtype[y].affiliation;
+                    if(y+1<unique_affiliations->card[x].number_of_types){
+                        TEMP_card_profiles_OUT << ",  ";
+                    }
+                }
+                if(x+1<unique_affiliations->number_of_characters){
+                    TEMP_card_profiles_OUT << "\n";
+                }
+            }
+
+            TEMP_card_profiles_OUT.close();
+
+            ifstream TEMP_card_profiles_IN;
+
+            TEMP_card_profiles_IN.open(TEMPfilename.c_str());
+
+            string profile, TEMPprofile;
+            bool newProfile=false;
+
+            while(!card_profiles_IN.eof()){
+                getline(card_profiles_IN,profile,'\n');
+                getline(TEMP_card_profiles_IN,TEMPprofile,'\n');
+
+                if(profile!=TEMPprofile){
+                    newProfile=true;
+                    cout << "\tNew profile(s) found (compare).\n\n";
+                    break;
+                }
+            }
+
+            if(card_profiles_IN.eof() && !TEMP_card_profiles_IN.eof()){
+                newProfile=true;
+                cout << "\tNew profile(s) found (eof).\n\n";
+            }
+
+            card_profiles_IN.close();
+            TEMP_card_profiles_IN.close();
+
+            if(newProfile){
+
+                int oldprofile_counter=0, newprofile_counter=0;
+
+                string dummy;
+
+                card_profiles_IN.open(filename.c_str());
+                while(!card_profiles_IN.eof()){
+                    getline(card_profiles_IN,dummy,'\n');
+                    oldprofile_counter++;
+                }
+                card_profiles_IN.close();
+
+                TEMP_card_profiles_IN.open(TEMPfilename.c_str());
+                while(!TEMP_card_profiles_IN.eof()){
+                    getline(TEMP_card_profiles_IN,dummy,'\n');
+                    newprofile_counter++;
+                }
+                TEMP_card_profiles_IN.close();
+
+                remove(filename.c_str());
+
+                ofstream card_profiles_OUT;
+
+                card_profiles_OUT.open(filename.c_str());
+
+                for(x=0;x<unique_affiliations->number_of_characters;x++){
+                    card_profiles_OUT << unique_affiliations->card[x].rarity << "*  ";
+                    for(y=0;y<unique_affiliations->card[x].number_of_types;y++){
+                        card_profiles_OUT << unique_affiliations->card[x].cardtype[y].affiliation;
+                        if(y+1<unique_affiliations->card[x].number_of_types){
+                            card_profiles_OUT << ",  ";
+                        }
+                    }
+
+                    if(x+1<unique_affiliations->number_of_characters){
+                        card_profiles_OUT << "\n";
+                    }
+                }
+
+                card_profiles_OUT.close();
+
+                cout << newprofile_counter-oldprofile_counter << " new profiles found.\n\n";
+            }
+
+            remove(TEMPfilename.c_str());
+
+        }
+    }
 }
