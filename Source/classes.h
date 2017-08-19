@@ -7,13 +7,6 @@
     Here are the structures and function prototypes used for the entire program.
 **/
 
-struct CardType{
-
-    string affiliation;
-
-};
-extern CardType cardtype;
-
 struct Card{
 
     int number_of_types, evo_level, rarity, is_awakened, card_ID, skill_ID, skillcard_ID;
@@ -22,15 +15,15 @@ struct Card{
     double cost, min_cost, max_cost;
     string name, skillname;
     bool has_skill;
-    CardType cardtype[MAXTYPES];
+    vector<string> cardtypes;
 
 };
 extern Card card;
 
 struct ALL_Cards{
 
-    Card card[MAXCHARACTERS];
-    int number_of_characters;
+    vector<Card> card;
+    int number_of_characters, max_affiliations, max_rarity, min_rarity;
 };
 extern ALL_Cards all_cards;
 extern ALL_Cards unique_affiliations;
@@ -45,11 +38,11 @@ extern SupportSkillReqs supportskillreqs;
 
 struct SupportSkillCard{
 
-    CardType types_needed[MAXAFFILIATIONS];
+    vector<string> types_needed;
     string charactername;
     int current_level, numTypeReq, skillcard_ID, card_ID;
     double rarity, cost;
-    SupportSkillReqs supportskillreqs[MAXSUPPORTLEVEL];
+    vector<SupportSkillReqs> supportskillreqs;
 
 };
 extern SupportSkillCard supportskillcard;
@@ -58,14 +51,14 @@ struct SupportSkill{
 
     string skillName, skillNickname;
     int max_level, numberOfCards, skill_ID;
-    SupportSkillCard supportskillcard[MAXSUPPORTCARDS];
+    vector<SupportSkillCard> supportskillcard;
 
 };
 extern SupportSkill supportskill;
 
 struct AllSupportSkills{
 
-    SupportSkill supportskill[MAXSUPPORT];
+    vector<SupportSkill> supportskill;
     int numberOfSkills;
 
 };
@@ -81,7 +74,7 @@ extern Affiliation affiliation;
 
 struct Affiliation_Array{
 
-    Affiliation affiliation[MAXAFFILIATIONS];
+    vector<Affiliation> affiliation;
     int number_of_affiliations;
 };
 extern Affiliation_Array affiliation_array;
@@ -89,8 +82,8 @@ extern Affiliation_Array aff_counter;
 
 struct SupportDeck{
 
-    CardType required_types[MAXAFFILIATIONS];
-    Affiliation current_types[MAXAFFILIATIONS], current_base_types[MAXAFFILIATIONS];
+    vector<string> required_types;
+    vector<Affiliation> current_types, current_base_types;
     string skills_in_deck[SUPPORTDECK];
     int skill_locator[SUPPORTDECK], card_locator[SUPPORTDECK], skill_threshold[SUPPORTDECK];
     int number_of_skills, types_needed, numTypes_in_deck, bases_only, type_threshold, user_set_max_cost;
@@ -116,7 +109,7 @@ int get_numTypes_needed(AllSupportSkills *allsupportskills, SupportDeck *support
 int get_skill_match(ALL_Cards *all_cards, SupportDeck *supportdeck , int INDEX);
 double awaken_bonus(ALL_Cards *unique_cards, int index);
 void update_card_profiles(ALL_Cards all_card, ALL_Cards unique_afilliations, int size_of_tracker);
-int filter_unique_profiles(ALL_Cards *unique_profiles, SupportDeck *supportdeck, int unique_match_id[MAXCHARACTERS], int size_of_tracker);
+int filter_unique_profiles(ALL_Cards *unique_profiles, SupportDeck *supportdeck, vector<int> *unique_match_id, int size_of_tracker);
 void print_locations(AllSupportSkills *allsupportskill, SupportDeck *supportdeck, int skl_cd_loc[SUPPORTDECK]);
 
 void reset_types_in_deck(SupportDeck *supportdeck);
@@ -127,7 +120,7 @@ void filter_allowed_skill_cards(SupportDeck *supportdeck, AllSupportSkills *alls
 
 double get_min_cost(ALL_Cards *all_cards, ALL_Cards *unique_cards, int totalcards, int support_array[SUPPORTDECK], int numSkills);
 double get_max_cost(ALL_Cards *all_cards, ALL_Cards *unique_cards, int totalcards, int support_array[SUPPORTDECK], int numSkills);
-void presearch_config(AllSupportSkills *allsupportskills, ALL_Cards *unique_affiliations, SupportDeck *supportdeck, int skill_card_locator[SUPPORTDECK], int effective_chars, int unique_profile_match[MAXCHARACTERS], int &numChars);
+void presearch_config(AllSupportSkills *allsupportskills, ALL_Cards *unique_affiliations, SupportDeck *supportdeck, int skill_card_locator[SUPPORTDECK], int effective_chars, vector<int> *unique_profile_match, int &numChars);
 void find_combinations(SupportDeck *supportdeck, ALL_Cards *all_cards, ALL_Cards *unique_affiliations, AllSupportSkills *allsupportskills, int support_array[SUPPORTDECK], int skill_card_locator[SUPPORTDECK], int &entry_counter, int &base_entry_counter, int entry_tracker[MAXSUPPORTCARDS], int index, ofstream &myoutput, ofstream &baseoutput);
 
 
@@ -149,6 +142,8 @@ void trackNoCombinations(SupportDeck *supportdeck, AllSupportSkills *allskills);
 string nameFile(SupportDeck *supportdeck, AllSupportSkills *allsupportskills, bool emax);
 bool checkIfFileExists(SupportDeck *supportdeck, AllSupportSkills *allsupportskills);
 void checkForNewProfiles(ALL_Cards *unique_affilitations);
+
+int StringToInt(const string &StringText);
 
 #endif
 //end CLASSES_H

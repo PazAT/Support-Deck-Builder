@@ -39,20 +39,21 @@ bool create_Database(AllSupportSkills* allsupportskills, ALL_Cards* all_cards, A
             getline(myfile,placeholder1,'\n');
             char *charholder = new char[placeholder1.length()+1];
             strcpy(charholder, placeholder1.c_str());
-            allsupportskills->supportskill[allsupportskills->numberOfSkills].skillName=charholder;
+            allsupportskills->supportskill.push_back(SupportSkill());
+            allsupportskills->supportskill[allsupportskills->supportskill.size()-1].skillName=charholder;
             delete charholder;
 
             getline(myfile,placeholder1,'\n');
             char *charholder_2 = new char[placeholder1.length()+1];
             strcpy(charholder_2, placeholder1.c_str());
-            allsupportskills->supportskill[allsupportskills->numberOfSkills].skillNickname=charholder_2;
+            allsupportskills->supportskill[allsupportskills->supportskill.size()-1].skillNickname=charholder_2;
             delete charholder_2;
 
-            allsupportskills->supportskill[allsupportskills->numberOfSkills].skill_ID=allsupportskills->numberOfSkills;
-
-            allsupportskills->numberOfSkills++;
+            allsupportskills->supportskill[allsupportskills->supportskill.size()-1].skill_ID=allsupportskills->supportskill.size()-1;
 
         }while( !(myfile.eof()) );
+
+        allsupportskills->numberOfSkills=allsupportskills->supportskill.size();
 
         myfile.close();
     }else{
@@ -89,8 +90,10 @@ bool create_Database(AllSupportSkills* allsupportskills, ALL_Cards* all_cards, A
                 goto IssueExit;
             }
             for(y=0;y<allsupportskills->supportskill[x].numberOfCards;y++){
+                allsupportskills->supportskill[x].supportskillcard.push_back(SupportSkillCard());
                 allsupportskills->supportskill[x].supportskillcard[y].skillcard_ID=y;
                 for(z=0;z<allsupportskills->supportskill[x].max_level;z++){
+                    allsupportskills->supportskill[x].supportskillcard[y].supportskillreqs.push_back(SupportSkillReqs());
                     allsupportskills->supportskill[x].supportskillcard[y].supportskillreqs[z].level=z+1;
                     myfile >> allsupportskills->supportskill[x].supportskillcard[y].supportskillreqs[z].typereq;
                 }
@@ -135,13 +138,13 @@ bool create_Database(AllSupportSkills* allsupportskills, ALL_Cards* all_cards, A
                 strcpy(charholder4,placeholder4.c_str());
 
                 allsupportskills->supportskill[y].supportskillcard[x].charactername=charholder1;
-                allsupportskills->supportskill[y].supportskillcard[x].types_needed[0].affiliation=charholder2;
-                allsupportskills->supportskill[y].supportskillcard[x].types_needed[1].affiliation=charholder3;
-                allsupportskills->supportskill[y].supportskillcard[x].types_needed[2].affiliation=charholder4;
+                allsupportskills->supportskill[y].supportskillcard[x].types_needed.push_back(charholder2);
+                allsupportskills->supportskill[y].supportskillcard[x].types_needed.push_back(charholder3);
+                allsupportskills->supportskill[y].supportskillcard[x].types_needed.push_back(charholder4);
 
                 none_counter=0;
-                for(z=0;z<3;z++){
-                    if(allsupportskills->supportskill[y].supportskillcard[x].types_needed[z].affiliation!="None"){
+                for(z=0;z<allsupportskills->supportskill[y].supportskillcard[x].types_needed.size();z++){
+                    if(allsupportskills->supportskill[y].supportskillcard[x].types_needed[z]!="None"){
                         none_counter++;
                     }
                 }
@@ -164,15 +167,19 @@ bool create_Database(AllSupportSkills* allsupportskills, ALL_Cards* all_cards, A
     myfile.open("Data/cardTypes.txt");
 
     if(myfile.is_open()){
+        affiliation_array->number_of_affiliations=0;
         do{
             getline(myfile, placeholder, '\n');
             char *charholder = new char[placeholder.length()+1];
             strcpy(charholder,placeholder.c_str());
-            affiliation_array->affiliation[affiliation_array->number_of_affiliations].aff_name=charholder;
+            affiliation_array->affiliation.push_back(Affiliation());
+            affiliation_array->affiliation[affiliation_array->affiliation.size()-1].aff_name=charholder;
             delete charholder;
 
-            affiliation_array->affiliation[affiliation_array->number_of_affiliations].type_value=pow(2,affiliation_array->number_of_affiliations);
+            affiliation_array->affiliation[affiliation_array->affiliation.size()-1].type_value=pow(2,affiliation_array->number_of_affiliations);
+
             affiliation_array->number_of_affiliations++;
+
         }while( !(myfile.eof()) );
 
         myfile.close();
@@ -200,6 +207,7 @@ bool create_Database(AllSupportSkills* allsupportskills, ALL_Cards* all_cards, A
             getline(myfile, placeholder, '\n');
             char *charholder = new char[placeholder.length()+1];
             strcpy(charholder,placeholder.c_str());
+            all_cards->card.push_back(Card());
             all_cards->card[all_cards->number_of_characters].name=charholder;
             delete charholder;
             all_cards->number_of_characters++;
@@ -224,13 +232,24 @@ bool create_Database(AllSupportSkills* allsupportskills, ALL_Cards* all_cards, A
     myfile.open("Data/numericTypes.txt");
 
     if(myfile.is_open()){
+        int max_num_types=0, maximum_rarity=-1, minimum_rarity=100;
         for(x=0;x<all_cards->number_of_characters;x++){
             is_not_same_aff=0;
             myfile >> all_cards->card[x].rarity >> all_cards->card[x].cost >> all_cards->card[x].number_of_types >> all_cards->card[x].affiliation_sum >> all_cards->card[x].is_awakened;
             all_cards->card[x].card_ID=x;
             all_cards->card[x].num_profiles_exact=1;
             all_cards->card[x].num_profiles_awakened_exact=all_cards->card[x].is_awakened;
+            if(all_cards->card[x].number_of_types>max_num_types){
+                max_num_types=all_cards->card[x].number_of_types;
+            }
+            if(all_cards->card[x].rarity>maximum_rarity){
+                maximum_rarity=all_cards->card[x].rarity;
+            }
+            if(minimum_rarity>all_cards->card[x].rarity){
+                minimum_rarity=all_cards->card[x].rarity;
+            }
             if(x==0){
+                unique_affiliations->card.push_back(Card());
                 unique_affiliations->card[0].rarity=all_cards->card[x].rarity;
                 unique_affiliations->card[0].number_of_types=all_cards->card[x].number_of_types;
                 unique_affiliations->card[0].affiliation_sum=all_cards->card[x].affiliation_sum;
@@ -242,9 +261,8 @@ bool create_Database(AllSupportSkills* allsupportskills, ALL_Cards* all_cards, A
                 unique_affiliations->card[0].num_profiles_at_least++;
                 unique_affiliations->card[0].num_profiles_awakened_exact=all_cards->card[x].is_awakened;
                 unique_affiliations->card[0].num_profiles_awakened_at_least=all_cards->card[x].is_awakened;
-
             }else{
-                for(y=0;y<x;y++){
+                for(y=0;y<unique_affiliations->card.size();y++){
                     if( (unique_affiliations->card[y].affiliation_sum!=all_cards->card[x].affiliation_sum) || (unique_affiliations->card[y].affiliation_sum==all_cards->card[x].affiliation_sum && unique_affiliations->card[y].rarity!=all_cards->card[x].rarity) ){
                         is_not_same_aff++;
                     }
@@ -253,7 +271,8 @@ bool create_Database(AllSupportSkills* allsupportskills, ALL_Cards* all_cards, A
                     }
                 }
 
-                if(is_not_same_aff==x){
+                if(is_not_same_aff==unique_affiliations->card.size()){
+                    unique_affiliations->card.push_back(Card());
                     unique_affiliations->card[unique_affiliations->number_of_characters].affiliation_sum=all_cards->card[x].affiliation_sum;
                     unique_affiliations->card[unique_affiliations->number_of_characters].rarity=all_cards->card[x].rarity;
                     unique_affiliations->card[unique_affiliations->number_of_characters].number_of_types=all_cards->card[x].number_of_types;
@@ -261,10 +280,16 @@ bool create_Database(AllSupportSkills* allsupportskills, ALL_Cards* all_cards, A
                     unique_affiliations->card[unique_affiliations->number_of_characters].card_ID=unique_affiliations->number_of_characters;
                     unique_affiliations->card[unique_affiliations->number_of_characters].cost=0;
                     unique_affiliations->number_of_characters++;
-
                 }
             }
         }
+
+        all_cards->max_affiliations=max_num_types;
+        all_cards->max_rarity=maximum_rarity;
+        all_cards->min_rarity=minimum_rarity;
+        unique_affiliations->max_affiliations=max_num_types;
+        unique_affiliations->max_rarity=maximum_rarity;
+        unique_affiliations->min_rarity=minimum_rarity;
 
         myfile.close();
     }else{
@@ -273,7 +298,7 @@ bool create_Database(AllSupportSkills* allsupportskills, ALL_Cards* all_cards, A
         goto IssueExit;
     }
 
-    for(int check=0;check<all_cards->number_of_characters;check++){
+    for(int check=0;check<all_cards->card.size();check++){
         if(all_cards->card[check].rarity<1){
             noIssue=false;
             cout << "\tCard index " <<check+1<< " has incorrect rarity value.\n";
@@ -315,7 +340,7 @@ bool create_Database(AllSupportSkills* allsupportskills, ALL_Cards* all_cards, A
 
                         for(z=0;z<unique_affiliations->card[x].number_of_types;z++){
                             for(w=0;w<all_cards->card[y].number_of_types;w++){
-                                if(all_cards->card[y].cardtype[w].affiliation==unique_affiliations->card[x].cardtype[z].affiliation){
+                                if(all_cards->card[y].cardtypes[w]==unique_affiliations->card[x].cardtypes[z]){
                                     type_counter++;
                                 }
                             }
@@ -334,7 +359,7 @@ bool create_Database(AllSupportSkills* allsupportskills, ALL_Cards* all_cards, A
 
                         for(z=0;z<unique_affiliations->card[x].number_of_types;z++){
                             for(w=0;w<all_cards->card[y].number_of_types;w++){
-                                if(all_cards->card[y].cardtype[w].affiliation==unique_affiliations->card[x].cardtype[z].affiliation){
+                                if(all_cards->card[y].cardtypes[w]==unique_affiliations->card[x].cardtypes[z]){
                                     type_counter++;
                                 }
                             }
@@ -401,12 +426,16 @@ void create_affiliations(Affiliation_Array *affiliation_array, ALL_Cards *all_ca
             upper_limit=affiliation_array->number_of_affiliations;
         }
 
+        for(int numOfTypes=0;numOfTypes<numTypes;numOfTypes++){
+            all_cards->card[i].cardtypes.push_back("");
+        }
+
         if(numTypes==1){
             for(j=0;j<upper_limit;j++)
                 if(place_sum==pow(2,j)){
                     for(k=0;k<upper_limit;k++){
                         if(place_sum==affiliation_array->affiliation[k].type_value){
-                            all_cards->card[i].cardtype[0].affiliation=affiliation_array->affiliation[k].aff_name;
+                            all_cards->card[i].cardtypes[0]=affiliation_array->affiliation[k].aff_name;
                         }
                     }
                 break;
@@ -420,45 +449,45 @@ void create_affiliations(Affiliation_Array *affiliation_array, ALL_Cards *all_ca
                             val2=pow(2,k);
                             for(m=0;m<upper_limit;m++){
                                 if(val1==affiliation_array->affiliation[m].type_value){
-                                    all_cards->card[i].cardtype[0].affiliation=affiliation_array->affiliation[m].aff_name;
+                                    all_cards->card[i].cardtypes[0]=affiliation_array->affiliation[m].aff_name;
                                 }
                                 if(val2==affiliation_array->affiliation[m].type_value){
-                                    all_cards->card[i].cardtype[1].affiliation=affiliation_array->affiliation[m].aff_name;
+                                    all_cards->card[i].cardtypes[1]=affiliation_array->affiliation[m].aff_name;
                                 }
                             }
                         }
                     }
-                    if(all_cards->card[i].cardtype[0].affiliation !=""){
+                    if(all_cards->card[i].cardtypes[0] !=""){
                         break;
                     }
                 }
             }else
                 if(numTypes==3){
-                 for(j=0;j<upper_limit;j++){
-                    for(k=0;k<upper_limit;k++){
-                        for(m=0;m<upper_limit;m++){
-                            if( (j!=k) && (k!=m) && (j!=m) && (pow(2,j)+pow(2,k)+pow(2,m)==place_sum) ){
-                                val1=pow(2,j);
-                                val2=pow(2,k);
-                                val3=pow(2,m);
-                                for(n=0;n<upper_limit;n++){
-                                    if(val1==affiliation_array->affiliation[n].type_value){
-                                        all_cards->card[i].cardtype[0].affiliation=affiliation_array->affiliation[n].aff_name;
-                                    }
-                                    if(val2==affiliation_array->affiliation[n].type_value){
-                                        all_cards->card[i].cardtype[1].affiliation=affiliation_array->affiliation[n].aff_name;
-                                    }
-                                    if(val3==affiliation_array->affiliation[n].type_value){
-                                        all_cards->card[i].cardtype[2].affiliation=affiliation_array->affiliation[n].aff_name;
+                    for(j=0;j<upper_limit;j++){
+                        for(k=0;k<upper_limit;k++){
+                            for(m=0;m<upper_limit;m++){
+                                if( (j!=k) && (k!=m) && (j!=m) && (pow(2,j)+pow(2,k)+pow(2,m)==place_sum) ){
+                                    val1=pow(2,j);
+                                    val2=pow(2,k);
+                                    val3=pow(2,m);
+                                    for(n=0;n<upper_limit;n++){
+                                        if(val1==affiliation_array->affiliation[n].type_value){
+                                            all_cards->card[i].cardtypes[0]=affiliation_array->affiliation[n].aff_name;
+                                        }
+                                        if(val2==affiliation_array->affiliation[n].type_value){
+                                            all_cards->card[i].cardtypes[1]=affiliation_array->affiliation[n].aff_name;
+                                        }
+                                        if(val3==affiliation_array->affiliation[n].type_value){
+                                            all_cards->card[i].cardtypes[2]=affiliation_array->affiliation[n].aff_name;
+                                        }
                                     }
                                 }
                             }
-                        }
-                        if(all_cards->card[i].cardtype[0].affiliation!=""){
+                        if(all_cards->card[i].cardtypes[0]!=""){
                             break;
                         }
                     }
-                    if(all_cards->card[i].cardtype[0].affiliation!=""){
+                    if(all_cards->card[i].cardtypes[0]!=""){
                         break;
                     }
                 }
@@ -475,29 +504,29 @@ void create_affiliations(Affiliation_Array *affiliation_array, ALL_Cards *all_ca
                                         val4=pow(2,n);
                                         for(p=0;p<upper_limit;p++){
                                             if(val1==affiliation_array->affiliation[p].type_value){
-                                                all_cards->card[i].cardtype[0].affiliation=affiliation_array->affiliation[p].aff_name;
+                                                all_cards->card[i].cardtypes[0]=affiliation_array->affiliation[p].aff_name;
                                             }
                                             if(val2==affiliation_array->affiliation[p].type_value){
-                                                all_cards->card[i].cardtype[1].affiliation=affiliation_array->affiliation[p].aff_name;
+                                                all_cards->card[i].cardtypes[1]=affiliation_array->affiliation[p].aff_name;
                                             }
                                             if(val3==affiliation_array->affiliation[p].type_value){
-                                                all_cards->card[i].cardtype[2].affiliation=affiliation_array->affiliation[p].aff_name;
+                                                all_cards->card[i].cardtypes[2]=affiliation_array->affiliation[p].aff_name;
                                             }
                                             if(val4==affiliation_array->affiliation[p].type_value){
-                                                all_cards->card[i].cardtype[3].affiliation=affiliation_array->affiliation[p].aff_name;
+                                                all_cards->card[i].cardtypes[3]=affiliation_array->affiliation[p].aff_name;
                                             }
                                         }
                                     }
                                 }
-                                if(all_cards->card[i].cardtype[0].affiliation!=""){
+                                if(all_cards->card[i].cardtypes[0]!=""){
                                     break;
                                 }
                             }
-                            if(all_cards->card[i].cardtype[0].affiliation!=""){
+                            if(all_cards->card[i].cardtypes[0]!=""){
                                 break;
                             }
                         }
-                        if(all_cards->card[i].cardtype[0].affiliation!=""){
+                        if(all_cards->card[i].cardtypes[0]!=""){
                             break;
                         }
                     }
@@ -516,36 +545,36 @@ void create_affiliations(Affiliation_Array *affiliation_array, ALL_Cards *all_ca
                                                 val5=pow(2,p);
                                                 for(q=0;q<upper_limit;q++){
                                                     if(val1==affiliation_array->affiliation[q].type_value){
-                                                        all_cards->card[i].cardtype[0].affiliation=affiliation_array->affiliation[q].aff_name;
+                                                        all_cards->card[i].cardtypes[0]=affiliation_array->affiliation[q].aff_name;
                                                     }
                                                     if(val2==affiliation_array->affiliation[q].type_value){
-                                                        all_cards->card[i].cardtype[1].affiliation=affiliation_array->affiliation[q].aff_name;
+                                                        all_cards->card[i].cardtypes[1]=affiliation_array->affiliation[q].aff_name;
                                                     }
                                                     if(val3==affiliation_array->affiliation[q].type_value){
-                                                        all_cards->card[i].cardtype[2].affiliation=affiliation_array->affiliation[q].aff_name;
+                                                        all_cards->card[i].cardtypes[2]=affiliation_array->affiliation[q].aff_name;
                                                     }
                                                     if(val4==affiliation_array->affiliation[q].type_value){
-                                                        all_cards->card[i].cardtype[3].affiliation=affiliation_array->affiliation[q].aff_name;
-                                                        }
+                                                        all_cards->card[i].cardtypes[3]=affiliation_array->affiliation[q].aff_name;
+                                                    }
                                                     if(val5==affiliation_array->affiliation[q].type_value){
-                                                        all_cards->card[i].cardtype[4].affiliation=affiliation_array->affiliation[q].aff_name;
+                                                        all_cards->card[i].cardtypes[4]=affiliation_array->affiliation[q].aff_name;
                                                     }
                                                 }
                                             }
                                         }
-                                        if(all_cards->card[i].cardtype[0].affiliation!=""){
+                                        if(all_cards->card[i].cardtypes[0]!=""){
                                             break;
                                         }
                                     }
-                                    if(all_cards->card[i].cardtype[0].affiliation!=""){
+                                    if(all_cards->card[i].cardtypes[0]!=""){
                                         break;
                                     }
                                 }
-                                if(all_cards->card[i].cardtype[0].affiliation!=""){
+                                if(all_cards->card[i].cardtypes[0]!=""){
                                     break;
                                 }
                             }
-                            if(all_cards->card[i].cardtype[0].affiliation!=""){
+                            if(all_cards->card[i].cardtypes[0]!=""){
                                 break;
                             }
                         }
@@ -566,43 +595,43 @@ void create_affiliations(Affiliation_Array *affiliation_array, ALL_Cards *all_ca
                                                             val6=pow(2,q);
                                                             for(r=0;r<upper_limit;r++){
                                                                 if(val1==affiliation_array->affiliation[r].type_value){
-                                                                    all_cards->card[i].cardtype[0].affiliation=affiliation_array->affiliation[r].aff_name;
+                                                                    all_cards->card[i].cardtypes[0]=affiliation_array->affiliation[r].aff_name;
                                                                 }
                                                                 if(val2==affiliation_array->affiliation[r].type_value){
-                                                                    all_cards->card[i].cardtype[1].affiliation=affiliation_array->affiliation[r].aff_name;
+                                                                    all_cards->card[i].cardtypes[1]=affiliation_array->affiliation[r].aff_name;
                                                                 }
                                                                 if(val3==affiliation_array->affiliation[r].type_value){
-                                                                    all_cards->card[i].cardtype[2].affiliation=affiliation_array->affiliation[r].aff_name;
+                                                                    all_cards->card[i].cardtypes[2]=affiliation_array->affiliation[r].aff_name;
                                                                 }
                                                                 if(val4==affiliation_array->affiliation[r].type_value){
-                                                                    all_cards->card[i].cardtype[3].affiliation=affiliation_array->affiliation[r].aff_name;
-                                                                    }
+                                                                    all_cards->card[i].cardtypes[3]=affiliation_array->affiliation[r].aff_name;
+                                                                }
                                                                 if(val5==affiliation_array->affiliation[r].type_value){
-                                                                    all_cards->card[i].cardtype[4].affiliation=affiliation_array->affiliation[r].aff_name;
+                                                                    all_cards->card[i].cardtypes[4]=affiliation_array->affiliation[r].aff_name;
                                                                 }
                                                                 if(val6==affiliation_array->affiliation[r].type_value){
-                                                                    all_cards->card[i].cardtype[5].affiliation=affiliation_array->affiliation[r].aff_name;
+                                                                    all_cards->card[i].cardtypes[5]=affiliation_array->affiliation[r].aff_name;
                                                                 }
                                                             }
                                                         }
                                                     }
-                                                    if(all_cards->card[i].cardtype[0].affiliation!=""){
+                                                    if(all_cards->card[i].cardtypes[0]!=""){
                                                         break;
                                                     }
                                                 }
-                                                if(all_cards->card[i].cardtype[0].affiliation!=""){
+                                                if(all_cards->card[i].cardtypes[0]!=""){
                                                     break;
                                                 }
                                             }
-                                            if(all_cards->card[i].cardtype[0].affiliation!=""){
+                                            if(all_cards->card[i].cardtypes[0]!=""){
                                                 break;
                                             }
                                         }
-                                        if(all_cards->card[i].cardtype[0].affiliation!=""){
+                                        if(all_cards->card[i].cardtypes[0]!=""){
                                             break;
                                         }
                                     }
-                                    if(all_cards->card[i].cardtype[0].affiliation!=""){
+                                    if(all_cards->card[i].cardtypes[0]!=""){
                                         break;
                                     }
                                 }
@@ -613,7 +642,10 @@ void create_affiliations(Affiliation_Array *affiliation_array, ALL_Cards *all_ca
 
 void reset_support_deck(SupportDeck *supportdeck){
 
-    /** Clears all previous information from the support deck structure. Could be considered an initializer for the support deck **/
+    /**
+        Clears all previous information from the support deck structure.
+        Could be considered an initializer for the support deck.
+    **/
 
     int i,j;
 
@@ -645,15 +677,18 @@ void reset_support_deck(SupportDeck *supportdeck){
         }
     }
 
-    for(i=0;i<MAXAFFILIATIONS;i++){
-        supportdeck->current_types[i].aff_name="";
-        supportdeck->current_types[i].type_value=0.0;
-
-        supportdeck->current_base_types[i].aff_name="";
-        supportdeck->current_base_types[i].type_value=0.0;
-
-        supportdeck->required_types[i].affiliation="";
+    while(supportdeck->current_types.size()>0){
+        supportdeck->current_types.pop_back();
     }
+
+    while(supportdeck->current_base_types.size()>0){
+        supportdeck->current_base_types.pop_back();
+    }
+
+    while(supportdeck->required_types.size()>0){
+        supportdeck->required_types.pop_back();
+    }
+
 
 }
 
@@ -780,7 +815,8 @@ int generate_deck_types(SupportDeck *supportdeck, ALL_Cards *all_cards, ALL_Card
     if(supportdeck->bases_only==1){
         //set first elements from support card 1
         for(q=0;q<all_cards->card[support_array[0]].number_of_types;q++){
-            supportdeck->current_types[q].aff_name=all_cards->card[support_array[0]].cardtype[q].affiliation;
+            supportdeck->current_types.push_back(Affiliation());
+            supportdeck->current_types[q].aff_name=all_cards->card[support_array[0]].cardtypes[q];
             supportdeck->current_types[q].type_value+=all_cards->card[support_array[0]].rarity+(supportdeck->bases_only*(0.3+awaken_bonus(all_cards,support_array[0])));
             current_type_counter++;
         }
@@ -790,17 +826,18 @@ int generate_deck_types(SupportDeck *supportdeck, ALL_Cards *all_cards, ALL_Card
             for(q=0;q<all_cards->card[support_array[j]].number_of_types;q++){
                 aff_counter=0;
                 for(r=0;r<current_type_counter;r++){
-                    if(all_cards->card[support_array[j]].cardtype[q].affiliation==supportdeck->current_types[r].aff_name){
+                    if(all_cards->card[support_array[j]].cardtypes[q]==supportdeck->current_types[r].aff_name){
                         supportdeck->current_types[r].type_value+=all_cards->card[support_array[j]].rarity+(supportdeck->bases_only*(0.3+awaken_bonus(all_cards,support_array[j])));
                     }else
-                        if(all_cards->card[support_array[j]].cardtype[q].affiliation!=supportdeck->current_types[r].aff_name){
+                        if(all_cards->card[support_array[j]].cardtypes[q]!=supportdeck->current_types[r].aff_name){
                             aff_counter++;
                         }
 
                 } //closes r loop
-                //creates a new type entry if cardtype[q] for card j doesn't match any current types
+                //creates a new type entry if cardtypes[q] for card j doesn't match any current types
                 if(aff_counter==current_type_counter){
-                    supportdeck->current_types[current_type_counter].aff_name=all_cards->card[support_array[j]].cardtype[q].affiliation;
+                    supportdeck->current_types.push_back(Affiliation());
+                    supportdeck->current_types[current_type_counter].aff_name=all_cards->card[support_array[j]].cardtypes[q];
                     supportdeck->current_types[current_type_counter].type_value+=all_cards->card[support_array[j]].rarity+(supportdeck->bases_only*(0.3+awaken_bonus(all_cards,support_array[j])));
                     current_type_counter++;
                 }
@@ -812,17 +849,18 @@ int generate_deck_types(SupportDeck *supportdeck, ALL_Cards *all_cards, ALL_Card
             for(q=0;q<unique_affiliations->card[support_array[j]].number_of_types;q++){
                 aff_counter=0;
                 for(r=0;r<current_type_counter;r++){
-                    if(unique_affiliations->card[support_array[j]].cardtype[q].affiliation==supportdeck->current_types[r].aff_name){
+                    if(unique_affiliations->card[support_array[j]].cardtypes[q]==supportdeck->current_types[r].aff_name){
                         supportdeck->current_types[r].type_value+=unique_affiliations->card[support_array[j]].rarity+(supportdeck->bases_only*(0.3+awaken_bonus(unique_affiliations,support_array[j])));
                     }else
-                        if(unique_affiliations->card[support_array[j]].cardtype[q].affiliation!=supportdeck->current_types[r].aff_name){
+                        if(unique_affiliations->card[support_array[j]].cardtypes[q]!=supportdeck->current_types[r].aff_name){
                             aff_counter++;
                         }
 
                 } //closes r loop
-                //creates a new type entry if cardtype[q] for card j doesn't match any current types
+                //creates a new type entry if cardtypes[q] for card j doesn't match any current types
                 if(aff_counter==current_type_counter){
-                    supportdeck->current_types[current_type_counter].aff_name=unique_affiliations->card[support_array[j]].cardtype[q].affiliation;
+                    supportdeck->current_types.push_back(Affiliation());
+                    supportdeck->current_types[current_type_counter].aff_name=unique_affiliations->card[support_array[j]].cardtypes[q];
                     supportdeck->current_types[current_type_counter].type_value+=unique_affiliations->card[support_array[j]].rarity+(supportdeck->bases_only*(0.3+awaken_bonus(unique_affiliations,support_array[j])));
                     current_type_counter++;
                 }
@@ -833,7 +871,8 @@ int generate_deck_types(SupportDeck *supportdeck, ALL_Cards *all_cards, ALL_Card
         if(supportdeck->bases_only==0){
             //set first elements from support card 1
             for(q=0;q<all_cards->card[support_array[0]].number_of_types;q++){
-                supportdeck->current_base_types[q].aff_name=all_cards->card[support_array[0]].cardtype[q].affiliation;
+                supportdeck->current_base_types.push_back(Affiliation());
+                supportdeck->current_base_types[q].aff_name=all_cards->card[support_array[0]].cardtypes[q];
                 supportdeck->current_base_types[q].type_value+=all_cards->card[support_array[0]].rarity+(supportdeck->bases_only*(0.3+awaken_bonus(all_cards,support_array[0])));
                 current_type_counter++;
             }
@@ -843,17 +882,18 @@ int generate_deck_types(SupportDeck *supportdeck, ALL_Cards *all_cards, ALL_Card
                 for(q=0;q<all_cards->card[support_array[j]].number_of_types;q++){
                     aff_counter=0;
                     for(r=0;r<current_type_counter;r++){
-                        if(all_cards->card[support_array[j]].cardtype[q].affiliation==supportdeck->current_base_types[r].aff_name){
+                        if(all_cards->card[support_array[j]].cardtypes[q]==supportdeck->current_base_types[r].aff_name){
                             supportdeck->current_base_types[r].type_value+=all_cards->card[support_array[j]].rarity+(supportdeck->bases_only*(0.3+awaken_bonus(all_cards,support_array[j])));
                         }else
-                            if(all_cards->card[support_array[j]].cardtype[q].affiliation!=supportdeck->current_base_types[r].aff_name){
+                            if(all_cards->card[support_array[j]].cardtypes[q]!=supportdeck->current_base_types[r].aff_name){
                                 aff_counter++;
                             }
 
                     } //closes r loop
                     //creates a new type entry if cardtype[q] for card j doesn't match any current types
                     if(aff_counter==current_type_counter){
-                        supportdeck->current_base_types[current_type_counter].aff_name=all_cards->card[support_array[j]].cardtype[q].affiliation;
+                        supportdeck->current_base_types.push_back(Affiliation());
+                        supportdeck->current_base_types[current_type_counter].aff_name=all_cards->card[support_array[j]].cardtypes[q];
                         supportdeck->current_base_types[current_type_counter].type_value+=all_cards->card[support_array[j]].rarity+(supportdeck->bases_only*(0.3+awaken_bonus(all_cards,support_array[j])));
                         current_type_counter++;
                     }
@@ -865,17 +905,18 @@ int generate_deck_types(SupportDeck *supportdeck, ALL_Cards *all_cards, ALL_Card
                 for(q=0;q<unique_affiliations->card[support_array[j]].number_of_types;q++){
                     aff_counter=0;
                     for(r=0;r<current_type_counter;r++){
-                        if(unique_affiliations->card[support_array[j]].cardtype[q].affiliation==supportdeck->current_base_types[r].aff_name){
+                        if(unique_affiliations->card[support_array[j]].cardtypes[q]==supportdeck->current_base_types[r].aff_name){
                             supportdeck->current_base_types[r].type_value+=unique_affiliations->card[support_array[j]].rarity+(supportdeck->bases_only*(0.3+awaken_bonus(unique_affiliations,support_array[j])));
                         }else
-                            if(unique_affiliations->card[support_array[j]].cardtype[q].affiliation!=supportdeck->current_base_types[r].aff_name){
+                            if(unique_affiliations->card[support_array[j]].cardtypes[q]!=supportdeck->current_base_types[r].aff_name){
                                 aff_counter++;
                             }
 
                     } //closes r loop
                     //creates a new type entry if cardtype[q] for card j doesn't match any current types
                     if(aff_counter==current_type_counter){
-                        supportdeck->current_base_types[current_type_counter].aff_name=unique_affiliations->card[support_array[j]].cardtype[q].affiliation;
+                        supportdeck->current_base_types.push_back(Affiliation());
+                        supportdeck->current_base_types[current_type_counter].aff_name=unique_affiliations->card[support_array[j]].cardtypes[q];
                         supportdeck->current_base_types[current_type_counter].type_value+=unique_affiliations->card[support_array[j]].rarity+(supportdeck->bases_only*(0.3+awaken_bonus(unique_affiliations,support_array[j])));
                         current_type_counter++;
                     }
@@ -928,7 +969,7 @@ void print_output(SupportDeck *supportdeck, AllSupportSkills *allsupportskills, 
             if(allsupportskills->supportskill[supportdeck->skill_locator[k]].supportskillcard[j].charactername==all_cards->card[support_array[k]].name){
                 output_file << allsupportskills->supportskill[supportdeck->skill_locator[k]].supportskillcard[j].supportskillreqs[skill_level[k]-1].typereq << " (";
                 for(x=0;x<allsupportskills->supportskill[supportdeck->skill_locator[k]].supportskillcard[j].numTypeReq;x++){
-                    output_file << allsupportskills->supportskill[supportdeck->skill_locator[k]].supportskillcard[j].types_needed[x].affiliation;
+                    output_file << allsupportskills->supportskill[supportdeck->skill_locator[k]].supportskillcard[j].types_needed[x];
 
                     if(x+1<allsupportskills->supportskill[supportdeck->skill_locator[k]].supportskillcard[j].numTypeReq){
                         output_file << ",  ";
@@ -951,7 +992,7 @@ void print_output(SupportDeck *supportdeck, AllSupportSkills *allsupportskills, 
     for(j=supportdeck->number_of_skills;j<supportdeck->total_cards_to_use;j++){
         output_file << "\t" << unique_affiliations->card[support_array[j]].rarity << "*  ";
         for(m=0;m<unique_affiliations->card[support_array[j]].number_of_types;m++){
-            output_file << unique_affiliations->card[support_array[j]].cardtype[m].affiliation;
+            output_file << unique_affiliations->card[support_array[j]].cardtypes[m];
             if(m+1<unique_affiliations->card[support_array[j]].number_of_types){
                 output_file << ",  ";
             }
@@ -1034,7 +1075,7 @@ int skill_level_check(AllSupportSkills *allsupportskills, SupportDeck *supportde
         for(j=0;j<supportdeck->number_of_skills;j++){
             if(allsupportskills->supportskill[supportdeck->skill_locator[j]].supportskillcard[skill_card_locator[j]].numTypeReq==1){
                 for(r=0;r<supportdeck->numTypes_in_deck;r++){
-                    if(allsupportskills->supportskill[supportdeck->skill_locator[j]].supportskillcard[skill_card_locator[j]].types_needed[0].affiliation==supportdeck->current_types[r].aff_name){
+                    if(allsupportskills->supportskill[supportdeck->skill_locator[j]].supportskillcard[skill_card_locator[j]].types_needed[0]==supportdeck->current_types[r].aff_name){
                             type1_match=r;
 
                             for(i=0;i<allsupportskills->supportskill[supportdeck->skill_locator[j]].max_level;i++){
@@ -1048,7 +1089,7 @@ int skill_level_check(AllSupportSkills *allsupportskills, SupportDeck *supportde
                 if(allsupportskills->supportskill[supportdeck->skill_locator[j]].supportskillcard[skill_card_locator[j]].numTypeReq==2){
                     for(q=0;q<supportdeck->numTypes_in_deck;q++){
                         for(r=0;r<supportdeck->numTypes_in_deck;r++){
-                            if( (allsupportskills->supportskill[supportdeck->skill_locator[j]].supportskillcard[skill_card_locator[j]].types_needed[0].affiliation==supportdeck->current_types[q].aff_name) && (allsupportskills->supportskill[supportdeck->skill_locator[j]].supportskillcard[skill_card_locator[j]].types_needed[1].affiliation==supportdeck->current_types[r].aff_name) ){
+                            if( (allsupportskills->supportskill[supportdeck->skill_locator[j]].supportskillcard[skill_card_locator[j]].types_needed[0]==supportdeck->current_types[q].aff_name) && (allsupportskills->supportskill[supportdeck->skill_locator[j]].supportskillcard[skill_card_locator[j]].types_needed[1]==supportdeck->current_types[r].aff_name) ){
                                     type1_match=q;
                                     type2_match=r;
 
@@ -1066,7 +1107,7 @@ int skill_level_check(AllSupportSkills *allsupportskills, SupportDeck *supportde
                         for(q=0;q<supportdeck->numTypes_in_deck;q++){
                             for(r=0;r<supportdeck->numTypes_in_deck;r++){
                                 for(p=0;p<supportdeck->numTypes_in_deck;p++){
-                                    if( (allsupportskills->supportskill[supportdeck->skill_locator[j]].supportskillcard[skill_card_locator[j]].types_needed[0].affiliation==supportdeck->current_types[q].aff_name) && (allsupportskills->supportskill[supportdeck->skill_locator[j]].supportskillcard[skill_card_locator[j]].types_needed[1].affiliation==supportdeck->current_types[r].aff_name) && (allsupportskills->supportskill[supportdeck->skill_locator[j]].supportskillcard[skill_card_locator[j]].types_needed[2].affiliation==supportdeck->current_types[p].aff_name) ){
+                                    if( (allsupportskills->supportskill[supportdeck->skill_locator[j]].supportskillcard[skill_card_locator[j]].types_needed[0]==supportdeck->current_types[q].aff_name) && (allsupportskills->supportskill[supportdeck->skill_locator[j]].supportskillcard[skill_card_locator[j]].types_needed[1]==supportdeck->current_types[r].aff_name) && (allsupportskills->supportskill[supportdeck->skill_locator[j]].supportskillcard[skill_card_locator[j]].types_needed[2]==supportdeck->current_types[p].aff_name) ){
                                             type1_match=q;
                                             type2_match=r;
                                             type3_match=p;
@@ -1097,7 +1138,7 @@ int skill_level_check(AllSupportSkills *allsupportskills, SupportDeck *supportde
             for(j=0;j<supportdeck->number_of_skills;j++){
                 if(allsupportskills->supportskill[supportdeck->skill_locator[j]].supportskillcard[skill_card_locator[j]].numTypeReq==1){
                     for(r=0;r<supportdeck->numTypes_in_deck;r++){
-                        if(allsupportskills->supportskill[supportdeck->skill_locator[j]].supportskillcard[skill_card_locator[j]].types_needed[0].affiliation==supportdeck->current_base_types[r].aff_name){
+                        if(allsupportskills->supportskill[supportdeck->skill_locator[j]].supportskillcard[skill_card_locator[j]].types_needed[0]==supportdeck->current_base_types[r].aff_name){
                                 type1_match=r;
 
                                 for(i=0;i<allsupportskills->supportskill[supportdeck->skill_locator[j]].max_level;i++){
@@ -1111,7 +1152,7 @@ int skill_level_check(AllSupportSkills *allsupportskills, SupportDeck *supportde
                     if(allsupportskills->supportskill[supportdeck->skill_locator[j]].supportskillcard[skill_card_locator[j]].numTypeReq==2){
                         for(q=0;q<supportdeck->numTypes_in_deck;q++){
                             for(r=0;r<supportdeck->numTypes_in_deck;r++){
-                                if( (allsupportskills->supportskill[supportdeck->skill_locator[j]].supportskillcard[skill_card_locator[j]].types_needed[0].affiliation==supportdeck->current_base_types[q].aff_name) && (allsupportskills->supportskill[supportdeck->skill_locator[j]].supportskillcard[skill_card_locator[j]].types_needed[1].affiliation==supportdeck->current_base_types[r].aff_name) ){
+                                if( (allsupportskills->supportskill[supportdeck->skill_locator[j]].supportskillcard[skill_card_locator[j]].types_needed[0]==supportdeck->current_base_types[q].aff_name) && (allsupportskills->supportskill[supportdeck->skill_locator[j]].supportskillcard[skill_card_locator[j]].types_needed[1]==supportdeck->current_base_types[r].aff_name) ){
                                         type1_match=q;
                                         type2_match=r;
 
@@ -1129,7 +1170,7 @@ int skill_level_check(AllSupportSkills *allsupportskills, SupportDeck *supportde
                             for(q=0;q<supportdeck->numTypes_in_deck;q++){
                                 for(r=0;r<supportdeck->numTypes_in_deck;r++){
                                     for(p=0;p<supportdeck->numTypes_in_deck;p++){
-                                        if( (allsupportskills->supportskill[supportdeck->skill_locator[j]].supportskillcard[skill_card_locator[j]].types_needed[0].affiliation==supportdeck->current_base_types[q].aff_name) && (allsupportskills->supportskill[supportdeck->skill_locator[j]].supportskillcard[skill_card_locator[j]].types_needed[1].affiliation==supportdeck->current_base_types[r].aff_name) && (allsupportskills->supportskill[supportdeck->skill_locator[j]].supportskillcard[skill_card_locator[j]].types_needed[2].affiliation==supportdeck->current_base_types[p].aff_name) ){
+                                        if( (allsupportskills->supportskill[supportdeck->skill_locator[j]].supportskillcard[skill_card_locator[j]].types_needed[0]==supportdeck->current_base_types[q].aff_name) && (allsupportskills->supportskill[supportdeck->skill_locator[j]].supportskillcard[skill_card_locator[j]].types_needed[1]==supportdeck->current_base_types[r].aff_name) && (allsupportskills->supportskill[supportdeck->skill_locator[j]].supportskillcard[skill_card_locator[j]].types_needed[2]==supportdeck->current_base_types[p].aff_name) ){
                                                 type1_match=q;
                                                 type2_match=r;
                                                 type3_match=p;
@@ -1170,7 +1211,7 @@ int get_numTypes_needed(AllSupportSkills *allsupportskills, SupportDeck *support
 
 	//set first card's q required types
 	for(q=0;q<allsupportskills->supportskill[supportdeck->skill_locator[0]].supportskillcard[SKCD_locator[0]].numTypeReq;q++){
-		supportdeck->required_types[q].affiliation=allsupportskills->supportskill[supportdeck->skill_locator[0]].supportskillcard[SKCD_locator[0]].types_needed[q].affiliation;
+		supportdeck->required_types.push_back(allsupportskills->supportskill[supportdeck->skill_locator[0]].supportskillcard[SKCD_locator[0]].types_needed[q]);
         type_counter++;
 	}
 
@@ -1179,13 +1220,13 @@ int get_numTypes_needed(AllSupportSkills *allsupportskills, SupportDeck *support
             aff_counter=0;
 
             for(r=0;r<type_counter;r++){
-                if(supportdeck->required_types[r].affiliation!=allsupportskills->supportskill[supportdeck->skill_locator[i]].supportskillcard[SKCD_locator[i]].types_needed[q].affiliation){
+                if(supportdeck->required_types[r]!=allsupportskills->supportskill[supportdeck->skill_locator[i]].supportskillcard[SKCD_locator[i]].types_needed[q]){
                     aff_counter++;
                 }
             }
 
             if(aff_counter==type_counter){
-                supportdeck->required_types[type_counter].affiliation=allsupportskills->supportskill[supportdeck->skill_locator[i]].supportskillcard[SKCD_locator[i]].types_needed[q].affiliation;
+                supportdeck->required_types.push_back(allsupportskills->supportskill[supportdeck->skill_locator[i]].supportskillcard[SKCD_locator[i]].types_needed[q]);
                 type_counter++;
             }
         }
@@ -1206,7 +1247,7 @@ int get_skill_match(ALL_Cards *all_cards, SupportDeck *supportdeck , int INDEX){
 
     for(p=0;p<all_cards->card[INDEX].number_of_types;p++){
         for(r=0;r<supportdeck->types_needed;r++){
-            if(all_cards->card[INDEX].cardtype[p].affiliation==supportdeck->required_types[r].affiliation){
+            if(all_cards->card[INDEX].cardtypes[p]==supportdeck->required_types[r]){
                 matches_type_req++;
             }
         }
@@ -1216,7 +1257,7 @@ int get_skill_match(ALL_Cards *all_cards, SupportDeck *supportdeck , int INDEX){
 }
 
 
-int filter_unique_profiles(ALL_Cards *unique_profiles, SupportDeck *supportdeck, int unique_match_id[MAXCHARACTERS], int size_of_tracker){
+int filter_unique_profiles(ALL_Cards *unique_profiles, SupportDeck *supportdeck, vector<int> *unique_match_id, int size_of_tracker){
 
     /**
         Creates an array which holds the ID's of card profiles which match the required affiliatons of the support skills and which
@@ -1225,19 +1266,21 @@ int filter_unique_profiles(ALL_Cards *unique_profiles, SupportDeck *supportdeck,
         skill cards.
     **/
 
-    int i, type_match_counter=0, filter_entries=0;
+    int i, type_match_counter=0;
+
+    while(unique_match_id->size()>0){
+        unique_match_id->pop_back();
+    }
 
     for(i=0;i<size_of_tracker;i++){
-        type_match_counter=0;
         type_match_counter=get_skill_match(unique_profiles,supportdeck,i);
 
         if(type_match_counter>=supportdeck->type_threshold){
-            unique_match_id[filter_entries]=i;
-            filter_entries++;
+            unique_match_id->push_back(i);
         }
     }
 
-    return filter_entries;
+    return unique_match_id->size();
 
 }
 
@@ -1269,15 +1312,18 @@ void print_locations(AllSupportSkills *allsupportskill, SupportDeck *supportdeck
 void reset_types_in_deck(SupportDeck *supportdeck){
 
     /** Erases the information about affiliations in the Support Deck from the previous run **/
-    int p;
 
     //erase previous run's values
-    for(p=0;p<supportdeck->numTypes_in_deck;p++){
-        supportdeck->current_types[p].type_value=0;
-        supportdeck->current_types[p].aff_name="";
+    while(supportdeck->current_types.size()>0){
+        supportdeck->current_types.pop_back();
+    }
 
-        supportdeck->current_base_types[p].type_value=0;
-        supportdeck->current_base_types[p].aff_name="";
+    while(supportdeck->current_base_types.size()>0){
+        supportdeck->current_base_types.pop_back();
+    }
+
+    while(supportdeck->required_types.size()>0){
+        supportdeck->required_types.pop_back();
     }
 
     supportdeck->numTypes_in_deck=0;
@@ -1372,7 +1418,7 @@ void filter_allowed_skill_cards(SupportDeck *supportdeck, AllSupportSkills *alls
 }
 
 
-void presearch_config(AllSupportSkills *allsupportskills, ALL_Cards *unique_affiliations, SupportDeck *supportdeck, int skill_card_locator[SUPPORTDECK], int effective_chars, int unique_profile_match[MAXCHARACTERS], int &numChars){
+void presearch_config(AllSupportSkills *allsupportskills, ALL_Cards *unique_affiliations, SupportDeck *supportdeck, int skill_card_locator[SUPPORTDECK], int effective_chars, vector<int> *unique_profile_match, int &numChars){
 
     /** Functions used before running the combination solving **/
 
@@ -1657,7 +1703,7 @@ void checkForNewProfiles(ALL_Cards *unique_affiliations){
          for(x=0;x<unique_affiliations->number_of_characters;x++){
             card_profiles_OUT << unique_affiliations->card[x].rarity << "*  ";
             for(y=0;y<unique_affiliations->card[x].number_of_types;y++){
-                card_profiles_OUT << unique_affiliations->card[x].cardtype[y].affiliation;
+                card_profiles_OUT << unique_affiliations->card[x].cardtypes[y];
                 if(y+1<unique_affiliations->card[x].number_of_types){
                     card_profiles_OUT << ",  ";
                 }
@@ -1681,7 +1727,7 @@ void checkForNewProfiles(ALL_Cards *unique_affiliations){
             for(x=0;x<unique_affiliations->number_of_characters;x++){
                 TEMP_card_profiles_OUT << unique_affiliations->card[x].rarity << "*  ";
                 for(y=0;y<unique_affiliations->card[x].number_of_types;y++){
-                    TEMP_card_profiles_OUT << unique_affiliations->card[x].cardtype[y].affiliation;
+                    TEMP_card_profiles_OUT << unique_affiliations->card[x].cardtypes[y];
                     if(y+1<unique_affiliations->card[x].number_of_types){
                         TEMP_card_profiles_OUT << ",  ";
                     }
@@ -1748,7 +1794,7 @@ void checkForNewProfiles(ALL_Cards *unique_affiliations){
                 for(x=0;x<unique_affiliations->number_of_characters;x++){
                     card_profiles_OUT << unique_affiliations->card[x].rarity << "*  ";
                     for(y=0;y<unique_affiliations->card[x].number_of_types;y++){
-                        card_profiles_OUT << unique_affiliations->card[x].cardtype[y].affiliation;
+                        card_profiles_OUT << unique_affiliations->card[x].cardtypes[y];
                         if(y+1<unique_affiliations->card[x].number_of_types){
                             card_profiles_OUT << ",  ";
                         }
@@ -1770,4 +1816,16 @@ void checkForNewProfiles(ALL_Cards *unique_affiliations){
 
         }
     }
+}
+
+int StringToInt(const string &StringText){
+    stringstream convertor(StringText);
+    int Integer;
+
+    if(convertor >> Integer){
+        return Integer;
+    }else{
+        return 0;
+    }
+
 }

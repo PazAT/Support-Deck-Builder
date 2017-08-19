@@ -15,8 +15,10 @@ void count_affiliations(ALL_Cards *all_cards, ALL_Cards *unique_affiliations, Af
         have at least the specified affiliations
     **/
 
-    int i,j,k, card_counter=0, unique_counter=0, tracker, rarity_tracker[5], unique_rarity_tracker[5];
-    int print_choice, match_tracker[MAXCHARACTERS];
+    int i,j,k, unique_counter=0, tracker, rarity_tracker[5], unique_rarity_tracker[5];
+    int print_choice;
+    string numText;
+    vector<int> match_tracker;
 
     for(i=0;i<5;i++){
         rarity_tracker[i]=0;
@@ -27,14 +29,13 @@ void count_affiliations(ALL_Cards *all_cards, ALL_Cards *unique_affiliations, Af
         tracker=0;
         for(j=0;j<all_cards->card[i].number_of_types;j++){
             for(k=0;k<aff_counter->number_of_affiliations;k++){
-                if(aff_counter->affiliation[k].aff_name==all_cards->card[i].cardtype[j].affiliation){
+                if(aff_counter->affiliation[k].aff_name==all_cards->card[i].cardtypes[j]){
                     tracker++;
                 }
             }
         }
         if(tracker==aff_counter->number_of_affiliations){
-            match_tracker[card_counter]=i;
-            card_counter++;
+            match_tracker.push_back(i);
             rarity_tracker[(all_cards->card[i].rarity)-1]++;
         }
     }
@@ -43,7 +44,7 @@ void count_affiliations(ALL_Cards *all_cards, ALL_Cards *unique_affiliations, Af
         tracker=0;
         for(j=0;j<unique_affiliations->card[i].number_of_types;j++){
             for(k=0;k<aff_counter->number_of_affiliations;k++){
-                if(aff_counter->affiliation[k].aff_name==unique_affiliations->card[i].cardtype[j].affiliation){
+                if(aff_counter->affiliation[k].aff_name==unique_affiliations->card[i].cardtypes[j]){
                     tracker++;
                 }
             }
@@ -78,7 +79,7 @@ void count_affiliations(ALL_Cards *all_cards, ALL_Cards *unique_affiliations, Af
             cout << ")" << "\n";
         }
     }
-    cout << "\t\tCharacter: " << card_counter << "  (";
+    cout << "\t\tCharacter: " << match_tracker.size() << "  (";
 
     for(i=5;i>0;i--){
         cout << rarity_tracker[i-1] << "  " << i << "*";
@@ -89,46 +90,49 @@ void count_affiliations(ALL_Cards *all_cards, ALL_Cards *unique_affiliations, Af
         }
     }
 
-    cout << "\n\nPrint out Character names to txt file? (Yes = 1):  ";
-    cin >> print_choice;
+    if(match_tracker.size()>0){
+        cout << "\n\nPrint out Character names to txt file? (Yes = 1):  ";
+        cin >> numText;
+        print_choice=StringToInt(numText);
 
-    if(!(cin.good()) || print_choice!=1){
-        cin.clear();
-        cin.ignore(256,'\n');
-        print_choice=0;
-    }
-
-    if(print_choice==1){
-        ofstream myoutput;
-        string filename="CharacterProfiles/";
-
-        filename.append(aff_counter->affiliation[0].aff_name);
-
-        for(i=1;i<aff_counter->number_of_affiliations;i++){
-            filename.append("_");
-            filename.append(aff_counter->affiliation[i].aff_name);
+        if(print_choice!=1){
+            cin.clear();
+            cin.ignore(256,'\n');
+            print_choice=0;
         }
 
-        filename.append(".txt");
+        if(print_choice){
+            ofstream myoutput;
+            string filename="CharacterProfiles/";
 
-        myoutput.open(filename.c_str());
+            filename.append(aff_counter->affiliation[0].aff_name);
 
-        for(i=0;i<card_counter;i++){
-            myoutput << all_cards->card[match_tracker[i]].name << "\n";
-            myoutput << "\tRarity:  " << all_cards->card[match_tracker[i]].rarity << "\tCost:  " << all_cards->card[match_tracker[i]].cost;
-            if(all_cards->card[match_tracker[i]].is_awakened){
-                myoutput << "\tAwakened";
+            for(i=1;i<aff_counter->number_of_affiliations;i++){
+                filename.append("_");
+                filename.append(aff_counter->affiliation[i].aff_name);
             }
 
-            if(i+1<card_counter){
-                myoutput << "\n\n";
+            filename.append(".txt");
+
+            myoutput.open(filename.c_str());
+
+            for(i=0;i<match_tracker.size();i++){
+                myoutput << all_cards->card[match_tracker[i]].name << "\n";
+                myoutput << "\tRarity:  " << all_cards->card[match_tracker[i]].rarity << "\tCost:  " << all_cards->card[match_tracker[i]].cost;
+                if(all_cards->card[match_tracker[i]].is_awakened){
+                    myoutput << "\tAwakened";
+                }
+
+                if(i+1<match_tracker.size()){
+                    myoutput << "\n\n";
+                }
             }
+
+            myoutput.close();
+
+            cout << "\n\n\tCharacter names printed to 'CharacterProfiles'\n\n";
         }
-
-        myoutput.close();
-
-        cout << "\n\n\tCharacter names printed to 'CharacterProfiles'\n\n";
-    }
+}
 
 }
 
@@ -148,15 +152,17 @@ void return_affiliation_numbers(ALL_Cards *all_cards, ALL_Cards *unique_profiles
 
     int i, counter=0, unique_counter=0;
 
-    for(i=0;i<all_cards->number_of_characters;i++){
-        if(all_cards->card[i].number_of_types==number){
-            counter++;
+    if(number<=all_cards->max_affiliations){
+        for(i=0;i<all_cards->number_of_characters;i++){
+            if(all_cards->card[i].number_of_types==number){
+                counter++;
+            }
         }
-    }
 
-    for(i=0;i<unique_profiles->number_of_characters;i++){
-        if(unique_profiles->card[i].number_of_types==number){
-            unique_counter++;
+        for(i=0;i<unique_profiles->number_of_characters;i++){
+            if(unique_profiles->card[i].number_of_types==number){
+                unique_counter++;
+            }
         }
     }
 
@@ -169,29 +175,37 @@ void print_rarity(ALL_Cards *all_cards, ALL_Cards *unique_affiliations){
 
     /** Counts and prints to screen the number of cards and unique profiles of each rarity **/
 
-    int i, character_rarity[5], unique_rarity[5];
+    const int maxCharRarity=all_cards->max_rarity, minCharRarity=all_cards->min_rarity;
+    const int CharRarityDiff=maxCharRarity-minCharRarity+1;
+    int i;
+    int *character_rarity = new int[CharRarityDiff];
+    int *unique_rarity= new int[CharRarityDiff];
 
-    for(i=0;i<5;i++){
+    for(i=0;i<CharRarityDiff;i++){
         character_rarity[i]=0;
         unique_rarity[i]=0;
     }
 
     for(i=0;i<all_cards->number_of_characters;i++){
-        character_rarity[all_cards->card[i].rarity-1]++;
+        character_rarity[all_cards->card[i].rarity-minCharRarity]+=1;
     }
 
     for(i=0;i<unique_affiliations->number_of_characters;i++){
-        unique_rarity[unique_affiliations->card[i].rarity-1]++;
+        unique_rarity[unique_affiliations->card[i].rarity-minCharRarity]+=1;
+
     }
 
-    cout << "\n\n";
-
-    for(i=0;i<5;i++){
-        cout << "\tThere are " << character_rarity[i] << " " << i+1 << "* character cards" ;
-        cout << "  (" << unique_rarity[i] << " unique profiles)\n";
+    for(i=0;i<CharRarityDiff;i++){
+        if(character_rarity[i]!=0){
+            cout << "\tThere are " << character_rarity[i] << " " << i+minCharRarity << "* character cards" ;
+            cout << "  (" << unique_rarity[i] << " unique profiles)\n";
+        }
     }
 
     cout << "\n";
+
+    delete [] character_rarity;
+    delete [] unique_rarity;
 }
 
 
@@ -199,30 +213,37 @@ void track_awaken(ALL_Cards *all_cards, ALL_Cards *unique_affiliations){
 
     /** Counts and prints to screen the awakened cards in the database **/
 
-    int i, character_awaken[5], unique_awaken[5];
+    const int maxCharRarity=all_cards->max_rarity, minCharRarity=all_cards->min_rarity;
+    const int CharRarityDiff=maxCharRarity-minCharRarity+1;
+    int i;
+    int *character_awaken= new int[CharRarityDiff];
+    int *unique_awaken= new int[CharRarityDiff];
 
-    for(i=0;i<5;i++){
+    for(i=0;i<CharRarityDiff;i++){
         character_awaken[i]=0;
         unique_awaken[i]=0;
     }
 
     for(i=0;i<all_cards->number_of_characters;i++){
-        character_awaken[all_cards->card[i].rarity-1]+=all_cards->card[i].is_awakened;
+        character_awaken[all_cards->card[i].rarity-minCharRarity]+=all_cards->card[i].is_awakened;
     }
 
     for(i=0;i<unique_affiliations->number_of_characters;i++){
-        unique_awaken[unique_affiliations->card[i].rarity-1]+=unique_affiliations->card[i].is_awakened;
+        unique_awaken[unique_affiliations->card[i].rarity-minCharRarity]+=unique_affiliations->card[i].is_awakened;
     }
 
     cout << "\n\n";
 
-    for(i=0;i<5;i++){
-        cout << "\tThere are " << character_awaken[i] << " " << i+1 << "* awakened character cards" ;
-        cout << "  (" << unique_awaken[i] << " unique awakened profiles)\n";
+    for(i=0;i<CharRarityDiff;i++){
+        if(character_awaken[i]!=0){
+            cout << "\tThere are " << character_awaken[i] << " " << i+minCharRarity << "* awakened character cards" ;
+            cout << "  (" << unique_awaken[i] << " unique awakened profiles)\n";
+        }
     }
 
     cout << "\n";
-
+    delete [] character_awaken;
+    delete [] unique_awaken;
 }
 
 
@@ -234,19 +255,19 @@ void count_affiliation_spread(ALL_Cards *all_cards){
                 -Counts how many cards possess each unique affiliation profile
     **/
 
-    int i,j,x,y, sum_tracker, sum_array_size=0;
-    unsigned long int sum_array[MAXCHARACTERS][3];
+    int i,j, sum_tracker;
+    vector< vector<unsigned long int> > sum_array;
+    vector<unsigned long int> sum_column_values (3);
 
     ofstream myoutput;
-
-    sum_array[0][0]=all_cards->card[0].affiliation_sum;
-    sum_array[0][1]=1;
-    sum_array[0][2]=0;
-    sum_array_size++;
+    sum_column_values[0]=all_cards->card[0].affiliation_sum;
+    sum_column_values[1]=1;
+    sum_column_values[2]=0;
+    sum_array.push_back(sum_column_values);
 
     for(i=1;i<all_cards->number_of_characters;i++){
         sum_tracker=0;
-        for(j=0;j<sum_array_size;j++){
+        for(j=0;j<sum_array.size();j++){
             if(sum_array[j][0]!=all_cards->card[i].affiliation_sum){
                 sum_tracker++;
             }else
@@ -254,19 +275,19 @@ void count_affiliation_spread(ALL_Cards *all_cards){
                     sum_array[j][1]++;
                 }
         }
-        if(sum_tracker==sum_array_size){
-            sum_array[j][0]=all_cards->card[i].affiliation_sum;
-            sum_array[j][1]=1;
-            sum_array[j][2]=i;
-            sum_array_size++;
+        if(sum_tracker==sum_array.size()){
+            sum_column_values[0]=all_cards->card[i].affiliation_sum;
+            sum_column_values[1]=1;
+            sum_column_values[2]=i;
+            sum_array.push_back(sum_column_values);
         }
 
     }
 
     myoutput.open("UniqueProfiles/unique_profile_dist.txt");
 
-    if(myoutput.is_open()==true){
-        for(i=0;i<sum_array_size;i++){
+    if(myoutput.is_open()){
+        for(i=0;i<sum_array.size();i++){
             if(sum_array[i][1]==1){
                 myoutput << "There is " << sum_array[i][1] << " character card which is exactly: ";
             }else{
@@ -274,13 +295,13 @@ void count_affiliation_spread(ALL_Cards *all_cards){
             }
 
             for(j=0;j<all_cards->card[sum_array[i][2]].number_of_types;j++){
-                myoutput << all_cards->card[sum_array[i][2]].cardtype[j].affiliation;
+                myoutput << all_cards->card[sum_array[i][2]].cardtypes[j];
                 if(j+1<all_cards->card[sum_array[i][2]].number_of_types){
                     myoutput << ", ";
                 }
             }
 
-            if(i+1<sum_array_size){
+            if(i+1<sum_array.size()){
                 myoutput << "\n\n";
             }
         }
@@ -300,15 +321,18 @@ void print_skills(AllSupportSkills allsupportskills){
     **/
 
     int choice, skill_choice, i,j,k, list_on=1;
+    string numText;
 
     cout << "\nPrint all skills (1) or choose from a list (2)?:  ";
-    cin >> choice;
+    cin >> numText;
+    choice=StringToInt(numText);
 
-    while(!(cin.good()) || choice<1 || choice>2){
+    while(choice<1 || choice>2){
         cin.clear();
         cin.ignore(256,'\n');
         cout << "Invalid choice. Enter again:  ";
-        cin >> choice;
+        cin >> numText;
+        choice=StringToInt(numText);
     }
     cout << "\n\n";
 
@@ -320,7 +344,7 @@ void print_skills(AllSupportSkills allsupportskills){
                 cout << "\t\t" << allsupportskills.supportskill[i].supportskillcard[j].rarity << "* " << allsupportskills.supportskill[i].supportskillcard[j].charactername << "\n";
                 cout << "\t\t\trequires " << allsupportskills.supportskill[i].supportskillcard[j].numTypeReq << " cardtypes (";
                 for(k=0;k<allsupportskills.supportskill[i].supportskillcard[j].numTypeReq;k++){
-                    cout << allsupportskills.supportskill[i].supportskillcard[j].types_needed[k].affiliation;
+                    cout << allsupportskills.supportskill[i].supportskillcard[j].types_needed[k];
 
                     if(k+1<allsupportskills.supportskill[i].supportskillcard[j].numTypeReq){
                         cout << " and ";
@@ -354,13 +378,15 @@ void print_skills(AllSupportSkills allsupportskills){
                     cout << i+1 << ")  " << allsupportskills.supportskill[i].skillName << "\n";
                 }
                 cout << "\nPlease choose a support skill:  ";
-                cin >> skill_choice;
+                cin >> numText;
+                skill_choice=StringToInt(numText);
 
-                while(!(cin.good()) || skill_choice>allsupportskills.numberOfSkills || skill_choice<1){
+                while(skill_choice>allsupportskills.numberOfSkills || skill_choice<1){
                     cin.clear();
                     cin.ignore(256, '\n');
                     cout << "\nInvalid choice. Please enter again:  ";
-                    cin >> skill_choice;
+                    cin >> numText;
+                    skill_choice=StringToInt(numText);
                 }
 
                 i=skill_choice-1;
@@ -372,7 +398,7 @@ void print_skills(AllSupportSkills allsupportskills){
                     cout << "\t\t" << allsupportskills.supportskill[i].supportskillcard[j].rarity << "* " << allsupportskills.supportskill[i].supportskillcard[j].charactername << "\n";
                     cout << "\t\t\trequires " << allsupportskills.supportskill[i].supportskillcard[j].numTypeReq << " cardtypes (";
                     for(k=0;k<allsupportskills.supportskill[i].supportskillcard[j].numTypeReq;k++){
-                        cout << allsupportskills.supportskill[i].supportskillcard[j].types_needed[k].affiliation;
+                        cout << allsupportskills.supportskill[i].supportskillcard[j].types_needed[k];
 
                         if(k+1<allsupportskills.supportskill[i].supportskillcard[j].numTypeReq){
                             cout << " and ";
@@ -392,15 +418,14 @@ void print_skills(AllSupportSkills allsupportskills){
                 }
 
                 cout << "\nCheck another skill? (Yes = 1):  ";
-                cin >> list_on;
+                cin >> numText;
+                list_on=StringToInt(numText);
 
-                if(!(cin.good()) || list_on!=1){
-                    cin.clear();
-                    cin.ignore(256, '\n');
+                if(list_on!=1){
                     list_on=0;
                 }
 
-            }while(list_on==1);
+            }while(list_on);
         }
 
 }
@@ -415,29 +440,30 @@ void print_exact_profiles(ALL_Cards *all_cards){
         is only produced for combinations of affilations which exist in the database.
     **/
 
-    int i,j,k,l, not_in_array=0, sum_size=0;
-    unsigned long int affiliation_sum_tracker[MAXCHARACTERS], current_sum;
+    int i,j,k,l, not_in_array=0;
+    unsigned long int current_sum;
+    vector<unsigned long int> affiliation_sum_tracker;
     string filename, txt=".txt";
     ofstream myoutput;
 
     for(i=0;i<all_cards->number_of_characters;i++){
         not_in_array=0;
 
-        for(j=0;j<sum_size;j++){
+        for(j=0;j<affiliation_sum_tracker.size();j++){
             if(all_cards->card[i].affiliation_sum!=affiliation_sum_tracker[j]){
                 not_in_array++;
             }
         }
 
-        if(not_in_array==sum_size){
+        if(not_in_array==affiliation_sum_tracker.size()){
             current_sum=all_cards->card[i].affiliation_sum;
 
             filename="CharacterProfiles/ExactProfiles/";
-            filename.append(all_cards->card[i].cardtype[0].affiliation);
+            filename.append(all_cards->card[i].cardtypes[0]);
 
             for(k=1;k<all_cards->card[i].number_of_types;k++){
                 filename.append("_");
-                filename.append(all_cards->card[i].cardtype[k].affiliation);
+                filename.append(all_cards->card[i].cardtypes[k]);
             }
 
             filename.append(txt);
@@ -453,8 +479,7 @@ void print_exact_profiles(ALL_Cards *all_cards){
 
             myoutput.close();
 
-            affiliation_sum_tracker[sum_size]=current_sum;
-            sum_size++;
+            affiliation_sum_tracker.push_back(current_sum);
         }
     }
 
@@ -470,7 +495,8 @@ void check_stats(ALL_Cards *all_cards, ALL_Cards *unique_cards, Affiliation_Arra
         and then ask if the user wishes to continue checking stats or if they're ready to proceed.
     **/
 
-    int choice, finished=0, affiliation_number=0, keep_adding=0, translator, i, new_search;
+    int choice, finished=0, affiliation_number=0, translator, i, new_search;
+    string numText;
 
     do{
         cout << "\n(1) Number of cards\n";
@@ -483,13 +509,13 @@ void check_stats(ALL_Cards *all_cards, ALL_Cards *unique_cards, Affiliation_Arra
         cout << "(8) Update Exact Profiles\n";
         cout << "\nSelect which stat (1-8) you wish to check:  ";
 
-        cin >> choice;
+        cin >> numText;
+        choice=StringToInt(numText);
 
-        while(!(cin.good()) || choice>8 || choice<1){
-            cin.clear();
-            cin.ignore(256,'\n');
+        while(choice>8 || choice<1){
             cout << "Invalid choice. Please enter again: ";
-            cin >> choice;
+            cin >> numText;
+            choice=StringToInt(numText);
         }
 
         if(choice==1){
@@ -503,13 +529,13 @@ void check_stats(ALL_Cards *all_cards, ALL_Cards *unique_cards, Affiliation_Arra
                 }else
                     if(choice==4){
                         cout << "\nExactly how many affiliations?: ";
-                        cin >> affiliation_number;
+                        cin >> numText;
+                        affiliation_number=StringToInt(numText);
 
-                        while(!(cin.good()) || affiliation_number<0){
-                            cin.clear();
-                            cin.ignore(256,'\n');
+                        while(affiliation_number<0){
                             cout << "Invalid choice. Please enter again: ";
-                            cin >> affiliation_number;
+                            cin >> numText;
+                            affiliation_number=StringToInt(numText);
                         }
 
                         return_affiliation_numbers(all_cards, unique_cards, affiliation_number);
@@ -524,16 +550,17 @@ void check_stats(ALL_Cards *all_cards, ALL_Cards *unique_cards, Affiliation_Arra
                                 }
                             }
 
-                            keep_adding=0;
+                            while(aff_counter.affiliation.size()>0){
+                                aff_counter.affiliation.pop_back();
+                            }
 
                             cout << "\n\n\nSelect which affiliation(s) (1-" << affiliation_array->number_of_affiliations << ") you wish to search, then press enter\nEnter 0 to start search:\n";
 
                             do{
-                                cin>>translator;
+                                cin>>numText;
+                                translator=StringToInt(numText);
 
-                                if(!(cin.good()) || translator<0 || translator>affiliation_array->number_of_affiliations){
-                                    cin.clear();
-                                    cin.ignore(256,'\n');
+                                if(translator<0 || translator>affiliation_array->number_of_affiliations){
                                     cout << "\n\tInvalid entry\n";
                                 }else
                                     if(translator==0){
@@ -541,26 +568,26 @@ void check_stats(ALL_Cards *all_cards, ALL_Cards *unique_cards, Affiliation_Arra
                                     }else{
                                         new_search=0;
 
-                                        for(i=0;i<keep_adding;i++){
+                                        for(i=0;i<aff_counter.affiliation.size();i++){
                                             if(aff_counter.affiliation[i].type_value!=affiliation_array->affiliation[translator-1].type_value){
                                                 new_search++;
                                             }
                                         }
 
-                                        if(new_search==keep_adding){
-                                            aff_counter.affiliation[keep_adding].aff_name=affiliation_array->affiliation[translator-1].aff_name;
-                                            aff_counter.affiliation[keep_adding].type_value=affiliation_array->affiliation[translator-1].type_value;
-                                            keep_adding++;
+                                        if(new_search==aff_counter.affiliation.size()){
+                                            aff_counter.affiliation.push_back(Affiliation());
+                                            aff_counter.affiliation[new_search].aff_name=affiliation_array->affiliation[translator-1].aff_name;
+                                            aff_counter.affiliation[new_search].type_value=affiliation_array->affiliation[translator-1].type_value;
                                         }
                                     }
 
-                                if(keep_adding==affiliation_array->number_of_affiliations){
+                                if(aff_counter.affiliation.size()==affiliation_array->number_of_affiliations){
                                     break;
                                 }
 
                             }while(1==1);
 
-                            aff_counter.number_of_affiliations=keep_adding;
+                            aff_counter.number_of_affiliations=aff_counter.affiliation.size();
 
                             cout << "\n";
 
@@ -585,7 +612,7 @@ void check_stats(ALL_Cards *all_cards, ALL_Cards *unique_cards, Affiliation_Arra
             finished=0;
         }
 
-    }while(finished==1);
+    }while(finished);
 
 }
 
@@ -602,13 +629,12 @@ void print_info(AllSupportSkills *allsupportskills, ALL_Cards *all_cards){
     **/
 
     int x, i, counter, choice, rand_char, start, list_on=1;
+    string numText;
 
     cout << "List (1) or random (2) or Quit (0)?: ";
-    cin >> start;
-
-    if(!(cin.good())){
-        cin.clear();
-        cin.ignore(256,'\n');
+    cin >> numText;
+    start=StringToInt(numText);
+    if(start>2 || start <1){
         start=0;
     }
 
@@ -616,10 +642,10 @@ void print_info(AllSupportSkills *allsupportskills, ALL_Cards *all_cards){
         cout << endl;
 
         for(counter=0;counter<all_cards->number_of_characters;counter++){
-            cout << all_cards->card[counter].rarity << "* " << all_cards->card[counter].name << " is afilliated with " << all_cards->card[counter].cardtype[0].affiliation;
+            cout << all_cards->card[counter].rarity << "* " << all_cards->card[counter].name << " is afilliated with " << all_cards->card[counter].cardtypes[0];
             if(all_cards->card[counter].number_of_types>1){
                 for(x=1;x<all_cards->card[counter].number_of_types;x++){
-                    cout << " and " << all_cards->card[counter].cardtype[x].affiliation;
+                    cout << " and " << all_cards->card[counter].cardtypes[x];
                 }
             }
             cout << ".\n";
@@ -635,7 +661,7 @@ void print_info(AllSupportSkills *allsupportskills, ALL_Cards *all_cards){
                 for(x=0;x<allsupportskills->supportskill[all_cards->card[counter].skill_ID].max_level;x++){
                     cout << "\t" << allsupportskills->supportskill[all_cards->card[counter].skill_ID].supportskillcard[all_cards->card[counter].skillcard_ID].supportskillreqs[x].typereq << " of ";
                     for(i=0;i<allsupportskills->supportskill[all_cards->card[counter].skill_ID].supportskillcard[all_cards->card[counter].skillcard_ID].numTypeReq;i++){
-                        cout << "(" << allsupportskills->supportskill[all_cards->card[counter].skill_ID].supportskillcard[all_cards->card[counter].skillcard_ID].types_needed[i].affiliation << ")  ";
+                        cout << "(" << allsupportskills->supportskill[all_cards->card[counter].skill_ID].supportskillcard[all_cards->card[counter].skillcard_ID].types_needed[i] << ")  ";
                     }
                     cout << " for level " <<  allsupportskills->supportskill[all_cards->card[counter].skill_ID].supportskillcard[all_cards->card[counter].skillcard_ID].supportskillreqs[x].level << endl;
                 }
@@ -665,10 +691,10 @@ void print_info(AllSupportSkills *allsupportskills, ALL_Cards *all_cards){
 
             do{
                 rand_char=rand()%all_cards->number_of_characters;
-                cout << "\n\n" << all_cards->card[rand_char].rarity << "* " << all_cards->card[rand_char].name << " is afilliated with " << all_cards->card[rand_char].cardtype[0].affiliation;
+                cout << "\n\n" << all_cards->card[rand_char].rarity << "* " << all_cards->card[rand_char].name << " is afilliated with " << all_cards->card[rand_char].cardtypes[0];
                     if(all_cards->card[rand_char].number_of_types>1){
                         for(x=1;x<all_cards->card[rand_char].number_of_types;x++){
-                            cout << " and " << all_cards->card[rand_char].cardtype[x].affiliation;
+                            cout << " and " << all_cards->card[rand_char].cardtypes[x];
                         }
                     }
                     cout << ".\n";
@@ -684,7 +710,7 @@ void print_info(AllSupportSkills *allsupportskills, ALL_Cards *all_cards){
                         for(x=0;x<allsupportskills->supportskill[all_cards->card[rand_char].skill_ID].max_level;x++){
                             cout << "\t" << allsupportskills->supportskill[all_cards->card[rand_char].skill_ID].supportskillcard[all_cards->card[rand_char].skillcard_ID].supportskillreqs[x].typereq << " of ";
                             for(i=0;i<allsupportskills->supportskill[all_cards->card[rand_char].skill_ID].supportskillcard[all_cards->card[rand_char].skillcard_ID].numTypeReq;i++){
-                                cout << "(" << allsupportskills->supportskill[all_cards->card[rand_char].skill_ID].supportskillcard[all_cards->card[rand_char].skillcard_ID].types_needed[i].affiliation << ")  ";
+                                cout << "(" << allsupportskills->supportskill[all_cards->card[rand_char].skill_ID].supportskillcard[all_cards->card[rand_char].skillcard_ID].types_needed[i] << ")  ";
                             }
                             cout << " for level " <<  allsupportskills->supportskill[all_cards->card[rand_char].skill_ID].supportskillcard[all_cards->card[rand_char].skillcard_ID].supportskillreqs[x].level << endl;
                         }
@@ -695,15 +721,14 @@ void print_info(AllSupportSkills *allsupportskills, ALL_Cards *all_cards){
 
                 cout << "Database ID: " << rand_char << endl;
                 cout << "\n\nRun again? (Yes = 1):  ";
-                cin >> choice;
+                cin >> numText;
+                choice=StringToInt(numText);
                 if(choice!=1){
-                    cin.clear();
-                    cin.ignore(256,'\n');
                     choice=0;
                 }
                 cout << "\n\n";
 
-            }while(choice==1);
+            }while(choice);
         }
 
     }

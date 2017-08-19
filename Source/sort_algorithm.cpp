@@ -32,7 +32,8 @@ void construct_support_deck(SupportDeck *supportdeck, AllSupportSkills *allsuppo
 
     int i=0,k,x,y,z,m,n,j, effective_chars=0, numChars=0, entry_counter=0, base_entry_counter=0;
     int support_array[SUPPORTDECK], skill_card_locator[SUPPORTDECK], entry_tracker[MAXSUPPORTCARDS];
-    int unique_profile_match[MAXCHARACTERS], allowed_skill_cards[SUPPORTDECK][MAXSUPPORTCARDS];
+    int allowed_skill_cards[SUPPORTDECK][MAXSUPPORTCARDS];
+    vector<int> unique_profile_match;
     double time_start=time(0), time_end, run_start, run_end;
     ofstream myoutput, baseoutput;
     string filename="", base_filename="";
@@ -58,10 +59,6 @@ void construct_support_deck(SupportDeck *supportdeck, AllSupportSkills *allsuppo
             entry_tracker[j]=0;
         }
 
-        for(j=0;j<unique_affiliations->number_of_characters;j++){
-            unique_profile_match[j]=0;
-        }
-
         filter_allowed_skill_cards(supportdeck, allsupportskills, allowed_skill_cards);
 
         if(supportdeck->number_of_skills==2){
@@ -73,7 +70,7 @@ void construct_support_deck(SupportDeck *supportdeck, AllSupportSkills *allsuppo
                 for(m=0;m<supportdeck->num_allowed_cards[1];m++){
                     skill_card_locator[1]=allowed_skill_cards[1][m];
 
-                    presearch_config(allsupportskills, unique_affiliations, supportdeck, skill_card_locator, effective_chars, unique_profile_match, numChars);
+                    presearch_config(allsupportskills, unique_affiliations, supportdeck, skill_card_locator, effective_chars, &unique_profile_match, numChars);
 
                     for(j=0;j<supportdeck->number_of_skills;j++){
                         support_array[j]=supportdeck->card_locator[j];
@@ -170,7 +167,7 @@ void construct_support_deck(SupportDeck *supportdeck, AllSupportSkills *allsuppo
                         for(n=0;n<supportdeck->num_allowed_cards[2];n++){
                             skill_card_locator[2]=allowed_skill_cards[2][n];
 
-                            presearch_config(allsupportskills, unique_affiliations, supportdeck, skill_card_locator, effective_chars, unique_profile_match, numChars);
+                            presearch_config(allsupportskills, unique_affiliations, supportdeck, skill_card_locator, effective_chars, &unique_profile_match, numChars);
 
                             for(j=0;j<supportdeck->number_of_skills;j++){
                                 support_array[j]=supportdeck->card_locator[j];
@@ -260,7 +257,7 @@ void construct_support_deck(SupportDeck *supportdeck, AllSupportSkills *allsuppo
                                 for(z=0;z<supportdeck->num_allowed_cards[3];z++){
                                     skill_card_locator[3]=allowed_skill_cards[3][z];
 
-                                    presearch_config(allsupportskills, unique_affiliations, supportdeck, skill_card_locator, effective_chars, unique_profile_match, numChars);
+                                    presearch_config(allsupportskills, unique_affiliations, supportdeck, skill_card_locator, effective_chars, &unique_profile_match, numChars);
 
                                     for(j=0;j<supportdeck->number_of_skills;j++){
                                         support_array[j]=supportdeck->card_locator[j];
@@ -343,7 +340,7 @@ void construct_support_deck(SupportDeck *supportdeck, AllSupportSkills *allsuppo
                                         for(y=0;y<supportdeck->num_allowed_cards[4];y++){
                                             skill_card_locator[4]=allowed_skill_cards[4][y];
 
-                                            presearch_config(allsupportskills, unique_affiliations, supportdeck, skill_card_locator, effective_chars, unique_profile_match, numChars);
+                                            presearch_config(allsupportskills, unique_affiliations, supportdeck, skill_card_locator, effective_chars, &unique_profile_match, numChars);
 
                                             for(j=0;j<supportdeck->number_of_skills;j++){
                                                 support_array[j]=supportdeck->card_locator[j];
@@ -417,7 +414,7 @@ void construct_support_deck(SupportDeck *supportdeck, AllSupportSkills *allsuppo
                                                 for(x=0;x<supportdeck->num_allowed_cards[5];x++){
                                                     skill_card_locator[5]=allowed_skill_cards[5][x];
 
-                                                    presearch_config(allsupportskills, unique_affiliations, supportdeck, skill_card_locator, effective_chars, unique_profile_match, numChars);
+                                                    presearch_config(allsupportskills, unique_affiliations, supportdeck, skill_card_locator, effective_chars, &unique_profile_match, numChars);
 
                                                     for(j=0;j<supportdeck->number_of_skills;j++){
                                                         support_array[j]=supportdeck->card_locator[j];

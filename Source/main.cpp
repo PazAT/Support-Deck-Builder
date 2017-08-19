@@ -9,10 +9,11 @@ using namespace std;
         3) Print to screen info about cards
 **/
 
-
 int main(){
 
-    int x,i, z=0, choice, get_skill, new_search, translator, keep_adding;
+
+    int x,i, z=0, get_skill, new_search, translator, keep_adding;
+    string numText;
     int path, is_double=0, wants_max_cost=0, user_max_cost;
     bool still_in_use=true, continue_with_solving, dataBaseSuccessful=false;
     ifstream myfile;
@@ -28,51 +29,53 @@ int main(){
 
         do{
             cout << "\nCheck combinations (1) or check stats (2) or print profile info (3) or Quit (0)? :  ";
-            cin >> path;
+            cin >> numText;
 
-            while(!(cin.good()) || path<0 || path>3){
-                cin.clear();
-                cin.ignore(256, '\n');
-                cout << "Please enter a valid choice: ";
-                cin >> path;
-            }
+            path=StringToInt(numText);
 
             if(path==1){
                 reset_support_deck(&supportdeck);
 
                 cout << "\n\nHow many skills (2 - 6) do you want in your support deck?: ";
-                cin >> supportdeck.number_of_skills;
+                cin >> numText;
+                supportdeck.number_of_skills=StringToInt(numText);
 
-                while(!(cin.good()) || supportdeck.number_of_skills>6 || supportdeck.number_of_skills<2){
+                while(supportdeck.number_of_skills>6 || supportdeck.number_of_skills<2){
                     cin.clear();
                     cin.ignore(256, '\n');
                     cout << "Please enter a number from 2 to 6: ";
-                    cin >>supportdeck.number_of_skills;
+                    cin >> numText;
+                    supportdeck.number_of_skills=StringToInt(numText);
                 }
 
                 cout << "\n\nHow many total cards (" << supportdeck.number_of_skills << " - " << SUPPORTDECK << ") do you want in your support deck?: ";
-                cin >> supportdeck.total_cards_to_use;
+                cin >> numText;
+                supportdeck.total_cards_to_use=StringToInt(numText);
 
-                while(!(cin.good()) || supportdeck.total_cards_to_use>SUPPORTDECK || supportdeck.total_cards_to_use<supportdeck.number_of_skills){
+                while(supportdeck.total_cards_to_use>SUPPORTDECK || supportdeck.total_cards_to_use<supportdeck.number_of_skills){
                     cin.clear();
                     cin.ignore(256, '\n');
                     cout << "Please enter a number from " << supportdeck.number_of_skills << " to " << SUPPORTDECK << ": ";
-                    cin >>supportdeck.total_cards_to_use;
+                    cin >> numText;
+                    supportdeck.total_cards_to_use=StringToInt(numText);
                 }
 
                 cout << "\n\nSet a maximum cap cost? (Yes = 1): ";
-                cin >> wants_max_cost;
+                cin >> numText;
+                wants_max_cost=StringToInt(numText);
 
                 if(wants_max_cost==1){
                     cout << "\n\tEnter the desired maximum cap cost (not less than zero):  ";
-                    cin >> user_max_cost;
+                    cin >> numText;
+                    user_max_cost=StringToInt(numText);
 
-                    while(!(cin.good()) || user_max_cost<0){
+                    while(user_max_cost<0){
                         cin.clear();
                         cin.ignore(256, '\n');
                         cout << "\n\n\tInvalid entry.";
                         cout << "\n\tEnter the desired maximum cap cost (not less than zero):  ";
-                        cin >> user_max_cost;
+                        cin >> numText;
+                        user_max_cost=StringToInt(numText);
                     }
 
                     supportdeck.user_set_max_cost=user_max_cost;
@@ -81,19 +84,14 @@ int main(){
 
                 if(supportdeck.number_of_skills>1){
                     cout << "\n\nEnforce minimum skill levels? (Yes = 1): ";
-                    cin >> choice;
-
-                    supportdeck.looking_for_specific_level=1;
-
-                    if(!(cin.good()) || choice!=1){
-                        cin.clear();
-                        cin.ignore(256, '\n');
-                        choice=0;
+                    cin >> numText;
+                    supportdeck.looking_for_specific_level=StringToInt(numText);
+                    if(supportdeck.looking_for_specific_level!=1){
                         supportdeck.looking_for_specific_level=0;
                     }
 
+                    cout << "\n";
 
-                    cout << endl;
                     for(z=0;z<allsupportskills.numberOfSkills;z++){
                         cout << z+1 << ") " << allsupportskills.supportskill[z].skillName << endl;
                     }
@@ -102,29 +100,25 @@ int main(){
                     for(x=0;x<supportdeck.number_of_skills;x++){
                         do{
                             cout << "Please choose a skill: ";
-                            cin >> get_skill;
-
-                            while(!(cin.good()) ){
-                                if( !(cin >> get_skill) ){
-                                    cin.clear();
-                                    cin.ignore(256, '\n');
-                                }
-                            }
+                            cin >> numText;
+                            get_skill=StringToInt(numText);
 
                             if(get_skill>allsupportskills.numberOfSkills || get_skill<1){
                                 cout << "\n\tPlease enter a number from 1 to " << allsupportskills.numberOfSkills << endl << endl;
                             }
 
-                            is_double=0;
+                            if(get_skill<=allsupportskills.numberOfSkills){
+                                is_double=0;
 
-                            for(i=0;i<x;i++){
-                                if(get_skill-1==supportdeck.skill_locator[i]){
-                                    is_double=1;
+                                for(i=0;i<x;i++){
+                                    if(get_skill-1==supportdeck.skill_locator[i]){
+                                        is_double=1;
+                                    }
                                 }
-                            }
 
-                            if(is_double==1){
-                                cout << "\n\tSkill already chosen - choose a different one.\n\n";
+                                if(is_double==1){
+                                    cout << "\n\tSkill already chosen - choose a different one.\n\n";
+                                }
                             }
 
                         }while(get_skill>allsupportskills.numberOfSkills || get_skill<1 || is_double==1);
@@ -141,9 +135,10 @@ int main(){
                         keep_adding=0;
 
                         do{
-                            cin>>translator;
+                            cin>>numText;
+                            translator=StringToInt(numText);
 
-                            if(!(cin.good()) || translator<0 || translator>allsupportskills.supportskill[get_skill-1].numberOfCards){
+                            if(translator<0 || translator>allsupportskills.supportskill[get_skill-1].numberOfCards){
                                 cin.clear();
                                 cin.ignore(256,'\n');
                                 cout << "\n\tInvalid entry\n";
@@ -174,7 +169,7 @@ int main(){
                         supportdeck.num_ignored_cards[x]=keep_adding;
                         supportdeck.num_allowed_cards[x]=allsupportskills.supportskill[get_skill-1].numberOfCards-keep_adding;
 
-                        if(choice==1){
+                        if(supportdeck.looking_for_specific_level){
                             if(allsupportskills.supportskill[get_skill-1].max_level==1){
                                 supportdeck.skill_threshold[x]=1;
                             }else{
@@ -189,13 +184,15 @@ int main(){
                                     }
                                 }
 
-                                cin >> supportdeck.skill_threshold[x];
+                                cin >> numText;
+                                supportdeck.skill_threshold[x]=StringToInt(numText);
 
-                                while(!(cin.good()) || supportdeck.skill_threshold[x]>allsupportskills.supportskill[get_skill-1].max_level || supportdeck.skill_threshold[x]<1){
+                                while(supportdeck.skill_threshold[x]>allsupportskills.supportskill[get_skill-1].max_level || supportdeck.skill_threshold[x]<1){
                                     cout << "\nInvalid value. Enter again: ";
                                     cin.clear();
                                     cin.ignore(256, '\n');
-                                    cin >> supportdeck.skill_threshold[x];
+                                    cin >> numText;
+                                    supportdeck.skill_threshold[x]=StringToInt(numText);
                                 }
                             }
 
@@ -211,32 +208,30 @@ int main(){
                         cout << "\n\nA file containing combinations for these skills already exists.";
                         cout << "\nRunning the solver will overwrite the exisiting file.";
                         cout << "\n\n\tContinue with solving? (Yes = 1):  ";
-                        cin >> continue_with_solving;
-
-                        if(!cin.good()){
-                            cin.clear();
-                            cin.ignore(256,'\n');
+                        cin >> numText;
+                        if(StringToInt(numText)!=1){
                             continue_with_solving=false;
                         }
-                    }
 
                     if(continue_with_solving){
                         if(supportdeck.total_cards_to_use>supportdeck.number_of_skills){
                             cout << "Enter the minimum number of matching types per card: ";
-                            cin >> supportdeck.type_threshold;
+                            cin >> numText;
+                            supportdeck.type_threshold=StringToInt(numText);
 
-                            while(!(cin.good()) || supportdeck.type_threshold<0 || supportdeck.type_threshold>MAXTYPES){
+                            while(supportdeck.type_threshold<0){
                                 cout << "\nInvalid value. Enter again: ";
                                 cin.clear();
                                 cin.ignore(256, '\n');
-                                cin >> supportdeck.type_threshold;
-
+                                cin >> numText;
+                                supportdeck.type_threshold=StringToInt(numText);
                             }
 
                             cout << "\n\nQuery through which rarity (5 4 3 2 1)? : ";
-                            cin >> supportdeck.using_rarity;
+                            cin >> numText;
+                            supportdeck.using_rarity=StringToInt(numText);
 
-                            if( !(cin.good()) || supportdeck.using_rarity<1 || supportdeck.using_rarity>5){
+                            if( supportdeck.using_rarity<1 || supportdeck.using_rarity>5){
                                 cin.clear();
                                 cin.ignore(256, '\n');
                                 supportdeck.using_rarity=4;
@@ -244,22 +239,25 @@ int main(){
                         }
 
                         cout << "\n\nStop searching after a certain number of solutions? (Yes = 1):  ";
-                        cin >> supportdeck.breaking_early;
+                        cin >> numText;
+                        supportdeck.breaking_early=StringToInt(numText);
 
-                        if( !(cin.good()) || supportdeck.breaking_early!=1){
+                        if(supportdeck.breaking_early!=1){
                             cin.clear();
                             cin.ignore(256, '\n');
                             supportdeck.breaking_early=0;
                             supportdeck.breaking_at_solution=0;
                         }else{
                             cout << "\n\tSearch for how many solutions?:  ";
-                            cin >> supportdeck.breaking_at_solution;
+                            cin >> numText;
+                            supportdeck.breaking_at_solution=StringToInt(numText);
 
                             while(!(cin.good()) || supportdeck.breaking_at_solution<1){
                                 cout << "\nInvalid value. Enter again: ";
                                 cin.clear();
                                 cin.ignore(256, '\n');
-                                cin >> supportdeck.breaking_at_solution;
+                                cin >> numText;
+                                supportdeck.breaking_at_solution=StringToInt(numText);
                             }
                         }
 
@@ -270,7 +268,7 @@ int main(){
                 }else{
                     cout << "\n\n\t\tThanks for using the support skill optimizer!!";
                 }
-
+                }
             }else
                 if(path==2){
                     check_stats(&all_cards,&unique_affiliations,&affiliation_array, &allsupportskills);
@@ -284,7 +282,7 @@ int main(){
 
             if(path!=0){
                 cout << "\n\n\n\t\tDo something else? (Yes = 1): ";
-                cin >> still_in_use;
+                cin >>still_in_use;
 
                 if( !(cin.good())){
                     cin.clear();
@@ -300,6 +298,8 @@ int main(){
         cout << "\n\nPress enter to exit";
         getchar();
     }
+
+    cout << "\n\n";
 
     return 0;
 }
