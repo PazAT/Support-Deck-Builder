@@ -70,6 +70,7 @@ Darth Vader [TIE Advance]
 Death Trooper
 Dengar
 Director Krennic
+Director Krennic [Advanced Weapons Research]
 Dooku
 Dooku [Dark Conspirator]
 Dooku [Dark Lord]
@@ -78,6 +79,7 @@ Dooku [Sith Lord]
 Droideka
 Emperor Palpatine
 Emperor's Royal Guard
+Fifth Brother Inquisitor
 Finn
 Finn [Battle of Takodana]
 First Order Flametrooper
@@ -114,6 +116,7 @@ Jango Fett [The Original Warrior]
 Jar Jar Binks
 Jar Jar Binks [Gungan Senator]
 Jyn Erso
+K-2SO
 Kanan Jarrus
 Ki-Adi-Mundi
 Kit Fisto
@@ -175,6 +178,7 @@ Rancor
 Rey
 Rey [Starkiller Base]
 Sabine Wren
+Sabine Wren [Spectre-5]
 Savage Opress
 Saw Guerra
 Sebulba
